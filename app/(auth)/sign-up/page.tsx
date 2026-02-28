@@ -102,40 +102,42 @@ export default function SignUpPage() {
     <div>
       {/* Header */}
       <div className="mb-6">
-        {/* Mobile logo */}
+        {/* Mobile logo - visible only on small screens */}
         <div className="flex items-center gap-2 mb-6 lg:hidden">
-          <div className="flex items-center justify-center w-8 h-8 bg-brand-navy rounded-lg">
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              className="text-white"
-            >
-              <path
-                d="M12 2L2 7L12 12L22 7L12 2Z"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M2 17L12 22L22 17"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M2 12L12 17L22 12"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-          <span className="text-lg font-bold text-brand-navy">corelms</span>
+          <svg
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="text-brand-navy"
+          >
+            <path
+              d="M16 2.66663L2.66663 9.33329L16 16L29.3333 9.33329L16 2.66663Z"
+              fill="currentColor"
+              fillOpacity="0.2"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M2.66663 22.6667L16 29.3333L29.3333 22.6667"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M2.66663 16L16 22.6667L29.3333 16"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <span className="text-xl font-bold text-brand-navy tracking-tight">
+            corelms
+          </span>
         </div>
 
         <h2 className="text-2xl font-bold text-brand-navy">

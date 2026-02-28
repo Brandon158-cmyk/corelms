@@ -80,6 +80,21 @@ const schema = defineSchema({
   })
     .index("by_token", ["token"])
     .index("by_userId", ["userId"]),
+
+  /**
+   * Classes table — represents courses or classrooms in a school.
+   */
+  classes: defineTable({
+    tenantId: v.id("tenants"),
+    name: v.string(), // e.g., "Mathematics 101"
+    description: v.optional(v.string()),
+    teacherId: v.optional(v.id("users")), // Primary instructor
+    room: v.optional(v.string()),
+    schedule: v.optional(v.string()),
+    status: v.union(v.literal("active"), v.literal("archived")),
+  })
+    .index("by_tenant", ["tenantId"])
+    .index("by_tenant_teacher", ["tenantId", "teacherId"]),
 });
 
 export default schema;

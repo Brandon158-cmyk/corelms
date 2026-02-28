@@ -63,6 +63,29 @@ export const updateProfile = mutation({
 });
 
 /**
+ * List all users for the current authenticated user's tenant.
+ * Used for the Users management datatable.
+ */
+export const listTenantUsers = query({
+  args: {},
+  handler: async (ctx) => {
+    const userId = await auth.getUserId(ctx);
+    if (!userId) throw new Error("Not authenticated");
+
+    const user = await ctx.db.get(userId);
+    if (!user || (!user.tenantId && user.role !== "superAdmin")) {
+      return [];
+    }
+
+    // List all users in this tenant
+    return await ctx.db
+      .query("users")
+      .withIndex("by_tenant", (q) => q.eq("tenantId", user.tenantId as any))
+      .collect();
+  },
+});
+
+/**
  * Link a user to a tenant using a school code.
  * Called during or after sign-up to associate the user with a school.
  */

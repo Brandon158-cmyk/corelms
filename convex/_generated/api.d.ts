@@ -11,6 +11,7 @@
 import type * as CustomPassword from "../CustomPassword.js";
 import type * as MockPasswordReset from "../MockPasswordReset.js";
 import type * as auth from "../auth.js";
+import type * as classes from "../classes.js";
 import type * as cleanup from "../cleanup.js";
 import type * as http from "../http.js";
 import type * as tenants from "../tenants.js";
@@ -27,6 +28,7 @@ declare const fullApi: ApiFromModules<{
   CustomPassword: typeof CustomPassword;
   MockPasswordReset: typeof MockPasswordReset;
   auth: typeof auth;
+  classes: typeof classes;
   cleanup: typeof cleanup;
   http: typeof http;
   tenants: typeof tenants;
