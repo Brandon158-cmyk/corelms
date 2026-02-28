@@ -1,5 +1,6 @@
 import { Password } from "@convex-dev/auth/providers/Password";
 import { DataModel } from "./_generated/dataModel";
+import { MockPasswordReset } from "./MockPasswordReset";
 
 /**
  * Custom Password provider for corelms.
@@ -7,7 +8,7 @@ import { DataModel } from "./_generated/dataModel";
  * user profile fields: name, role, and tenantId (via schoolCode).
  *
  * The `profile` callback maps sign-up form fields to user document fields.
- * The schoolCode → tenantId resolution happens in the auth callbacks.
+ * The `reset` option handles the password reset OTP flow.
  */
 const CustomPassword = Password<DataModel>({
   profile(params) {
@@ -17,6 +18,7 @@ const CustomPassword = Password<DataModel>({
       role: (params.role as string) || "student",
     };
   },
+  reset: MockPasswordReset,
 });
 
 export default CustomPassword;

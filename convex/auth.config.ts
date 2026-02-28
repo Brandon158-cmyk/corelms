@@ -6,7 +6,7 @@
 export default {
   providers: [
     {
-      domain: process.env.CONVEX_SITE_URL,
+      domain: "https://vivid-armadillo-494.convex.site",
       applicationID: "convex",
     },
   ],
