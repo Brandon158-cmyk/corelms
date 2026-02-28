@@ -1,0 +1,294 @@
+# Qademy: Multi-Tenant School Management Platform (Zambia)
+
+## 1. Executive Summary
+**Qademy** is a localized, cloud-based Software-as-a-Service (SaaS) School Management System tailored for the Zambian education sector. Designed as a **multi-tenant platform**, Qademy allows multiple independent schools (Primary, Junior Secondary, and Senior Secondary) to register, configure their unique profiles, and manage their daily operations securely. 
+
+The system seamlessly integrates with Zambian standards, including the **Examinations Council of Zambia (ECZ)** grading formats, local currency (**ZMW**), and widespread mobile money integrations (**MTN MoMo & Airtel Money**).
+
+---
+
+## 2. Multi-Tenant Architecture (SaaS Model)
+Because multiple schools use Qademy, data privacy and isolation are paramount. 
+* **Tenant Isolation:** Every time a user logs in, the `Auth Service` issues a JWT containing a `TenantID` (School ID). All database queries automatically filter by this `TenantID` to ensure School A cannot see School B's data.
+* **Customization:** Schools can upload their own logos, set their own fee structures, and configure custom term dates.
+* **Cloud Infrastructure:** Hosted on scalable cloud infrastructure (e.g., AWS or Azure) utilizing microservices to handle high traffic during critical periods, such as end-of-term report generation and ECZ mock exam seasons.
+
+---
+
+## 3. UI/UX Design & Styling Guidelines
+Qademy focuses on a **Mobile-First** design, recognizing that many teachers, students, and parents in Zambia will access the platform via smartphones.
+
+### Color Palette & Typography
+* **Primary Colors:** **Deep Navy Blue** (`#0B192C`) representing trust and professionalism, and **Vibrant Orange/Gold** (`#FF8C00`) representing African warmth, energy, and youth.
+* **Backgrounds:** Clean, off-white/light gray (`#F4F7FE`) to ensure data cards and text remain highly readable.
+* **Typography:** Clean, modern sans-serif fonts like *Inter* or *Poppins* for excellent readability on small screens.
+
+### Layout Structure
+* **Left Navigation:** A sleek dark-blue sidebar (collapsible on mobile) featuring the school's logo alongside the glowing Qademy branding.
+* **Top Header:** Global search, notification bell (e.g., for SMS/MoMo alerts), and user profile.
+* **Main Dashboard:** Clean white cards with soft drop shadows displaying relevant metrics based on the user's role (e.g., ZMW fee collections for Bursars, pending lesson plans for Management).
+
+---
+
+## 4. Platform Phases & Sequence Diagrams
+
+Below are the detailed sequence diagrams outlining the exact data flows for the five primary user roles on the Qademy platform.
+
+### Phase 1: Management (Principals, Admin, Directors)
+Management requires a bird’s-eye view of the school’s academic and financial health, staff onboarding, and bulk communication.
+
+```plantuml
+@startuml
+!theme plain
+skinparam maxMessageSize 150
+skinparam ParticipantPadding 20
+skinparam BoxPadding 10
+
+actor "Management\n(Admin/Principal)" as Mgt
+box "Qademy Frontend" #LightCyan
+participant "Management\nPortal" as Portal
+end box
+
+box "Backend Microservices" #LightYellow
+participant "Auth\nService" as Auth
+participant "User & System\nManagement" as UMS
+participant "Academic\nModule" as Acad
+participant "Finance\nModule" as Fin
+participant "Reporting &\nComm Service" as Rep
+end box
+
+database "Tenant DB\n(Isolated by School)" as DB
+
+== 1. Authentication & Access ==
+Mgt -> Portal: Enter Admin Credentials
+Portal -> Auth: POST /login (credentials)
+Auth -> DB: Fetch user hash, roles & TenantID
+DB --> Auth: Return UserData (Role: Management, Tenant: School_A)
+Auth -> Auth: Generate JWT (Includes TenantID)
+Auth --> Portal: 200 OK (Token)
+Portal -> Rep: Fetch Dashboard Aggregates (Stats)
+Rep -> DB: Query school-wide metrics (WHERE TenantID = School_A)
+DB --> Rep: Return metrics
+Rep --> Portal: Return Dashboard Data
+Portal --> Mgt: Display Management Dashboard
+
+== 2. System & User Management ==
+Mgt -> Portal: Initialize New Term (e.g., Term 1)
+Portal -> UMS: POST /term/setup
+UMS -> DB: Create term records
+UMS --> Portal: Term initialized
+
+== 3. Academic Oversight ==
+Mgt -> Portal: Configure ECZ Subjects & Assign Teachers
+Portal -> Acad: PUT /classes/assign-teacher
+Acad -> DB: Map Teacher ID to Class ID
+Acad --> Portal: Assignment confirmed
+
+== 4. Financial Oversight (ZMW) ==
+Mgt -> Portal: Request Fee Collection Report
+Portal -> Fin: GET /finance/fees/summary
+Fin -> DB: Aggregate paid vs pending fees (ZMW)
+Fin --> Portal: Return Fee Report Data
+
+== 5. Whole-School Reporting ==
+Mgt -> Portal: Send Urgent Broadcast (SMS/Email)
+Portal -> Rep: POST /communicate/broadcast
+Rep -> DB: Fetch contacts
+Rep -> Rep: Interface with Zambian SMS Gateway
+Rep --> Portal: Broadcast queued
+@enduml
+
+@startuml
+!theme plain
+skinparam maxMessageSize 150
+skinparam ParticipantPadding 20
+skinparam BoxPadding 10
+
+actor "Staff Member\n(Bursar/Librarian)" as Staff
+box "Qademy Frontend" #LightCyan
+participant "Staff\nPortal" as Portal
+end box
+
+box "Backend Microservices" #LightYellow
+participant "Auth\nService" as Auth
+participant "Admissions\nService" as Adm
+participant "Finance\nModule" as Fin
+participant "Library\nModule" as Lib
+participant "Notification\nService" as Notif
+end box
+
+database "Tenant DB" as DB
+
+== 1. Auth & Role Routing ==
+Staff -> Portal: Enter Credentials
+Portal -> Auth: POST /login
+Auth --> Portal: 200 OK (Token, Role Context)
+Portal --> Staff: Display specific Staff Dashboard
+
+== 2. Admissions (Registrar) ==
+Staff -> Portal: Enroll New Student
+Portal -> Adm: POST /admissions/enroll
+Adm -> DB: Create Student Profile
+Adm -> Notif: Trigger Welcome SMS to Parent
+Adm --> Portal: Enrollment Successful
+
+== 3. Fee Collection (Bursar) ==
+Staff -> Portal: Record Fee Payment (ZMW, Cash/MoMo)
+Portal -> Fin: POST /finance/fees/pay
+Fin -> DB: Update Student Fee Ledger
+Fin -> Notif: POST /sms/receipt (Amount, Balance)
+Notif -> Notif: Send SMS via Gateway
+Fin --> Portal: Transaction ID & Receipt generated
+
+== 4. Library Operations (Librarian) ==
+Staff -> Portal: Scan Student ID & Book
+Portal -> Lib: POST /library/checkout
+Lib -> DB: Check Fines & Update book status
+Lib --> Portal: Checkout Successful
+@enduml
+
+@startuml
+!theme plain
+skinparam maxMessageSize 150
+skinparam ParticipantPadding 20
+skinparam BoxPadding 10
+
+actor "Teacher" as Tr
+box "Qademy Frontend" #LightCyan
+participant "Teacher\nPortal" as Portal
+end box
+
+box "Backend Microservices" #LightYellow
+participant "Auth\nService" as Auth
+participant "Academic\nModule" as Acad
+participant "Grading\nModule" as Grad
+participant "Notification\nService" as Notif
+end box
+
+database "Tenant DB" as DB
+
+== 1. Auth & Daily Timetable ==
+Tr -> Portal: Login
+Portal -> Auth: POST /login
+Auth --> Portal: 200 OK (JWT)
+Portal -> Acad: GET /timetable/today
+Acad --> Portal: Return Schedule
+
+== 2. Attendance Tracking ==
+Tr -> Portal: Mark Attendance
+Portal -> Acad: POST /attendance/submit
+Acad -> DB: Save attendance
+Acad -> Notif: Trigger SMS for 'Absent' Students
+Notif --> Acad: SMS Dispatched to Parents
+Acad --> Portal: Saved
+
+== 3. Assignments & Materials ==
+Tr -> Portal: Upload ECZ Past Paper PDF
+Portal -> Acad: POST /materials/upload
+Acad -> DB: Save file metadata
+Acad --> Portal: Upload successful
+
+== 4. CA & ECZ Grading ==
+Tr -> Portal: Input Raw Marks (e.g., 78/100)
+Portal -> Grad: POST /grading/submit-marks
+Grad -> Grad: Validate inputs & Convert to ECZ Grade (e.g., Distinction)
+Grad -> DB: Store final marks
+Grad --> Portal: Grades Locked & Saved
+@enduml
+
+@startuml
+!theme plain
+skinparam maxMessageSize 150
+skinparam ParticipantPadding 20
+skinparam BoxPadding 10
+
+actor "Student" as Stu
+box "Qademy Frontend" #LightCyan
+participant "Student\nPortal / App" as Portal
+end box
+
+box "Backend Microservices" #LightYellow
+participant "Academic\nModule" as Acad
+participant "Finance\nModule" as Fin
+participant "Grading\nModule" as Grad
+end box
+
+database "Tenant DB" as DB
+
+== 1. Dashboard & Materials ==
+Stu -> Portal: Navigate to "My Subjects"
+Portal -> Acad: GET /materials/subject
+Acad --> Portal: Display ECZ Past Papers
+Stu -> Portal: Download File
+Portal -> Acad: GET /materials/download
+Acad --> Portal: Secure AWS S3 URL
+
+== 2. Assignment Submission ==
+Stu -> Portal: Upload Homework PDF
+Portal -> Acad: POST /assignments/submit
+Acad -> Acad: Validate Due Date
+Acad -> DB: Save submission
+Acad --> Portal: 200 OK
+
+== 3. Results & Report Cards (Fee Check) ==
+Stu -> Portal: Request Term Report Card
+Portal -> Grad: GET /results/report-card
+Grad -> Fin: GET /finance/status
+Fin -> DB: Check Fee Ledger balance
+alt Fees Not Cleared
+    Fin --> Grad: Outstanding Balance
+    Grad --> Portal: 402 Payment Required (See Bursar)
+else Fees Cleared
+    Grad -> DB: Fetch Grades & Generate PDF
+    Grad --> Portal: Return PDF Link
+end
+@enduml
+
+@startuml
+!theme plain
+skinparam maxMessageSize 150
+skinparam ParticipantPadding 20
+skinparam BoxPadding 10
+
+actor "Parent" as Par
+box "Qademy Frontend" #LightCyan
+participant "Parent\nPortal / App" as Portal
+end box
+
+box "Backend Microservices" #LightYellow
+participant "Academic\nModule" as Acad
+participant "Finance\nModule" as Fin
+participant "Notification\nService" as Notif
+end box
+
+box "External Services" #LightGray
+participant "MTN/Airtel\nMoMo Gateway" as MoMo
+end box
+
+database "Tenant DB" as DB
+
+== 1. Multi-Child Dashboard ==
+Par -> Portal: Login
+Portal -> Acad: GET /parent/children
+Acad --> Portal: Return Profiles (e.g., Child A, Child B)
+
+== 2. Attendance Alerts ==
+note over Par, Notif: Background: If Teacher marks student absent...
+Notif -> Par: Push Notification / SMS: "Your child is absent today."
+
+== 3. Mobile Money Fee Payments (ZMW) ==
+Par -> Portal: Click "Pay via MoMo" (Enter Phone & Amount)
+Portal -> Fin: POST /finance/pay/momo
+Fin -> MoMo: Initiate STK Push API (Prompt User Phone)
+MoMo --> Fin: Payment Pending
+Par -> MoMo: Enter MoMo PIN on phone
+MoMo -> Fin: Webhook Callback (Success)
+Fin -> DB: Update Student Fee Ledger
+Fin -> Notif: Trigger SMS Receipt
+Fin --> Portal: Payment Success & Receipt
+
+== 4. Academic Tracking ==
+Par -> Portal: Download Term Report
+Portal -> Acad: GET /results/report-card
+Acad --> Portal: Return PDF File
+@enduml
