@@ -119,6 +119,21 @@ const navData: NavGroup[] = [
         url: "/dashboard/timetable/manage",
         allowedRoles: ADMIN_ROLES,
       },
+      {
+        title: "SEN Support",
+        url: "/dashboard/sen",
+        allowedRoles: [...ADMIN_ROLES, "teacher"],
+      },
+      {
+        title: "Learning (LMS)",
+        url: "/dashboard/lms",
+        allowedRoles: [...ADMIN_ROLES, "teacher", "student"],
+      },
+      {
+        title: "Analytics",
+        url: "/dashboard/analytics",
+        allowedRoles: [...ADMIN_ROLES, "teacher"],
+      },
     ],
   },
   {

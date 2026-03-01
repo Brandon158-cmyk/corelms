@@ -11,6 +11,7 @@
 import type * as CustomPassword from "../CustomPassword.js";
 import type * as MockPasswordReset from "../MockPasswordReset.js";
 import type * as academicYears from "../academicYears.js";
+import type * as analytics from "../analytics.js";
 import type * as assessments from "../assessments.js";
 import type * as attendance from "../attendance.js";
 import type * as auth from "../auth.js";
@@ -22,8 +23,10 @@ import type * as financials from "../financials.js";
 import type * as grades from "../grades.js";
 import type * as hostels from "../hostels.js";
 import type * as http from "../http.js";
+import type * as lms from "../lms.js";
 import type * as payroll from "../payroll.js";
 import type * as reportCards from "../reportCards.js";
+import type * as sen from "../sen.js";
 import type * as setup from "../setup.js";
 import type * as staff from "../staff.js";
 import type * as students from "../students.js";
@@ -46,6 +49,7 @@ declare const fullApi: ApiFromModules<{
   CustomPassword: typeof CustomPassword;
   MockPasswordReset: typeof MockPasswordReset;
   academicYears: typeof academicYears;
+  analytics: typeof analytics;
   assessments: typeof assessments;
   attendance: typeof attendance;
   auth: typeof auth;
@@ -57,8 +61,10 @@ declare const fullApi: ApiFromModules<{
   grades: typeof grades;
   hostels: typeof hostels;
   http: typeof http;
+  lms: typeof lms;
   payroll: typeof payroll;
   reportCards: typeof reportCards;
+  sen: typeof sen;
   setup: typeof setup;
   staff: typeof staff;
   students: typeof students;

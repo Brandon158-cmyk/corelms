@@ -443,16 +443,6 @@ As a Boarding Matron, I need to quickly take evening roll call on my tablet so t
 
 ---
 
-### 6.5 School Health, Nutrition (SHN), and Canteen
-
-**Health Clinic:**  
-Digitizes the learner SHN Card. The system tracks Body Mass Index (BMI), scheduling for bi-annual de-worming, and Vitamin A / Iron supplementation interventions, aligning with National Food and Nutrition Commission guidelines.
-
-**Canteen & HGSM:**  
-For schools in the Home Grown School Meals (HGSM) program, the system provides an inventory tracker for local agricultural procurement (e.g., maize, groundnuts) and tracks the daily headcount of meals served to fulfill WFP and MoE audit requirements. For private schools, this functions as a cashless Point-of-Sale (POS) linked to student NFC wristbands or ID cards.
-
----
-
 ### 6.6 Transport and Fleet Management
 
 A necessity for private and international schools in urban centers like Lusaka.
@@ -470,16 +460,6 @@ As a student boards the bus, they tap their ID card on an RFID scanner. The bus 
 #### Edge Cases:
 
 Geo-fencing algorithms trigger administrative alerts if a bus deviates from its approved route or exceeds speed limits.
-
----
-
-### 6.7 Library and Asset Management
-
-**Library:**  
-Allows cataloging via ISBN barcode scanning. Configurable loan periods (e.g., 3 hours for short-loan, 3 weeks for open shelf). Overdue items automatically incur fines (e.g., ZMW 2.00/day) which are pushed directly to the student's central billing ledger.
-
-**Inventory:**  
-Tracks physical assets (computers, lab equipment, desks) across rooms. Applies straight-line depreciation formulas for end-of-year financial reporting.
 
 ---
 

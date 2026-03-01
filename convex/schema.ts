@@ -708,6 +708,112 @@ const schema = defineSchema({
     .index("by_teacher", ["teacherId"]),
 
   /**
+   * Special Educational Needs (SEN) Support (Section 6.2)
+   */
+  senScreenings: defineTable({
+    tenantId: v.id("tenants"),
+    studentId: v.id("users"),
+    screenedBy: v.id("users"), // teacher
+    date: v.string(), // ISO date
+    domains: v.object({
+      visual: v.number(), // 1–10
+      hearing: v.number(),
+      intellectual: v.number(),
+      physical: v.number(),
+    }),
+    totalScore: v.number(), // sum of domains (4–40, but MoE uses 5–30 range)
+    classification: v.union(
+      v.literal("no-challenges"),
+      v.literal("monitor"),
+      v.literal("suspected-disability"),
+    ),
+    notes: v.optional(v.string()),
+    termId: v.optional(v.id("terms")),
+  })
+    .index("by_tenant", ["tenantId"])
+    .index("by_student", ["studentId"])
+    .index("by_classification", ["tenantId", "classification"]),
+
+  senReferrals: defineTable({
+    tenantId: v.id("tenants"),
+    screeningId: v.id("senScreenings"),
+    studentId: v.id("users"),
+    referredTo: v.string(), // SENCO name or District team
+    status: v.union(
+      v.literal("pending"),
+      v.literal("in-progress"),
+      v.literal("completed"),
+    ),
+    iepAttached: v.boolean(),
+    notes: v.optional(v.string()),
+    createdAt: v.number(),
+  })
+    .index("by_tenant", ["tenantId"])
+    .index("by_student", ["studentId"])
+    .index("by_status", ["tenantId", "status"]),
+
+  /**
+   * Learning Management System (Section 6.8 — LMS)
+   */
+  courses: defineTable({
+    tenantId: v.id("tenants"),
+    classId: v.id("classes"),
+    subjectId: v.id("subjects"),
+    title: v.string(),
+    description: v.optional(v.string()),
+    createdBy: v.id("users"),
+    status: v.union(v.literal("active"), v.literal("archived")),
+  })
+    .index("by_tenant", ["tenantId"])
+    .index("by_class", ["classId"])
+    .index("by_subject", ["subjectId"]),
+
+  lessons: defineTable({
+    courseId: v.id("courses"),
+    title: v.string(),
+    content: v.string(), // markdown / rich text
+    order: v.number(),
+    type: v.union(
+      v.literal("lesson"),
+      v.literal("quiz"),
+      v.literal("resource"),
+    ),
+    attachmentUrl: v.optional(v.string()),
+  }).index("by_course", ["courseId"]),
+
+  lmsAssignments: defineTable({
+    tenantId: v.id("tenants"),
+    courseId: v.id("courses"),
+    title: v.string(),
+    instructions: v.string(),
+    dueDate: v.string(), // ISO date
+    totalMarks: v.number(),
+    createdBy: v.id("users"),
+    status: v.union(v.literal("open"), v.literal("closed")),
+  })
+    .index("by_tenant", ["tenantId"])
+    .index("by_course", ["courseId"]),
+
+  lmsSubmissions: defineTable({
+    tenantId: v.id("tenants"),
+    assignmentId: v.id("lmsAssignments"),
+    studentId: v.id("users"),
+    content: v.string(), // text answer
+    submittedAt: v.number(),
+    grade: v.optional(v.number()),
+    gradedBy: v.optional(v.id("users")),
+    feedback: v.optional(v.string()),
+    status: v.union(
+      v.literal("submitted"),
+      v.literal("graded"),
+      v.literal("late"),
+    ),
+  })
+    .index("by_tenant", ["tenantId"])
+    .index("by_assignment", ["assignmentId"])
+    .index("by_student", ["studentId"]),
+
+  /**
    * Communication & Notifications (Section 6.8 & 7)
    */
   announcements: defineTable({
@@ -753,6 +859,29 @@ const schema = defineSchema({
     content: v.string(), // e.g., "Hello {{name}}, your balance is {{balance}}"
     category: v.optional(v.string()), // e.g., "fees", "attendance", "general"
   }).index("by_tenant", ["tenantId"]),
+
+  /**
+   * Predictive Analytics & Early Warning (Section 7.1)
+   */
+  studentRiskScores: defineTable({
+    tenantId: v.id("tenants"),
+    studentId: v.id("users"),
+    attendanceScore: v.number(), // 0–100 (higher = better)
+    academicScore: v.number(),
+    disciplineScore: v.number(),
+    overallRisk: v.number(), // 0–100 (higher = better, lower = more at risk)
+    riskLevel: v.union(
+      v.literal("low"),
+      v.literal("medium"),
+      v.literal("high"),
+      v.literal("critical"),
+    ),
+    factors: v.array(v.string()),
+    computedAt: v.number(),
+  })
+    .index("by_tenant", ["tenantId"])
+    .index("by_student", ["studentId"])
+    .index("by_risk", ["tenantId", "riskLevel"]),
 });
 
 export default schema;
