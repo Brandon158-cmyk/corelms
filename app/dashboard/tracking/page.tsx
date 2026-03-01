@@ -1,7 +1,17 @@
 "use client";
 
-import { useQuery } from "convex/react";
+import { useQuery, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
+import { LogIncidentDialog } from "@/components/discipline/LogIncidentDialog";
+import { Id } from "@/convex/_generated/dataModel";
+import { toast } from "sonner";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -15,6 +25,7 @@ import {
   Alert02Icon,
   Shield01Icon,
   SearchIcon,
+  MoreHorizontalIcon,
 } from "@hugeicons/core-free-icons";
 import {
   Table,
@@ -30,8 +41,21 @@ import { useState } from "react";
 export default function TrackingDashboardPage() {
   const [search, setSearch] = useState("");
 
-  const disciplineLogs = useQuery(api.tracking.listRecentDiscipline);
+  const disciplineLogs = useQuery(api.discipline.getSchoolLogs, { limit: 50 });
   const senAlerts = useQuery(api.tracking.listSENAlerts);
+  const updateStatus = useMutation(api.discipline.updateIncidentStatus);
+
+  const handleStatusChange = async (
+    logId: Id<"disciplineLogs">,
+    status: "open" | "resolved" | "escalated",
+  ) => {
+    try {
+      await updateStatus({ logId, status });
+      toast.success(`Status updated to ${status}`);
+    } catch (error) {
+      toast.error("Failed to update status");
+    }
+  };
 
   return (
     <div className="flex flex-1 flex-col gap-6 p-6 lg:p-8 bg-brand-bg/30">
@@ -45,6 +69,7 @@ export default function TrackingDashboardPage() {
             alerts across the institution.
           </p>
         </div>
+        <LogIncidentDialog />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -167,6 +192,7 @@ export default function TrackingDashboardPage() {
                   <TableHead className="font-semibold text-brand-accent text-right">
                     Pts
                   </TableHead>
+                  <TableHead className="text-right sr-only">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -241,6 +267,47 @@ export default function TrackingDashboardPage() {
                           >
                             -{log.pointsDeducted}
                           </Badge>
+                        </TableCell>
+                        <TableCell className="text-right">
+                          <DropdownMenu>
+                            <DropdownMenuTrigger
+                              render={
+                                <Button
+                                  variant="ghost"
+                                  className="h-8 w-8 p-0"
+                                />
+                              }
+                            >
+                              <span className="sr-only">Open menu</span>
+                              <HugeiconsIcon
+                                icon={MoreHorizontalIcon}
+                                className="h-4 w-4"
+                              />
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuItem
+                                onClick={() =>
+                                  handleStatusChange(log._id, "resolved")
+                                }
+                              >
+                                Mark as Resolved
+                              </DropdownMenuItem>
+                              <DropdownMenuItem
+                                onClick={() =>
+                                  handleStatusChange(log._id, "escalated")
+                                }
+                              >
+                                Escalate to Head
+                              </DropdownMenuItem>
+                              <DropdownMenuItem
+                                onClick={() =>
+                                  handleStatusChange(log._id, "open")
+                                }
+                              >
+                                Re-open Review
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
                         </TableCell>
                       </TableRow>
                     ))
