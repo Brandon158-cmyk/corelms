@@ -1,0 +1,23 @@
+[
+  {
+    "_id": "kmc0x46hh72w3nn6sb23qb9303ns96g5",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "name": "Main Road",
+    "type": "both",
+    "status": "active"
+  },
+  {
+    "_id": "ktt15ndhzt8qt54gsyzgx6cfsvj4n9gt",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "name": "Main Road",
+    "type": "both",
+    "status": "active"
+  },
+  {
+    "_id": "ktvpe6t62asekegv1zkjpwwp0ycmrxh8",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "name": "Main Road",
+    "type": "both",
+    "status": "active"
+  }
+]

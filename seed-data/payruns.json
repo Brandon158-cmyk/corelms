@@ -1,0 +1,44 @@
+[
+  {
+    "_id": "k8f607xp1y8821nez2x8fpg8xjk0jh7z",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "month": 3,
+    "year": 2026,
+    "status": "paid",
+    "totalGross": 45000,
+    "totalNet": 35000,
+    "totalTax": 10000,
+    "totalNAPSA": 2000,
+    "totalNHIMA": 500,
+    "processedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z",
+    "processedAt": 1772390043840
+  },
+  {
+    "_id": "k2g70k28spr8yvscwb096at7me7pgn66",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "month": 3,
+    "year": 2026,
+    "status": "paid",
+    "totalGross": 45000,
+    "totalNet": 35000,
+    "totalTax": 10000,
+    "totalNAPSA": 2000,
+    "totalNHIMA": 500,
+    "processedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj",
+    "processedAt": 1772390043843
+  },
+  {
+    "_id": "kx1cms5c70s5zdtqw06zq6c1p0vybyrw",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "month": 3,
+    "year": 2026,
+    "status": "paid",
+    "totalGross": 45000,
+    "totalNet": 35000,
+    "totalTax": 10000,
+    "totalNAPSA": 2000,
+    "totalNHIMA": 500,
+    "processedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r",
+    "processedAt": 1772390043847
+  }
+]

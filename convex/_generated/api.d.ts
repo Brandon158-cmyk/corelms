@@ -26,6 +26,7 @@ import type * as http from "../http.js";
 import type * as lms from "../lms.js";
 import type * as payroll from "../payroll.js";
 import type * as reportCards from "../reportCards.js";
+import type * as seed from "../seed.js";
 import type * as sen from "../sen.js";
 import type * as setup from "../setup.js";
 import type * as staff from "../staff.js";
@@ -64,6 +65,7 @@ declare const fullApi: ApiFromModules<{
   lms: typeof lms;
   payroll: typeof payroll;
   reportCards: typeof reportCards;
+  seed: typeof seed;
   sen: typeof sen;
   setup: typeof setup;
   staff: typeof staff;

@@ -1,0 +1,164 @@
+[
+  {
+    "_id": "kwmnq18zzarhmskwvkz08xjvfmbcz7ed",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "day": "monday",
+    "periodNumber": 1,
+    "startTime": "08:00",
+    "endTime": "08:40",
+    "type": "lesson"
+  },
+  {
+    "_id": "k3v17yew4s7sb9h7t1rbd1gtgedtrpa9",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "day": "monday",
+    "periodNumber": 2,
+    "startTime": "09:00",
+    "endTime": "09:40",
+    "type": "lesson"
+  },
+  {
+    "_id": "kxpaevc9t6fgg0vpzbazyvaknh0ke35r",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "day": "monday",
+    "periodNumber": 3,
+    "startTime": "010:00",
+    "endTime": "010:40",
+    "type": "lesson"
+  },
+  {
+    "_id": "kca8hsjb5w3vnt0r10634gq5mp0er4x1",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "day": "tuesday",
+    "periodNumber": 1,
+    "startTime": "08:00",
+    "endTime": "08:40",
+    "type": "lesson"
+  },
+  {
+    "_id": "k2ssp2wdbytvp50y06t0a0y7e8kts9w8",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "day": "tuesday",
+    "periodNumber": 2,
+    "startTime": "09:00",
+    "endTime": "09:40",
+    "type": "lesson"
+  },
+  {
+    "_id": "knba5xzm1kjqgqc9akb063g2m60m4bz7",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "day": "tuesday",
+    "periodNumber": 3,
+    "startTime": "010:00",
+    "endTime": "010:40",
+    "type": "lesson"
+  },
+  {
+    "_id": "kgwcbfjv86v1bpawcd29geq4gzc16arr",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "day": "monday",
+    "periodNumber": 1,
+    "startTime": "08:00",
+    "endTime": "08:40",
+    "type": "lesson"
+  },
+  {
+    "_id": "kkb70j2nf22wg4zy1zm8p87ack6yftsw",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "day": "monday",
+    "periodNumber": 2,
+    "startTime": "09:00",
+    "endTime": "09:40",
+    "type": "lesson"
+  },
+  {
+    "_id": "knc6td7zw903txhmrzzc1n00vfnmxzkz",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "day": "monday",
+    "periodNumber": 3,
+    "startTime": "010:00",
+    "endTime": "010:40",
+    "type": "lesson"
+  },
+  {
+    "_id": "kc8p6gmgnevefdgb1nnzfgheq6a2bsry",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "day": "tuesday",
+    "periodNumber": 1,
+    "startTime": "08:00",
+    "endTime": "08:40",
+    "type": "lesson"
+  },
+  {
+    "_id": "krg5at0cceknvhp1xqh0avq7je66s5xs",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "day": "tuesday",
+    "periodNumber": 2,
+    "startTime": "09:00",
+    "endTime": "09:40",
+    "type": "lesson"
+  },
+  {
+    "_id": "kkznc7qekjz836s37mm856ak0d3hna6q",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "day": "tuesday",
+    "periodNumber": 3,
+    "startTime": "010:00",
+    "endTime": "010:40",
+    "type": "lesson"
+  },
+  {
+    "_id": "kg4stjp5kq17ddb418vfrdx5tdp4ynj8",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "day": "monday",
+    "periodNumber": 1,
+    "startTime": "08:00",
+    "endTime": "08:40",
+    "type": "lesson"
+  },
+  {
+    "_id": "kqx5r1fscdx2rth987g2fs37n34p05a9",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "day": "monday",
+    "periodNumber": 2,
+    "startTime": "09:00",
+    "endTime": "09:40",
+    "type": "lesson"
+  },
+  {
+    "_id": "khmm1w5dfh41esz9mvta2c66a2hc42c6",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "day": "monday",
+    "periodNumber": 3,
+    "startTime": "010:00",
+    "endTime": "010:40",
+    "type": "lesson"
+  },
+  {
+    "_id": "knybn53wggn913tmgwcdgx9j2r8td65f",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "day": "tuesday",
+    "periodNumber": 1,
+    "startTime": "08:00",
+    "endTime": "08:40",
+    "type": "lesson"
+  },
+  {
+    "_id": "kdp9adqfpw4yasytx3eawg9xfr990p7q",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "day": "tuesday",
+    "periodNumber": 2,
+    "startTime": "09:00",
+    "endTime": "09:40",
+    "type": "lesson"
+  },
+  {
+    "_id": "k3kejw0b6vs7kqkztc9xvag728hte7kz",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "day": "tuesday",
+    "periodNumber": 3,
+    "startTime": "010:00",
+    "endTime": "010:40",
+    "type": "lesson"
+  }
+]

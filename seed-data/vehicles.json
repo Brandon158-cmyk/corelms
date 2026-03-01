@@ -1,0 +1,26 @@
+[
+  {
+    "_id": "k362t0fv1fk4nn4p3mbqx2g4hpcjq414",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "name": "Bus 1",
+    "plateNumber": "BAV 123",
+    "capacity": 60,
+    "status": "active"
+  },
+  {
+    "_id": "k9rn2m99jzt362qgxm49d3d7jhmj5efr",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "name": "Bus 1",
+    "plateNumber": "BAV 123",
+    "capacity": 60,
+    "status": "active"
+  },
+  {
+    "_id": "kzksbc7czfmnhhvm8fhg7qcspec40my9",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "name": "Bus 1",
+    "plateNumber": "BAV 123",
+    "capacity": 60,
+    "status": "active"
+  }
+]

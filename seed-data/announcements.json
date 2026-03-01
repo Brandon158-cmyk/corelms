@@ -1,0 +1,32 @@
+[
+  {
+    "_id": "kd13qyhmx5fcag8fn7c35cjd9tmh720w",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "title": "Exam Date",
+    "content": "Exams start on 20th",
+    "audience": "all",
+    "authorId": "kdgts1s5tgd8fmjbc22xkqnhq289z8qp",
+    "priority": "normal",
+    "createdAt": 1772390043840
+  },
+  {
+    "_id": "kxqkx7cwpqtacpgq31jbcm72tntq7pz7",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "title": "Exam Date",
+    "content": "Exams start on 20th",
+    "audience": "all",
+    "authorId": "k4c0ct0k30701wmh0490cd2yh56exq3v",
+    "priority": "normal",
+    "createdAt": 1772390043843
+  },
+  {
+    "_id": "kaxc5ebnyneqhecmw3ab1ggz31gnan6a",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "title": "Exam Date",
+    "content": "Exams start on 20th",
+    "audience": "all",
+    "authorId": "ktabf8jwzg1p1b1hjj25ebjvv60pcrq4",
+    "priority": "normal",
+    "createdAt": 1772390043847
+  }
+]

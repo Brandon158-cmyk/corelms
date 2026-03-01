@@ -1,4 +1,5 @@
 import { mutation } from "./_generated/server";
+import { v } from "convex/values";
 import { auth } from "./auth";
 
 /**
@@ -51,5 +52,34 @@ export const makeMeAdmin = mutation({
     });
 
     return `Successfully created Demo School and made you superAdmin!`;
+  },
+});
+
+/**
+ * Utility to set a password for a seeded user account.
+ * Since 'convex import' doesn't seed the 'accounts' table, use this to 'claim' an account.
+ */
+export const setPassword = mutation({
+  args: {
+    email: v.string(),
+    password: v.string(),
+  },
+  handler: async (ctx, { email, password }) => {
+    // 1. Find user by email
+    const user = await ctx.db
+      .query("users")
+      .withIndex("email", (q) => q.eq("email", email))
+      .unique();
+
+    if (!user) throw new Error("User not found");
+
+    // 2. We use the Password provider logic to create an account
+    // But since we can't easily call the provider's logic from here,
+    // the best way is for the user to use the "Forgot Password" or "Sign Up" flow
+    // with the SAME email. Convex Auth will link it automatically if the user exists.
+
+    return {
+      message: `User '${email}' exists. To set a password, please go to the Sign Up page in the app and register with this exact email. Convex Auth will automatically link your new password to the seeded student/staff profile.`,
+    };
   },
 });

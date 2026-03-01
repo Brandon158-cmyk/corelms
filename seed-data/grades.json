@@ -1,0 +1,77 @@
+[
+  {
+    "_id": "k2578a49vq6gpfabtk1yk7h68qtekvez",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "name": "Grade 8"
+  },
+  {
+    "_id": "ky1nybc12m19ptc58v5hrszesesj798s",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "name": "Grade 9"
+  },
+  {
+    "_id": "kht6921mmqzgx2q073ger197rhqx997p",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "name": "Grade 10"
+  },
+  {
+    "_id": "kxyzrztrxcnzyq98b7kzkj2zqkyytpj4",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "name": "Grade 11"
+  },
+  {
+    "_id": "kkheyvpwhcdg4pw4bh74dcs0yc6wa7j0",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "name": "Grade 12"
+  },
+  {
+    "_id": "k3nqz62fqwpbaehzabjmpbvt16tg0djz",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "name": "Grade 8"
+  },
+  {
+    "_id": "kqn9pr4rw4bj31pymr5xw7e1qrfr15v0",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "name": "Grade 9"
+  },
+  {
+    "_id": "kems0ma7kw1skvjs6wcfvbn7sna6pk4k",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "name": "Grade 10"
+  },
+  {
+    "_id": "k1cd6awg4qzstam9h9xrxpj9pnvxfcyr",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "name": "Grade 11"
+  },
+  {
+    "_id": "kj6qn5c25dyhkftan3aj1ws3493qgkbe",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "name": "Grade 12"
+  },
+  {
+    "_id": "k7xe9wt5txsksapzr2dag9pc3kz6gn1e",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "name": "Grade 8"
+  },
+  {
+    "_id": "kxxf80z5rhxfmecnt7a2kcy2c5vmvr22",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "name": "Grade 9"
+  },
+  {
+    "_id": "k1cfqpwnpx7cs3vs5547p87p74e9208p",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "name": "Grade 10"
+  },
+  {
+    "_id": "kq154j9f2n6f478v961vxmk8edwz3pj9",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "name": "Grade 11"
+  },
+  {
+    "_id": "kpd2d9t846hbykq7abma2fdsjt95y38a",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "name": "Grade 12"
+  }
+]

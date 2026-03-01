@@ -1,0 +1,83 @@
+[
+  {
+    "_id": "kmb40eeddz9mmbysjg41q2h75z4r4tw0",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "yearId": "kgfxmmbtec4w12k16ee8a9kxj6t8km94",
+    "name": "Term 1",
+    "startDate": "2026-01-05",
+    "endDate": "2026-03-10",
+    "isCurrent": true
+  },
+  {
+    "_id": "k750hqyr7gbnrdyx13w2nq310qxyvrbw",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "yearId": "kgfxmmbtec4w12k16ee8a9kxj6t8km94",
+    "name": "Term 2",
+    "startDate": "2026-04-05",
+    "endDate": "2026-06-10",
+    "isCurrent": false
+  },
+  {
+    "_id": "kx0ht9knkt69jsy5qmx1s65wf7pdfwhr",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "yearId": "kgfxmmbtec4w12k16ee8a9kxj6t8km94",
+    "name": "Term 3",
+    "startDate": "2026-07-05",
+    "endDate": "2026-09-10",
+    "isCurrent": false
+  },
+  {
+    "_id": "kkykq7a9wf7kvax4skc885w62yfvkdec",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "yearId": "ka5p91hs7h0pfx1qty36w462ydqn6b0c",
+    "name": "Term 1",
+    "startDate": "2026-01-05",
+    "endDate": "2026-03-10",
+    "isCurrent": true
+  },
+  {
+    "_id": "kx2aq1yxt4fq9617t2skctn32dgchm7n",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "yearId": "ka5p91hs7h0pfx1qty36w462ydqn6b0c",
+    "name": "Term 2",
+    "startDate": "2026-04-05",
+    "endDate": "2026-06-10",
+    "isCurrent": false
+  },
+  {
+    "_id": "kgr12nagmktcn60apt0pvyc2z1vd93gj",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "yearId": "ka5p91hs7h0pfx1qty36w462ydqn6b0c",
+    "name": "Term 3",
+    "startDate": "2026-07-05",
+    "endDate": "2026-09-10",
+    "isCurrent": false
+  },
+  {
+    "_id": "k1zkn9bb3y9snsdge4sgkz58axxg0bgj",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "yearId": "kqygaf8wvq73t8hc8ax0b4f9fe4z3815",
+    "name": "Term 1",
+    "startDate": "2026-01-05",
+    "endDate": "2026-03-10",
+    "isCurrent": true
+  },
+  {
+    "_id": "k3s4vc3q899wtnjq0hev55wctd48f3xv",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "yearId": "kqygaf8wvq73t8hc8ax0b4f9fe4z3815",
+    "name": "Term 2",
+    "startDate": "2026-04-05",
+    "endDate": "2026-06-10",
+    "isCurrent": false
+  },
+  {
+    "_id": "kt4n7gt14j8xdjcxkc19hggvw14e2kvx",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "yearId": "kqygaf8wvq73t8hc8ax0b4f9fe4z3815",
+    "name": "Term 3",
+    "startDate": "2026-07-05",
+    "endDate": "2026-09-10",
+    "isCurrent": false
+  }
+]

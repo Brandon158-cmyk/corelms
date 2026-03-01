@@ -134,6 +134,7 @@ export default function AssignmentsPage() {
         <Button
           variant="ghost"
           size="icon"
+          nativeButton={false}
           render={<Link href="/dashboard/lms" />}
         >
           <HugeiconsIcon icon={ArrowLeft02Icon} className="size-5" />
@@ -213,6 +214,7 @@ export default function AssignmentsPage() {
                           variant="outline"
                           size="sm"
                           className="text-xs h-7"
+                          nativeButton={false}
                           render={
                             <Link
                               href={`/dashboard/lms/assignments?id=${a._id}`}
@@ -268,11 +270,15 @@ export default function AssignmentsPage() {
             </CardHeader>
             <CardContent>
               <div className="flex items-center gap-2">
-                <Link href="/dashboard/lms/assignments">
-                  <Button variant="outline" size="sm" className="text-xs">
-                    ← All Assignments
-                  </Button>
-                </Link>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="text-xs"
+                  nativeButton={false}
+                  render={<Link href="/dashboard/lms/assignments" />}
+                >
+                  ← All Assignments
+                </Button>
                 {!isTeacher && selectedAssignment.status === "open" && (
                   <Button
                     size="sm"

@@ -34,6 +34,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -130,31 +131,33 @@ export default function DashboardLayout({
                     </Avatar>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-56 mt-1">
-                    <DropdownMenuLabel className="font-normal flex flex-col gap-1">
-                      <div className="flex flex-col space-y-1">
-                        <p className="text-sm font-medium leading-none">
-                          {user?.name}
-                        </p>
-                        <p className="text-xs leading-none text-muted-foreground">
-                          {user?.email}
-                        </p>
-                      </div>
-                    </DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem className="cursor-pointer">
-                      <HugeiconsIcon
-                        icon={UserIcon}
-                        className="mr-2 size-4 text-muted-foreground"
-                      />
-                      <span>Profile Options</span>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem className="cursor-pointer">
-                      <HugeiconsIcon
-                        icon={Settings01Icon}
-                        className="mr-2 size-4 text-muted-foreground"
-                      />
-                      <span>Settings</span>
-                    </DropdownMenuItem>
+                    <DropdownMenuGroup>
+                      <DropdownMenuLabel className="font-normal flex flex-col gap-1">
+                        <div className="flex flex-col space-y-1">
+                          <p className="text-sm font-medium leading-none">
+                            {user?.name}
+                          </p>
+                          <p className="text-xs leading-none text-muted-foreground">
+                            {user?.email}
+                          </p>
+                        </div>
+                      </DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem className="cursor-pointer">
+                        <HugeiconsIcon
+                          icon={UserIcon}
+                          className="mr-2 size-4 text-muted-foreground"
+                        />
+                        <span>Profile Options</span>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="cursor-pointer">
+                        <HugeiconsIcon
+                          icon={Settings01Icon}
+                          className="mr-2 size-4 text-muted-foreground"
+                        />
+                        <span>Settings</span>
+                      </DropdownMenuItem>
+                    </DropdownMenuGroup>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem
                       onClick={() => void signOut()}

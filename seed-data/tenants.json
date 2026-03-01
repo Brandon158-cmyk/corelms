@@ -1,0 +1,26 @@
+[
+  {
+    "_id": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "name": "CoreLMS Demo Academy",
+    "schoolCode": "DEMO_123",
+    "schoolType": "private",
+    "status": "active",
+    "createdAt": 1740854043834
+  },
+  {
+    "_id": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "name": "St. Marks Secondary",
+    "schoolCode": "SM_456",
+    "schoolType": "public",
+    "status": "active",
+    "createdAt": 1740854043840
+  },
+  {
+    "_id": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "name": "International School of Lusaka",
+    "schoolCode": "ISL_789",
+    "schoolType": "international",
+    "status": "active",
+    "createdAt": 1740854043843
+  }
+]

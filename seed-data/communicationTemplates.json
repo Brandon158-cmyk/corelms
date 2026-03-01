@@ -1,0 +1,23 @@
+[
+  {
+    "_id": "k6zdkz024j24b1q2np6mc9wqyx49274w",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "name": "Welcome",
+    "type": "email",
+    "content": "Welcome to CoreLMS"
+  },
+  {
+    "_id": "kf49wt10723c76y2wwyrv347w0y87bqj",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "name": "Welcome",
+    "type": "email",
+    "content": "Welcome to CoreLMS"
+  },
+  {
+    "_id": "kcw3am1097fygd51wxsggdgcqvhngm1x",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "name": "Welcome",
+    "type": "email",
+    "content": "Welcome to CoreLMS"
+  }
+]

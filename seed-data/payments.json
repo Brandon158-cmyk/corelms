@@ -1,0 +1,902 @@
+[
+  {
+    "_id": "k00jfw43n7gdmmq0m5vpawfsvvz941zx",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "k69wqwhasemrj589pm34dtwnwr3rfdy7",
+    "invoiceId": "kfarpfyqnk7cnnysr6em4hfy56bha9x6",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "k0d9danr5a310hehn9ejw9htvess040k",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "ke88kj7qct5bv4wwp52gwj76075yhs6s",
+    "invoiceId": "ks84gy1vbzkthg7r3pf5kwvgzzy0cp6b",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "k5j780tv51rqtv3ej8dy1vhcjrt8trs9",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "knqqwyk0engmvwptgqwvcr7yg8dxg7yj",
+    "invoiceId": "k2jecypc00pjt8kwm749h7cjznhk8w29",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "kjwte4v6nf2mx58xsw2mfpshmmf068p4",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "k037pzg33nnjc8g3dedx2gr548smbvxp",
+    "invoiceId": "ktew5pyhqefg3eyf0e2mh3y1e1es2n12",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "k8qz57abnp24rrgv6hqpjhq52b48ygeq",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "ktn02hhy9npmn85zkj43bjmbcpmcvcaa",
+    "invoiceId": "kfbrdnn98fsx6gnqxhh0gjgxk8f1q4n4",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "k3gr017zkg281zrk6bme9ebf40kj54tc",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "k3481kwx140032q6cv7nt9115hdsee4j",
+    "invoiceId": "kkstk3qq6r9d446ykn8ek7s96yejtrg7",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "kf7bk34gb0vjfg9dyrdp3ep1k5jv0f1r",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "k7q4b957btvqwcskvk6pbkknm7k33x8s",
+    "invoiceId": "kc67ev55m6wt1b012t4qfkyz0ywrk1yn",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "k0zxx43wft7mpkz8v4yyg1bhb9ybwdze",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "kp92ptb2b1pjqg0kv9a1pcnr74v7fvzw",
+    "invoiceId": "kf71j93y1wdtj599yvk78qkp7q1sg04b",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "kbyn8rcaayt9ky5z332m0gza5sydzr2z",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "kn36c79jkxwaw3j6kszx0dwr2mq7vb4c",
+    "invoiceId": "kt81rpph8p1x1x5bjyb9td6t716yrqme",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "kf32byr5wn0tranh5y8sj740tdb0493p",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "kk2g58f7h6wmey9zcnxqcgw5910qa1g5",
+    "invoiceId": "ks58ayw110b798k2q5x8km63hx176q6b",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "kbg3k7e7bgm88nv0kkvvcbv9w3tpe10h",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "k12a33q5p8cq2w79hys0wd1va3wb6vj6",
+    "invoiceId": "keddb14yvr5rreb9vv7037dn5p3d4q2n",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "k4p2bapgysh7zzx857s86eaqy5641exr",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "ktbcv47yqxsnbvf5vkhsmectgs9gqfep",
+    "invoiceId": "kw11rnbyjpz9787acm6ae5qaxht198nm",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "kk7p37wzw65ycamgbz16rrwbwyfbzg3v",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "kxdyaddqznzx8s96jp68er94enh0zzhf",
+    "invoiceId": "k3vsvanfc0sy3r86rj36wztda7rhh3y0",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "krsx0zq55w628qhn4qjns4rmvendqwhs",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "kq00casy8grywv8skxh5r1rf9srjgx0d",
+    "invoiceId": "k45sms1vtffkhfvh8b2wpv52ayjegvps",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "k7g75vag9xsq8j2877nc79gekygpj7sz",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "ktgmkr5nmcpzpf79nwc3vm1c6b1bw4z6",
+    "invoiceId": "kdgswt3wyqjsyfky4aa1mnjjwskqwsvx",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "kq0mdr5dnc5e5jb4t2qz04c3513f68mr",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "k3ga83an0d8jnqgtcwrg5f67qzw0dcek",
+    "invoiceId": "ksrtbxkys0f1pcj9sp28m5ktm1hvhe6k",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "k2h7xb31qx5jhrf82cbxhwqg1n7raqpq",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "kk9jts91tkv01p9x009j2m183370avdp",
+    "invoiceId": "kga0yyfs9atwkdzgh9nsbvmxmpjbm9jd",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "k1z1fqjjzdcgv7fdab9mka1r0hg3vxeq",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "ktk4m9xv945v15xyn47yhw26mb5mdbks",
+    "invoiceId": "kxhk5fs96fpdtm6e25cerana2xqjky9d",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "kp328ja569n5hzy5xdmj7rakcggcr55a",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "k3f5vjd13g6ha6phfztt8hpvmn31sb5q",
+    "invoiceId": "ksv51sdq3jvqbmcksgx6yhfazzws78dr",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "kxjmyyjrqtry53a3fqm3ejbt1eq83625",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "kefbh1gmde77qt27myaxa7stryjhe6jh",
+    "invoiceId": "khzd1evv682cd3kx39gqmvzy625yq6wt",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "k0vsnasdbh1xq3p98ndmya1xds4g9gr6",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "kjqajp1qxx9m0dsb59ma92kd8cah6m60",
+    "invoiceId": "k3rqcc870xgkgg8sf85x912745c3jtfy",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "ky8yepspyeebajwkxnk6qr0cz7vnc8px",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "khdyzgm85009vwyzxbwkj1nmdsvhwvsg",
+    "invoiceId": "k4br53v23sa2twbyd6yp903hn9735a7m",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "k0t1v452w6kg18w8ajg49kw7r2frtwee",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "k97v7kxxhkhwzhc1hrdetvw4y4181vyw",
+    "invoiceId": "knfnsnnjjsgpg8srjxpnrdxgtg0s5qwd",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "k4x6zbmvwqnes2g1aazzf460ynnd12jp",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "ka6vnpx8fxkz7rhap770q9m1vd00266d",
+    "invoiceId": "k7rfpnmqt87x9r1saxps4djtev66mm1q",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "karpjst5kn1yardn73hwz999vvns768e",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "k6ntragdsahhe9a37cpyx84svnsaa347",
+    "invoiceId": "khnntqdk2a3fnp6mhjv74wdf1pgwdqts",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "k5yg946fyz16yk4hnv6v56wfjrz4eg0b",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "kwbq55syq8950b933q617y7eqkg4eyay",
+    "invoiceId": "kv2x6gzcxk7y16prazmbv0fgsys07ygr",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "k6hktr1qqffaxcy5eeqkg3k9p82jpc4y",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "k5zavc31wvnynj8vyhy8j2vn9v9tnz8v",
+    "invoiceId": "kdhvhyvzgbn24v34rwz8bwkms6a53pgx",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "kvkf13zjy11s5ph50srddf1xjf71zfty",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "kd495r2d247rj2xcz8wz6thdag49332t",
+    "invoiceId": "k748x0cwa3sjthtyfk6kwq96z4vqwqgg",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "kzvabpy16gyrsbsj4fg432mzqjd9p98b",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "kwg7gsdr12m5z2hjtmdbdz34zaxksgqd",
+    "invoiceId": "k2zz6n4ef1fmbmmxsr7g5caebkva0zzc",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "k5j4kcnktn5nda5k58sajq8a7yafz8mz",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "kz265w4y151s0fnz7q8jj0hs8ae7zwmg",
+    "invoiceId": "k75qvnv2zy8mf6cc56e8s3fyw1n1j175",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kh3h5act9pp4sg3rfyvc3t4e23mzyy9z"
+  },
+  {
+    "_id": "k5wb3n48nrxsq93sdjpe2d0kpde8vr8c",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "knvq2qcds6r65fvtj1yyempy7eqwwe4j",
+    "invoiceId": "kr313tx7n8w538e3ewym4wcrzeswhw95",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "kz8tz421zwf5ve959snwb123bq3y5zzw",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "kwzp1fbz9xan5pndpn7rn7qfd14za64j",
+    "invoiceId": "kypk5fg4f424rk3kfbg9jy8a34xe6rx9",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "kvasrkzw255pvcb3s7jx80qg0cmcjgqc",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "kqavt4pnmfj94hw6z15k2h43qnan5tt8",
+    "invoiceId": "kt49e5ck97nd1nb2r3vej5zpft3hepxm",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "kfktejawkxybx1a7taq6rf59yps9jm0t",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "k9cf7mx2xh4vs5y4ddydn4pk739rz0vt",
+    "invoiceId": "kt6fh8tftzpa02x32vjpf19v1qnhzvt9",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "kdvw87y990nap2bnxs6tbt0vv4apdbfe",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "k0hes7frp427t3gd1jebdgeyqseb0xv5",
+    "invoiceId": "kstqm571b3299cfm5b83zfz2qy139hp7",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "kbraw4bey8fvc59zavqzargt7mcpdkqv",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "kjytpes3xgsanbm880mkzgvyf5wjrgcv",
+    "invoiceId": "ktvh0r0x4k262mr5v3h3d131x5p4ytz7",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "km5nzx4kmtcrznrbfa68dqzccghrksaq",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "k4s62fa9gt3t9q7b7d8gp11ycts7c69b",
+    "invoiceId": "kq697nvqavbzvhvnmvvxy0vqv465y0md",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "knbcehhg89y3pg15aq8h5kgnmb61594q",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "kpbgaf4sjft2myxqf1npy05qmsp3tdx8",
+    "invoiceId": "kbfxcpwp5hjd9kmc5993841wh10rxkp4",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "k7sp6z521r8kvq8t6ynt8yc5h2etwa05",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "kxmdn0dxf84gaprm8q8y82sx89myzxjz",
+    "invoiceId": "kyxkjy3ws6yd4vsq6762tfqn45xrrrdg",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "kszrbd1z87r14n19atvpq8bmcvrpr8ta",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "kx7g5k1zsqp8kg3hrkya9x5rjgrcrknh",
+    "invoiceId": "kpn69j26n3dv2wqm0ggd781smpwbprmy",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "kjpaxnt2wde9rxpfq5z238m20dvt92fr",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "k1r496k0jvv1bprmfvjqe2g2fjf998f4",
+    "invoiceId": "khs2qzgphqfqwgpc2rkcxq7470z99zh7",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "k8mswp8gk1s8ajmae35m55nqjz6j0jmm",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "ksag150j5m2047kqvjfmbwj0aj7qqata",
+    "invoiceId": "kcyr4zeywd72xzp52c4c78ndntgakpje",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "kqq4jz0c0t7qjsmkhd18b2mggkjsrhh6",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "kv8zfvn22zwge4yezzbj619rbaxmt7q3",
+    "invoiceId": "k4g9d91752ga9eqvj0zf8zqe7tchtddh",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "kkc12tjwpc5nn7gkd3fmx8yy59t7mate",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "krv3ecqpsaaea8wgzqzfqks8c5mjbhcd",
+    "invoiceId": "kzn5z4v1ztttznbc8nzm587w9xw8d5b9",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "k59k9bg29bqb2376hpcybr75qfchswxx",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "k51csxqpc9deq9wyexm6hvw5f6s73qkr",
+    "invoiceId": "k3fnshxh19yxpf60646k7zfark3sy72q",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "kkby86fhdst55fn0gnw3ah2y3a07v0yc",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "kqkm3ar0azqavv7gvpmeah8xjmyrgeas",
+    "invoiceId": "k280k1m3epcd6tptz2hg1wvekpj6p4q9",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "kra2cpby161fe874y38ec57drzk18jwe",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "kdqr72dvwcxaqr3s66gjd43sxgagcyjt",
+    "invoiceId": "kq03sesebk2k2q8c068etn7yd7st1wqd",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "k9gvv2ryqrvf4adm6zqgmwm4pj8mtj6d",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "kfytv8x2rckjyjw2j2kdrjg4wdh547q9",
+    "invoiceId": "ktbbgcd3zy2x0cbecc4k0x9zzytn9mmn",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "ksznxzw6b1d8618bbtfyshrh40vdhm6f",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "k3ypjshjpy0qjxfbz30ym5j30y90k2jt",
+    "invoiceId": "ktxw81s9jtg5709bvazh8j24r4f46qvc",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "kq2amkg3y9awwmke6ctpzrsb7a83p6q9",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "k3df9ze4xewpcqbhn9qex78qx5g02jtj",
+    "invoiceId": "khgdbmvz3mfh5asxj6a9j31mkgjxq2p9",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "ke4qt5zpj6js3gk4m3mrysz3h38kgmpj",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "k257t0gsb61z8fys30w0jc3f7wt6jd7q",
+    "invoiceId": "k0a4kbant6h8q4z5cvnnpkq681c8kgb6",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "k2v7q8zvxaycy9j34vns5n6y7bpgzzhh",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "kg70edj3kh5pxnkjt97rxkm40h61jawp",
+    "invoiceId": "knxbac1yh2bgmxt424a93dew6t2rv4ed",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "kbx4vjmjvj2cm7es4b4w1ssy8t2xa7dm",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "kdnvfx7v0be6w84e222p6p7teeyadr67",
+    "invoiceId": "k8vvwx4nzssws2txf8xjrqw1r40mdbk2",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "kg15hz25hkyg9sp26psqe6qv76wk4z08",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "k0hk8647g49wxe45ghthjvkwgx9pr24d",
+    "invoiceId": "k8b1nzga4r97w0rrrjczzefv4h424tf1",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "k5jc2eavqaz1p3x8sq1vmfabcb35g6pg",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "k9g4cr0x6vkdqwbhe0rec8pt4fjewzhm",
+    "invoiceId": "kv9n0skydg54906rsah6gx6h9y1zcpbv",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "kpj3yc44y209mpjckq876nh1yc7ph1wy",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "ky3adnf06y4ms6cm3bjrw9t3jv3g0awx",
+    "invoiceId": "kh0eb79berw8jfj0136m91tc0s41cjmw",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "kxbnrhs54mw7ap2ejc8eesxqzjpd8a9r",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "kx06v8zazcpz6zwm7tkkjnk6v6syx6bm",
+    "invoiceId": "k64p3dp5k0vb0tppcephehc5mz1txynt",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "kdhh54sq2z68jkp80nsktpjz535papzn",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "k0c5kjc965rzd8fep2rbbzzj7x7vyw4f",
+    "invoiceId": "kv4pms4s78amafjvdvjjnfhmcwjwtqzz",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "k211qk67c19k8ydcjnqrnxs5w99etcqd",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "k4rfke9yfnwntadsbvr40qp3crhxtjy7",
+    "invoiceId": "kc9peyj7g2eq1z6fbb34fcf5awxrzh9f",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "kszz3v92ravbv75pjr1abmydx2dzncy1",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "kmyc6tf299f6hy0ma3fyxfdtyfvj6h1w",
+    "invoiceId": "kwyt7d61ac7bsbfw6dq9yyc3mh7h2msg",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kg3jcqfw98q3gzhbbjw39ps016fdnbvj"
+  },
+  {
+    "_id": "kyk6bws6czqc90q8pwp0qmp3cw7436k7",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "k7rt837vs74h7vdx91havfjxfj6f0qg5",
+    "invoiceId": "kxaqsw84pk1zbhr3esge498a8wen0j3g",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "k85n5f7x3ebhm4x9h3w962nza3jhz894",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "krwdsvdqmj8s0g8yk4zgmebt575yrawz",
+    "invoiceId": "khrxazsmgvpw9x2ecdn44ggmz220sb55",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "knk0c4jgs1vmzqhdpgeaddz4hq66t9gk",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "krrc744h1m3vytb5xd6khqjfye4tt1ty",
+    "invoiceId": "k9bcdpj2p8xjst7x6v67enqwq54yxpmx",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "kazev5g0syxrvx35szbab57nftjgstwm",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "kk1qxt2bx3c1tjz8hv7y3tpe03nn4m74",
+    "invoiceId": "k91eqg3z389qda6e19p6x2y2ah7y0d3a",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "kyndhhp6tbkpc28s4v761d83571zym44",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "kf6vdhq6ceej8kx25bh3sxpppjabt1dq",
+    "invoiceId": "k78pt0fjpwgvb98nwzerhcx349j38tcw",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "kz8mndr4bnttts3xdth19h9djx0hp1dn",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "k2y2pbe5f4fh5n1g7wdfknz8ab8rt01w",
+    "invoiceId": "kg5xhjpae1849mrfxs76et3gt5aysd40",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "kax9nbar2xcse4fxskdwmp35kbd9yprj",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "k42gbxgm0kswxyssvbh9pr9bncmz4vtz",
+    "invoiceId": "k0yt2g8npesk09ap6ma1b78636ak4atg",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "kmbb2se2mrftwf8k05c3pvrrzrrg24rx",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "ktrpar2502cq77mf5y0j1djcvvrn3aer",
+    "invoiceId": "ke1s7tj4a31wqbbdbjzeateqswdn5r0d",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "kmyk0hffz1z16n10wyz27w2t164gngbm",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "k8krxdpc44yj89eq56m6ybbsn3rtcmdv",
+    "invoiceId": "k5jpe99x0tbfbe4ccqxc2mxtypxw7khv",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "kpmaq24jsqxmg3srzb1vcqdfxjsw52k3",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "kx148vsc8fcxcc18pnwt2t8yfsw06m0n",
+    "invoiceId": "kh9npz2tt1rwm73dn2faszwgg5szvvfk",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "kdmkzsynd4eww8ka761qss9a0my8new7",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "keecn4q7k5844033yw0e251p4hs97h4w",
+    "invoiceId": "kb758jvd0k9cks1jg4xdknj88d268zp3",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "kh1kkwer9vzp8bsezv0px5ky0xbf5g5z",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "k4vscytx25d33q0raq9snjxq0dcwzcjd",
+    "invoiceId": "k2wm4wqc9ehh2f98d02b5emwtapp4thh",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "kdcck5fk9tjt0qrgs6xpfebxfhbyb6a3",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "kfns88bj1bfmbwnp0vrbwac8j9stjk52",
+    "invoiceId": "k9ykmkweke5z7xznhx0adjpc38dnhw7v",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "kacc4dvx9x32cm90n2tjt802fn94ckpn",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "k41v3b9t1s0q0ztg9qamccgc84fhmxrh",
+    "invoiceId": "kjb58h5nyj57ekcd101h84971zcg90dh",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "k3mcytmqj6727e1jc93w9b83gxefxza3",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "k5qn4rtm1fnddb5xnsk6f5915xet859t",
+    "invoiceId": "kg2khk87y31m303x8zs1x9171zgpban5",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "k077gyhtnp2b9ws59b5qj1nktt7hta2r",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "k7tf7xkhv6xjdgwx3ax0fj365mynqksy",
+    "invoiceId": "k0gawvhz5e1ewm48pn7fk5n314gxe7dw",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "k9kbtjm9rrn8abzydfg9r1stzw87r057",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "k5xhn991yerh0reqe19j27sn1gwd0s4j",
+    "invoiceId": "k70pawnvs78hrm2184as6rrsw8tmbvtx",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "kfyw63z82zd0jq4sgb4sks03hxtb5jvz",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "knjkmf83y9jrp78wp7yg1yy86k7zhtrx",
+    "invoiceId": "kbrqssm4g0rmrvesqav82gjjf5x9awza",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "k45gaz77vx8hdvejdmdjsctyv94qpxz5",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "k4smch08grnstegpj0gse63yhpgh1xk5",
+    "invoiceId": "k549gta3xzp5qb0bj1qazxwv4nddr5e6",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "k54c11ncg1waq4zzh716d8f8r4hahhd8",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "kr125c15fa0r2pxttah08k7skg4r41nb",
+    "invoiceId": "kjv5jwzct2kg4frkbhmvz269p7kbp369",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "ksxz19jxa3bw8btdsd6jz5671rb37174",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "kgzp2nh52x818ntsvzvdg60pjr5r2zkj",
+    "invoiceId": "kf4947jqrrph4q7yxz4g2r6dnp3n40dy",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "k0agssehvzp5mcd4930b44d3z2zwv03d",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "kvhevb3e1a4cavmwk82bt36kwwwqc7wr",
+    "invoiceId": "k555wy000dve1gmazmb7wsbx862yvfb7",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "kcf2as93rhyd6gz2bvapjt8qqcxh0dkk",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "kc9m2yqzbrr0qthtwmbbww8j3msf3s6m",
+    "invoiceId": "kyen5tvd3dep3bc5g7vm6g1cjfdh3azc",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "kce21e487ggt9zsfgddfjed9ne7et4s8",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "kx56yenezcvwg38p5xfmywnbdse9vj2j",
+    "invoiceId": "kvz44p2qfhqdrca35ceb52s00gw4bv82",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "kfshscxr3kj1wmj9z9rawggv5dajhmkq",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "kx9ry68hvs9fk03ck79hnjx1gkasfpym",
+    "invoiceId": "kw12cwjftrehhcnpjj7aqsf7gbrrnqfw",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "kcr7sfr6c7y64r1w8sw538pj6p00x9ps",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "kcg90kpyw2939z1e1m7zy3r5x0sx936x",
+    "invoiceId": "kq2mmb0v4vqvgvtr5s0mdazyzn5hw3sg",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "kw5jwyjjxajen07ys3ztw2m67pwg293m",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "kn5qjzr6rp1x80vy75p2ck4a2wcg3dht",
+    "invoiceId": "k43akmww3gxa7gby7dybfes0yksatn5t",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "kshkpzbkdfnag2xrk3gmsw80v52ga444",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "k9rrgwqrfybdy0eg411tprc9jhj8esy8",
+    "invoiceId": "kr769mtwwwr062rjrae15wwfjxqaemx5",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "k5se5fn8s1667nqp6napxq8sbbpss8rh",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "k0n536ypja804b6mw3ehmhsnygstx2ww",
+    "invoiceId": "k0arbnhcphvbmzcx9sezjjanqspxbsaq",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  },
+  {
+    "_id": "k0pga931a0fac680sf446arymxz874h6",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "k043dvy7ds1sh32hb3a8c3n13z5dc888",
+    "invoiceId": "k2c57nzy4gxw5jdkm4vxs1sxmfdrq77w",
+    "amount": 2500,
+    "method": "cash",
+    "date": "2026-03-02",
+    "recordedBy": "kr18zem4ptrwkqdncxadvt9r19z7yz7r"
+  }
+]

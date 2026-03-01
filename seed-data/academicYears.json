@@ -1,0 +1,26 @@
+[
+  {
+    "_id": "kgfxmmbtec4w12k16ee8a9kxj6t8km94",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "name": "2026",
+    "startDate": "2026-01-01",
+    "endDate": "2026-12-31",
+    "isCurrent": true
+  },
+  {
+    "_id": "ka5p91hs7h0pfx1qty36w462ydqn6b0c",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "name": "2026",
+    "startDate": "2026-01-01",
+    "endDate": "2026-12-31",
+    "isCurrent": true
+  },
+  {
+    "_id": "kqygaf8wvq73t8hc8ax0b4f9fe4z3815",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "name": "2026",
+    "startDate": "2026-01-01",
+    "endDate": "2026-12-31",
+    "isCurrent": true
+  }
+]

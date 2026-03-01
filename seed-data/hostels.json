@@ -1,0 +1,23 @@
+[
+  {
+    "_id": "k7p1h195p1cr7d0zpxn6vc9dyqxms3qv",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "name": "Victoria Hostel",
+    "gender": "boys",
+    "capacity": 100
+  },
+  {
+    "_id": "krsscswzpkmdtxqrvt50daz2a2f181jq",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "name": "Victoria Hostel",
+    "gender": "boys",
+    "capacity": 100
+  },
+  {
+    "_id": "knt037pd5rf1r2334kx3s4678ygk0fc1",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "name": "Victoria Hostel",
+    "gender": "boys",
+    "capacity": 100
+  }
+]

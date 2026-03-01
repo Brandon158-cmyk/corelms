@@ -125,6 +125,7 @@ export default function LMSPage() {
           <Button
             variant="outline"
             size="sm"
+            nativeButton={false}
             render={<Link href="/dashboard/lms/assignments" />}
           >
             Assignments

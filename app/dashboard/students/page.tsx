@@ -198,20 +198,16 @@ export default function StudentsDirectoryPage() {
                         {student.guardianName || "—"}
                       </TableCell>
                       <TableCell className="text-right">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          render={
-                            <Link href={`/dashboard/students/${student.id}`} />
-                          }
-                          className="text-brand-primary hover:text-brand-primary-dark"
+                        <Link
+                          href={`/dashboard/students/${student.id}`}
+                          className="inline-flex items-center text-sm font-medium text-brand-primary hover:text-brand-primary-dark"
                         >
                           View
                           <HugeiconsIcon
                             icon={ArrowRight01Icon}
                             className="ml-1 size-3.5"
                           />
-                        </Button>
+                        </Link>
                       </TableCell>
                     </TableRow>
                   ))

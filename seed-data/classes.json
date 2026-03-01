@@ -1,0 +1,83 @@
+[
+  {
+    "_id": "kkcmewrrrg7ep88d491f8y2kgq3jy5xh",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "gradeId": "k2578a49vq6gpfabtk1yk7h68qtekvez",
+    "termId": "kmb40eeddz9mmbysjg41q2h75z4r4tw0",
+    "name": "Grade 8 Alpha",
+    "teacherId": "kn7d0tx1xt4xv1vber9sa0bwehf0s1eb",
+    "status": "active"
+  },
+  {
+    "_id": "kx2v0d7391rrhq8hfa208pe3yx4nzy1a",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "gradeId": "ky1nybc12m19ptc58v5hrszesesj798s",
+    "termId": "kmb40eeddz9mmbysjg41q2h75z4r4tw0",
+    "name": "Grade 9 Alpha",
+    "teacherId": "kn7d0tx1xt4xv1vber9sa0bwehf0s1eb",
+    "status": "active"
+  },
+  {
+    "_id": "kk4b5341sjx8xekng80ayzvjtpvbzphd",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "gradeId": "kht6921mmqzgx2q073ger197rhqx997p",
+    "termId": "kmb40eeddz9mmbysjg41q2h75z4r4tw0",
+    "name": "Grade 10 Alpha",
+    "teacherId": "kn7d0tx1xt4xv1vber9sa0bwehf0s1eb",
+    "status": "active"
+  },
+  {
+    "_id": "k8c27bv90zxwz7bbsn3wva38cmjxgkdd",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "gradeId": "k3nqz62fqwpbaehzabjmpbvt16tg0djz",
+    "termId": "kkykq7a9wf7kvax4skc885w62yfvkdec",
+    "name": "Grade 8 Alpha",
+    "teacherId": "kn937qw3dpayy6qbjw8vzn73ewpmc27c",
+    "status": "active"
+  },
+  {
+    "_id": "kbedvh1pevp7nbhrqabhqpbm383n0w6x",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "gradeId": "kqn9pr4rw4bj31pymr5xw7e1qrfr15v0",
+    "termId": "kkykq7a9wf7kvax4skc885w62yfvkdec",
+    "name": "Grade 9 Alpha",
+    "teacherId": "kn937qw3dpayy6qbjw8vzn73ewpmc27c",
+    "status": "active"
+  },
+  {
+    "_id": "k185h6d5epfga38w4w8ge0ejmytz8njn",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "gradeId": "kems0ma7kw1skvjs6wcfvbn7sna6pk4k",
+    "termId": "kkykq7a9wf7kvax4skc885w62yfvkdec",
+    "name": "Grade 10 Alpha",
+    "teacherId": "kn937qw3dpayy6qbjw8vzn73ewpmc27c",
+    "status": "active"
+  },
+  {
+    "_id": "kfap6v1b83w52v8zhd54drrg6s3nhc33",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "gradeId": "k7xe9wt5txsksapzr2dag9pc3kz6gn1e",
+    "termId": "k1zkn9bb3y9snsdge4sgkz58axxg0bgj",
+    "name": "Grade 8 Alpha",
+    "teacherId": "k6eyqv60n97j2t8hd0xn7rh64kpy96y1",
+    "status": "active"
+  },
+  {
+    "_id": "ks0q9680t7gk3x306th9qpkv6aqreyjh",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "gradeId": "kxxf80z5rhxfmecnt7a2kcy2c5vmvr22",
+    "termId": "k1zkn9bb3y9snsdge4sgkz58axxg0bgj",
+    "name": "Grade 9 Alpha",
+    "teacherId": "k6eyqv60n97j2t8hd0xn7rh64kpy96y1",
+    "status": "active"
+  },
+  {
+    "_id": "knv67ww2cvjh94ap67k4tt9n1x20vzhf",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "gradeId": "k1cfqpwnpx7cs3vs5547p87p74e9208p",
+    "termId": "k1zkn9bb3y9snsdge4sgkz58axxg0bgj",
+    "name": "Grade 10 Alpha",
+    "teacherId": "k6eyqv60n97j2t8hd0xn7rh64kpy96y1",
+    "status": "active"
+  }
+]

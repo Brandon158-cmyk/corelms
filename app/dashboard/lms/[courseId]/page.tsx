@@ -179,6 +179,7 @@ export default function CourseDetailPage() {
         <Button
           variant="ghost"
           size="icon"
+          nativeButton={false}
           render={<Link href="/dashboard/lms" />}
         >
           <HugeiconsIcon icon={ArrowLeft02Icon} className="size-5" />

@@ -1,0 +1,101 @@
+[
+  {
+    "_id": "k9668635feanaqy67qyzhghdewdg8j3t",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "k69wqwhasemrj589pm34dtwnwr3rfdy7",
+    "reporterId": "kzcz169xs2ca0yb9yxcn37a959smgzjb",
+    "date": "2026-03-02",
+    "category": "minor",
+    "infraction": "Late to class",
+    "pointsDeducted": 1,
+    "status": "resolved"
+  },
+  {
+    "_id": "kgzw57rdqywrjmesn7k39m37tgqk5wsq",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "k12a33q5p8cq2w79hys0wd1va3wb6vj6",
+    "reporterId": "kzcz169xs2ca0yb9yxcn37a959smgzjb",
+    "date": "2026-03-02",
+    "category": "minor",
+    "infraction": "Late to class",
+    "pointsDeducted": 1,
+    "status": "resolved"
+  },
+  {
+    "_id": "krh212b85gn621gxhhd0jb4gyd6qqytx",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "studentId": "kjqajp1qxx9m0dsb59ma92kd8cah6m60",
+    "reporterId": "kzcz169xs2ca0yb9yxcn37a959smgzjb",
+    "date": "2026-03-02",
+    "category": "minor",
+    "infraction": "Late to class",
+    "pointsDeducted": 1,
+    "status": "resolved"
+  },
+  {
+    "_id": "ktp108pxr1nssepvw86ckrkb67bgfey2",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "knvq2qcds6r65fvtj1yyempy7eqwwe4j",
+    "reporterId": "khfzn895ype8z31ar4h428ndz0fcy0cy",
+    "date": "2026-03-02",
+    "category": "minor",
+    "infraction": "Late to class",
+    "pointsDeducted": 1,
+    "status": "resolved"
+  },
+  {
+    "_id": "kd8zmgxp0gxz9d8ksraf6ez6a2tt8ycx",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "k1r496k0jvv1bprmfvjqe2g2fjf998f4",
+    "reporterId": "khfzn895ype8z31ar4h428ndz0fcy0cy",
+    "date": "2026-03-02",
+    "category": "minor",
+    "infraction": "Late to class",
+    "pointsDeducted": 1,
+    "status": "resolved"
+  },
+  {
+    "_id": "k70py5wmrag2j3v51mavyzyb8zaez0p8",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "studentId": "k257t0gsb61z8fys30w0jc3f7wt6jd7q",
+    "reporterId": "khfzn895ype8z31ar4h428ndz0fcy0cy",
+    "date": "2026-03-02",
+    "category": "minor",
+    "infraction": "Late to class",
+    "pointsDeducted": 1,
+    "status": "resolved"
+  },
+  {
+    "_id": "k15wwvtgd5gf82pf80qxnn9zk68p9ffr",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "k7rt837vs74h7vdx91havfjxfj6f0qg5",
+    "reporterId": "kjaednp1fwt1k08jznfabrpkdcwqcb9r",
+    "date": "2026-03-02",
+    "category": "minor",
+    "infraction": "Late to class",
+    "pointsDeducted": 1,
+    "status": "resolved"
+  },
+  {
+    "_id": "knwmx26g4pvew9hjnfp5827q12aqc7fa",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "keecn4q7k5844033yw0e251p4hs97h4w",
+    "reporterId": "kjaednp1fwt1k08jznfabrpkdcwqcb9r",
+    "date": "2026-03-02",
+    "category": "minor",
+    "infraction": "Late to class",
+    "pointsDeducted": 1,
+    "status": "resolved"
+  },
+  {
+    "_id": "k5wyke403m8nhfzk2775veg9mtgnkfsa",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "studentId": "kgzp2nh52x818ntsvzvdg60pjr5r2zkj",
+    "reporterId": "kjaednp1fwt1k08jznfabrpkdcwqcb9r",
+    "date": "2026-03-02",
+    "category": "minor",
+    "infraction": "Late to class",
+    "pointsDeducted": 1,
+    "status": "resolved"
+  }
+]

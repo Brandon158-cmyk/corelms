@@ -1,0 +1,23 @@
+[
+  {
+    "_id": "kryjkjkg7phxawbnj2b2w253t9kwj61p",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "name": "Tuition Fee",
+    "amount": 3000,
+    "termId": "kmb40eeddz9mmbysjg41q2h75z4r4tw0"
+  },
+  {
+    "_id": "kez14945xft1j15yzhfcb5srvb18h8dv",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "name": "Tuition Fee",
+    "amount": 3000,
+    "termId": "kkykq7a9wf7kvax4skc885w62yfvkdec"
+  },
+  {
+    "_id": "kd20qhc06gyy6q0k92q3r7vc24knr131",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "name": "Tuition Fee",
+    "amount": 3000,
+    "termId": "k1zkn9bb3y9snsdge4sgkz58axxg0bgj"
+  }
+]

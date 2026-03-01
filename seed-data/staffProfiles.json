@@ -1,0 +1,236 @@
+[
+  {
+    "_id": "kkstsk4njbve84k97dd209q7h2chn0hr",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "userId": "kn7d0tx1xt4xv1vber9sa0bwehf0s1eb",
+    "designation": "Senior HOD",
+    "idNumber": "NRC-93755",
+    "contractType": "permanent",
+    "dateJoined": "2024-01-01",
+    "qualifications": [
+      "Bachelor Degree"
+    ],
+    "basicSalary": 6500
+  },
+  {
+    "_id": "k341s5h6cyr8nsv4mpkh6vy1tkjrj3na",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "userId": "kzcz169xs2ca0yb9yxcn37a959smgzjb",
+    "designation": "Teacher",
+    "idNumber": "NRC-57889",
+    "contractType": "permanent",
+    "dateJoined": "2024-01-01",
+    "qualifications": [
+      "Bachelor Degree"
+    ],
+    "basicSalary": 7000
+  },
+  {
+    "_id": "kbrnzrbx8td338486e202q6hg7dfh78h",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "userId": "khn3338fhm86b17092k1btfhyk5s954x",
+    "designation": "Teacher",
+    "idNumber": "NRC-40608",
+    "contractType": "permanent",
+    "dateJoined": "2024-01-01",
+    "qualifications": [
+      "Bachelor Degree"
+    ],
+    "basicSalary": 7500
+  },
+  {
+    "_id": "k72c9r7vbk1c7rndbn9a8t6k0cvbqfdj",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "userId": "ktpqy2r378hbq1dbddqr94hhxvyt2dty",
+    "designation": "Teacher",
+    "idNumber": "NRC-38114",
+    "contractType": "permanent",
+    "dateJoined": "2024-01-01",
+    "qualifications": [
+      "Bachelor Degree"
+    ],
+    "basicSalary": 8000
+  },
+  {
+    "_id": "kv9v7twgc1xsacjwwv3nrxgff1amp8hj",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "userId": "k4c3c4qrfk7ryvkpx4rmsb6zsyxbt1yj",
+    "designation": "Teacher",
+    "idNumber": "NRC-31776",
+    "contractType": "permanent",
+    "dateJoined": "2024-01-01",
+    "qualifications": [
+      "Bachelor Degree"
+    ],
+    "basicSalary": 8500
+  },
+  {
+    "_id": "ka0r763tj73whn752ttsfd10qm7a33je",
+    "tenantId": "k7y7n982tp81b640hh0tdk01eg2naqj9",
+    "userId": "kav8zgdjb7szfw9bnkknp2ehc9r7vfmv",
+    "designation": "Teacher",
+    "idNumber": "NRC-22382",
+    "contractType": "permanent",
+    "dateJoined": "2024-01-01",
+    "qualifications": [
+      "Bachelor Degree"
+    ],
+    "basicSalary": 9000
+  },
+  {
+    "_id": "keazeye0efqb7dv0ychzpefk193wfqxp",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "userId": "kn937qw3dpayy6qbjw8vzn73ewpmc27c",
+    "designation": "Senior HOD",
+    "idNumber": "NRC-10730",
+    "contractType": "permanent",
+    "dateJoined": "2024-01-01",
+    "qualifications": [
+      "Bachelor Degree"
+    ],
+    "basicSalary": 6500
+  },
+  {
+    "_id": "k83w2797893kwxj8vht0ysgc7bwbwh81",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "userId": "khfzn895ype8z31ar4h428ndz0fcy0cy",
+    "designation": "Teacher",
+    "idNumber": "NRC-69118",
+    "contractType": "permanent",
+    "dateJoined": "2024-01-01",
+    "qualifications": [
+      "Bachelor Degree"
+    ],
+    "basicSalary": 7000
+  },
+  {
+    "_id": "kr9353pg1df1n0kaw36aqa5pn7x9xdx2",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "userId": "k9jj355kzxnqae8f725aqacvpwmzjbch",
+    "designation": "Teacher",
+    "idNumber": "NRC-94455",
+    "contractType": "permanent",
+    "dateJoined": "2024-01-01",
+    "qualifications": [
+      "Bachelor Degree"
+    ],
+    "basicSalary": 7500
+  },
+  {
+    "_id": "k0xcg92m1x2954njtarpfz33gafvf0j8",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "userId": "ky21t7n57jhvrq0ssgkhcj7t51pe7de0",
+    "designation": "Teacher",
+    "idNumber": "NRC-95580",
+    "contractType": "permanent",
+    "dateJoined": "2024-01-01",
+    "qualifications": [
+      "Bachelor Degree"
+    ],
+    "basicSalary": 8000
+  },
+  {
+    "_id": "kvtv7x95afqv0m52vxtctq371pcqw977",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "userId": "knm5g9xy7w1t781fjfwgskcwph1b070n",
+    "designation": "Teacher",
+    "idNumber": "NRC-69802",
+    "contractType": "permanent",
+    "dateJoined": "2024-01-01",
+    "qualifications": [
+      "Bachelor Degree"
+    ],
+    "basicSalary": 8500
+  },
+  {
+    "_id": "k87379zthg960w2dvbthxadsdg8j5x64",
+    "tenantId": "k33tj84b37bnv63ssbtc7hk5y26ffkr2",
+    "userId": "kb3ehkeh2wyrdck3nndct9rby3t8pvnb",
+    "designation": "Teacher",
+    "idNumber": "NRC-40893",
+    "contractType": "permanent",
+    "dateJoined": "2024-01-01",
+    "qualifications": [
+      "Bachelor Degree"
+    ],
+    "basicSalary": 9000
+  },
+  {
+    "_id": "kvzq0ewb152bcy1drkcqwzrefvk62mte",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "userId": "k6eyqv60n97j2t8hd0xn7rh64kpy96y1",
+    "designation": "Senior HOD",
+    "idNumber": "NRC-24370",
+    "contractType": "permanent",
+    "dateJoined": "2024-01-01",
+    "qualifications": [
+      "Bachelor Degree"
+    ],
+    "basicSalary": 6500
+  },
+  {
+    "_id": "kgywtxrw2wq3f7011qv43460ceckfj5w",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "userId": "kjaednp1fwt1k08jznfabrpkdcwqcb9r",
+    "designation": "Teacher",
+    "idNumber": "NRC-30045",
+    "contractType": "permanent",
+    "dateJoined": "2024-01-01",
+    "qualifications": [
+      "Bachelor Degree"
+    ],
+    "basicSalary": 7000
+  },
+  {
+    "_id": "k62ner5wwn28hp5fdcm125yhdcd2914q",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "userId": "kwkagkkdef4pcedxjmes2ertk5g52njg",
+    "designation": "Teacher",
+    "idNumber": "NRC-77127",
+    "contractType": "permanent",
+    "dateJoined": "2024-01-01",
+    "qualifications": [
+      "Bachelor Degree"
+    ],
+    "basicSalary": 7500
+  },
+  {
+    "_id": "k6j592a0scmnen51g07c095m64wvw3hd",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "userId": "k1vfz68dw801bxmyqz00tvwva211mqwx",
+    "designation": "Teacher",
+    "idNumber": "NRC-57330",
+    "contractType": "permanent",
+    "dateJoined": "2024-01-01",
+    "qualifications": [
+      "Bachelor Degree"
+    ],
+    "basicSalary": 8000
+  },
+  {
+    "_id": "ks70y437a8at0rrc8swc5b2tb0rsme9r",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "userId": "kff2wwn0vad0h4kwvwm076a6ps3d0cm1",
+    "designation": "Teacher",
+    "idNumber": "NRC-37937",
+    "contractType": "permanent",
+    "dateJoined": "2024-01-01",
+    "qualifications": [
+      "Bachelor Degree"
+    ],
+    "basicSalary": 8500
+  },
+  {
+    "_id": "khx1veadk0qphemzq01pa15et3d6s0ts",
+    "tenantId": "k0mhf3j2a5bd79j0cxhd67ykx8zmt2ww",
+    "userId": "kea6rh8r3scmm26sskc025x28ha73a76",
+    "designation": "Teacher",
+    "idNumber": "NRC-23418",
+    "contractType": "permanent",
+    "dateJoined": "2024-01-01",
+    "qualifications": [
+      "Bachelor Degree"
+    ],
+    "basicSalary": 9000
+  }
+]
