@@ -144,7 +144,7 @@
   /* Hide sidebar, header, and toolbar */
   [data-sidebar],
   header,
-  .print\\:hidden,
+  .print\:hidden,
   nav {
     display: none !important;
   }
@@ -171,13 +171,13 @@
   }
 
   /* Remove card borders for cleaner print */
-  .print\\:shadow-none {
+  .print\:shadow-none {
     box-shadow: none !important;
   }
-  .print\\:border-none {
+  .print\:border-none {
     border: none !important;
   }
-  .print\\:p-4 {
+  .print\:p-4 {
     padding: 1rem !important;
   }
 }

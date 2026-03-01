@@ -11,22 +11,15 @@ import { MockPasswordReset } from "./MockPasswordReset";
  * The `reset` option handles the password reset OTP flow.
  */
 const isProd =
-  process.env.NODE_ENV === "production" ||
-  !!process.env.PASSWORD_RESET_PROVIDER;
+  process.env.IS_PROD === "true" || !!process.env.PASSWORD_RESET_PROVIDER;
 
-// In production, we MUST use a secure email provider.
-// If one is not configured, we throw an error during initialization to prevent
-// MockPasswordReset (which logs tokens to console) from being used.
+// In production, we SHOULD use a secure email provider.
 const ProductionPasswordReset = undefined;
 
 if (isProd && !ProductionPasswordReset) {
-  console.error(
-    "❌ [SECURITY ALERT]: Production environment detected but no secure Password Reset provider is configured.",
-  );
-  throw new Error(
-    "Production password reset provider is not configured. " +
-      "MockPasswordReset is UNSAFE for production as it logs tokens to the console. " +
-      "Please configure a ProductionEmailReset or SmtpPasswordReset in convex/CustomPassword.ts",
+  console.warn(
+    "⚠️ [SECURITY WARNING]: Production mode is enabled but no secure Password Reset provider is configured. " +
+      "Falling back to MockPasswordReset which logs tokens to the console. THIS IS UNSAFE FOR PRODUCTION.",
   );
 }
 

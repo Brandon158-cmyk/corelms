@@ -156,7 +156,7 @@ const schema = defineSchema({
     classId: v.id("classes"),
     subjectId: v.optional(v.id("subjects")), // Optional: if missing -> daily class attendance
     studentId: v.id("users"),
-    date: v.string(), // ISO String 'YYYY-MM-DD'
+    date: v.union(v.string(), v.number()), // ISO String 'YYYY-MM-DD'
     status: v.union(
       v.literal("present"),
       v.literal("absent"),
@@ -177,8 +177,8 @@ const schema = defineSchema({
   academicYears: defineTable({
     tenantId: v.id("tenants"),
     name: v.string(),
-    startDate: v.string(), // ISO String 'YYYY-MM-DD'
-    endDate: v.string(), // ISO String 'YYYY-MM-DD'
+    startDate: v.union(v.string(), v.number()), // ISO String 'YYYY-MM-DD'
+    endDate: v.union(v.string(), v.number()), // ISO String 'YYYY-MM-DD'
     isCurrent: v.boolean(),
   }).index("by_tenant", ["tenantId"]),
 
@@ -190,8 +190,8 @@ const schema = defineSchema({
     tenantId: v.id("tenants"),
     yearId: v.id("academicYears"),
     name: v.string(),
-    startDate: v.string(), // ISO String 'YYYY-MM-DD'
-    endDate: v.string(), // ISO String 'YYYY-MM-DD'
+    startDate: v.union(v.string(), v.number()), // ISO String 'YYYY-MM-DD'
+    endDate: v.union(v.string(), v.number()), // ISO String 'YYYY-MM-DD'
     isCurrent: v.boolean(),
   })
     .index("by_tenant", ["tenantId"])
@@ -240,7 +240,7 @@ const schema = defineSchema({
       v.literal("project"),
     ),
     totalScore: v.number(), // the maximum possible score (e.g., 100)
-    date: v.string(), // ISO String 'YYYY-MM-DD'
+    date: v.union(v.string(), v.number()), // ISO String 'YYYY-MM-DD'
     teacherId: v.id("users"), // Author
     status: v.union(v.literal("draft"), v.literal("published")),
   })
@@ -268,7 +268,7 @@ const schema = defineSchema({
     tenantId: v.id("tenants"),
     studentId: v.id("users"),
     authorId: v.id("users"), // Teacher/Admin who recorded it
-    date: v.string(), // ISO String 'YYYY-MM-DD'
+    date: v.union(v.string(), v.number()), // ISO String 'YYYY-MM-DD'
     visualScore: v.number(), // out of 10
     hearingScore: v.number(), // out of 10
     intellectualScore: v.number(), // out of 10
@@ -287,7 +287,7 @@ const schema = defineSchema({
     tenantId: v.id("tenants"),
     studentId: v.id("users"),
     reporterId: v.id("users"),
-    date: v.string(), // ISO String 'YYYY-MM-DD'
+    date: v.union(v.string(), v.number()), // ISO String 'YYYY-MM-DD'
     category: v.union(
       v.literal("minor"),
       v.literal("moderate"),
