@@ -21,9 +21,24 @@ export const makeMeAdmin = mutation({
     }
 
     // Create a dummy tenant
+    // Generate a unique school code with a larger random part and a collision check
+    let schoolCode = "";
+    let isUnique = false;
+    while (!isUnique) {
+      const randomPart = Math.floor(100000 + Math.random() * 900000); // 6-digit random
+      schoolCode = `DEMO_${randomPart}`;
+
+      const existing = await ctx.db
+        .query("tenants")
+        .withIndex("by_schoolCode", (q) => q.eq("schoolCode", schoolCode))
+        .unique();
+
+      if (!existing) isUnique = true;
+    }
+
     const tenantId = await ctx.db.insert("tenants", {
       name: "CoreLMS Demo School",
-      schoolCode: "DEMO_" + Math.floor(Math.random() * 10000),
+      schoolCode,
       status: "active",
       createdAt: Date.now(),
     });

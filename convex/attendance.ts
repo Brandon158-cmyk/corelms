@@ -4,7 +4,7 @@ import { getAuthUserId } from "@convex-dev/auth/server";
 
 /**
  * Ensures the currently authenticated user belongs to the requested tenant.
- * Returns the tenantId to be used for queries and mutations.
+ * Returns the user's identity and permissions for RBAC enforcement.
  */
 async function enforceTenantAccess(ctx: any) {
   const userId = await getAuthUserId(ctx);
@@ -17,7 +17,11 @@ async function enforceTenantAccess(ctx: any) {
     return null;
   }
 
-  return user.tenantId;
+  return {
+    tenantId: user.tenantId,
+    role: user.role || "student",
+    userId: user._id,
+  };
 }
 
 /**
@@ -30,8 +34,9 @@ export const getClassAttendance = query({
     subjectId: v.optional(v.id("subjects")),
   },
   handler: async (ctx, args) => {
-    const tenantId = await enforceTenantAccess(ctx);
-    if (!tenantId) return [];
+    const access = await enforceTenantAccess(ctx);
+    if (!access) return [];
+    const { tenantId } = access;
 
     let q = ctx.db
       .query("attendance")
@@ -73,11 +78,14 @@ export const markClassAttendance = mutation({
     ),
   },
   handler: async (ctx, args) => {
-    const tenantId = await enforceTenantAccess(ctx);
-    if (!tenantId) throw new Error("Unauthorized: No tenant assigned");
+    const access = await enforceTenantAccess(ctx);
+    if (!access) throw new Error("Unauthorized: No tenant assigned");
+    const { tenantId, role, userId } = access;
 
-    const userId = await getAuthUserId(ctx);
-    if (!userId) throw new Error("Unauthorized");
+    const allowedRoles = ["superAdmin", "proprietor", "headteacher", "teacher"];
+    if (!allowedRoles.includes(role)) {
+      throw new Error("Unauthorized to mark attendance");
+    }
 
     // Fetch existing records for this class/date
     let q = ctx.db

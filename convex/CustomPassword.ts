@@ -10,6 +10,26 @@ import { MockPasswordReset } from "./MockPasswordReset";
  * The `profile` callback maps sign-up form fields to user document fields.
  * The `reset` option handles the password reset OTP flow.
  */
+const isProd =
+  process.env.NODE_ENV === "production" ||
+  !!process.env.PASSWORD_RESET_PROVIDER;
+
+// In production, we MUST use a secure email provider.
+// If one is not configured, we throw an error during initialization to prevent
+// MockPasswordReset (which logs tokens to console) from being used.
+const ProductionPasswordReset = undefined;
+
+if (isProd && !ProductionPasswordReset) {
+  console.error(
+    "❌ [SECURITY ALERT]: Production environment detected but no secure Password Reset provider is configured.",
+  );
+  throw new Error(
+    "Production password reset provider is not configured. " +
+      "MockPasswordReset is UNSAFE for production as it logs tokens to the console. " +
+      "Please configure a ProductionEmailReset or SmtpPasswordReset in convex/CustomPassword.ts",
+  );
+}
+
 const CustomPassword = Password<DataModel>({
   profile(params) {
     return {
@@ -18,7 +38,7 @@ const CustomPassword = Password<DataModel>({
       role: (params.role as string) || "student",
     };
   },
-  reset: MockPasswordReset,
+  reset: isProd ? ProductionPasswordReset : MockPasswordReset,
 });
 
 export default CustomPassword;

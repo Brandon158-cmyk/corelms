@@ -59,7 +59,9 @@ export const create = mutation({
       throw new Error("User does not belong to a school");
     }
 
-    if (!["superAdmin", "proprietor", "headteacher"].includes(user.role ?? "")) {
+    if (
+      !["superAdmin", "proprietor", "headteacher"].includes(user.role ?? "")
+    ) {
       throw new Error("Unauthorized to create grades");
     }
 
@@ -93,7 +95,9 @@ export const update = mutation({
       throw new Error("Grade not found or unauthorized");
     }
 
-    if (!["superAdmin", "proprietor", "headteacher"].includes(user.role ?? "")) {
+    if (
+      !["superAdmin", "proprietor", "headteacher"].includes(user.role ?? "")
+    ) {
       throw new Error("Unauthorized to update grades");
     }
 
@@ -124,8 +128,23 @@ export const remove = mutation({
       throw new Error("Grade not found or unauthorized");
     }
 
-    if (!["superAdmin", "proprietor", "headteacher"].includes(user.role ?? "")) {
+    if (
+      !["superAdmin", "proprietor", "headteacher"].includes(user.role ?? "")
+    ) {
       throw new Error("Unauthorized to delete grades");
+    }
+
+    // Check if any classes are still referencing this grade level
+    const dependentClass = await ctx.db
+      .query("classes")
+      .withIndex("by_grade", (q) => q.eq("gradeId", gradeId))
+      .first();
+
+    if (dependentClass) {
+      throw new Error(
+        "Cannot delete grade: classes still reference this grade level. " +
+          "Please delete or reassign classes first.",
+      );
     }
 
     await ctx.db.delete(gradeId);

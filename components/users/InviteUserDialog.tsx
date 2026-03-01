@@ -66,8 +66,10 @@ export function InviteUserDialog({ children }: { children?: React.ReactNode }) {
       toast.success("User invited successfully!");
       setOpen(false);
       form.reset();
-    } catch (error: any) {
-      toast.error(error.message || "Failed to invite user.");
+    } catch (error: unknown) {
+      const message =
+        error instanceof Error ? error.message : "Failed to invite user.";
+      toast.error(message);
       console.error(error);
     } finally {
       setIsSubmitting(false);

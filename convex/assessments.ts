@@ -90,6 +90,12 @@ export const getMarks = query({
     const tenantId = await enforceTenantAccess(ctx);
     if (!tenantId) return [];
 
+    // Verify the assessment belongs to this tenant
+    const assessment = await ctx.db.get(args.assessmentId);
+    if (!assessment || assessment.tenantId !== tenantId) {
+      return [];
+    }
+
     return await ctx.db
       .query("assessmentMarks")
       .withIndex("by_assessment", (q: any) =>
@@ -116,6 +122,12 @@ export const saveMarks = mutation({
   handler: async (ctx, args) => {
     const tenantId = await enforceTenantAccess(ctx);
     if (!tenantId) throw new Error("Unauthorized");
+
+    // Verify the assessment belongs to this tenant
+    const assessment = await ctx.db.get(args.assessmentId);
+    if (!assessment || assessment.tenantId !== tenantId) {
+      throw new Error("Unauthorized: Assessment not found or access denied");
+    }
 
     // Fetch existing records for this assessment to know whether to patch or insert
     const existing = await ctx.db

@@ -36,7 +36,7 @@ export default function Page() {
 
   const activeClassCount =
     classes?.filter((c) => c.status === "active").length ?? 0;
-  const totalStudents = 0; // will be computed when student queries are wired
+  const totalStudents = useQuery(api.students.countStudents);
 
   return (
     <div className="flex flex-1 flex-col gap-6">
@@ -91,7 +91,7 @@ export default function Page() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-brand-accent">
-              {totalStudents}
+              {totalStudents === undefined ? "…" : totalStudents}
             </div>
             <p className="text-xs text-muted-foreground mt-1">
               Enrolled currently

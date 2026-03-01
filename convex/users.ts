@@ -67,20 +67,31 @@ export const updateProfile = mutation({
  * Used for the Users management datatable.
  */
 export const listTenantUsers = query({
-  args: {},
-  handler: async (ctx) => {
+  args: { tenantId: v.optional(v.id("tenants")) },
+  handler: async (ctx, args) => {
     const userId = await auth.getUserId(ctx);
     if (!userId) throw new Error("Not authenticated");
 
     const user = await ctx.db.get(userId);
-    if (!user || (!user.tenantId && user.role !== "superAdmin")) {
+    if (!user) return [];
+
+    // Determine which tenant's users to list
+    // Non-superAdmins are strictly scoped to their own tenant
+    const targetTenantId =
+      user.role === "superAdmin"
+        ? args.tenantId || user.tenantId
+        : user.tenantId;
+
+    if (!targetTenantId) {
+      // If superAdmin wants to see global/system users (no tenant),
+      // we could handle that here, but typically we return [] or error.
       return [];
     }
 
-    // List all users in this tenant
+    // List all users in the determined tenant
     return await ctx.db
       .query("users")
-      .withIndex("by_tenant", (q) => q.eq("tenantId", user.tenantId as any))
+      .withIndex("by_tenant", (q) => q.eq("tenantId", targetTenantId))
       .collect();
   },
 });

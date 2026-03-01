@@ -30,14 +30,18 @@ async function run() {
       process.execPath,
       ["./node_modules/convex/bin/main.js", "env", "set", "--", name, value],
       {
-        stdio: "inherit",
+        stdio: "pipe",
         shell: false,
       },
     );
 
     if (result.status !== 0) {
       console.error(`Failed to set ${name}`);
+      process.stdout.write(result.stdout);
+      process.stderr.write(result.stderr);
+      process.exit(1);
     }
+    process.stdout.write(result.stdout);
   }
   console.log("Done!");
 }

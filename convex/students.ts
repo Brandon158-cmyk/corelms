@@ -182,3 +182,22 @@ export const listStudents = query({
     );
   },
 });
+/**
+ * Returns the total count of students in the tenant.
+ */
+export const countStudents = query({
+  args: {},
+  handler: async (ctx) => {
+    const tenantId = await enforceTenantAccess(ctx);
+    if (!tenantId) return 0;
+
+    const students = await ctx.db
+      .query("users")
+      .withIndex("by_tenant_role", (q: any) =>
+        q.eq("tenantId", tenantId).eq("role", "student"),
+      )
+      .collect();
+
+    return students.length;
+  },
+});

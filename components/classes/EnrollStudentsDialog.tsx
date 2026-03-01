@@ -51,16 +51,38 @@ export function EnrollStudentsDialog({
     setIsSubmitting(true);
 
     try {
-      const promises = Array.from(selectedIds).map((studentId) =>
-        enrollStudent({ classId, studentId }),
+      const studentIds = Array.from(selectedIds);
+      const results = await Promise.allSettled(
+        studentIds.map((studentId) => enrollStudent({ classId, studentId })),
       );
 
-      await Promise.all(promises);
-      toast.success(`Successfully enrolled ${selectedIds.size} student(s)`);
-      setOpen(false);
-      setSelectedIds(new Set());
-    } catch (error: any) {
-      toast.error(error.message || "Failed to enroll students");
+      const fulfilled = results.filter((r) => r.status === "fulfilled");
+      const rejected = results.filter((r) => r.status === "rejected");
+
+      if (fulfilled.length > 0) {
+        toast.success(`Successfully enrolled ${fulfilled.length} student(s)`);
+      }
+
+      if (rejected.length > 0) {
+        toast.error(`Failed to enroll ${rejected.length} student(s)`);
+
+        // Update selection to only include failed students so user can retry
+        const failedIds = new Set<Id<"users">>();
+        results.forEach((res, index) => {
+          if (res.status === "rejected") {
+            failedIds.add(studentIds[index]);
+          }
+        });
+        setSelectedIds(failedIds);
+      } else {
+        // Full success
+        setOpen(false);
+        setSelectedIds(new Set());
+      }
+    } catch (error: unknown) {
+      const message =
+        error instanceof Error ? error.message : "Failed to enroll students";
+      toast.error(message);
     } finally {
       setIsSubmitting(false);
     }

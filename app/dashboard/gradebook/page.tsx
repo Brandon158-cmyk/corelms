@@ -250,17 +250,54 @@ export default function GradebookPage() {
   };
 
   const getTailwindTextColor = (colorWord: string) => {
-    if (colorWord === "red") return "text-red-600";
-    if (colorWord === "green") return "text-green-600";
-    if (colorWord === "amber") return "text-amber-600";
-    return "text-blue-600";
+    switch (colorWord) {
+      case "red":
+        return "text-rose-600";
+      case "green":
+        return "text-emerald-600";
+      case "amber":
+        return "text-amber-600";
+      case "blue":
+        return "text-blue-600";
+      case "slate":
+        return "text-slate-600";
+      default:
+        return "text-blue-600";
+    }
   };
 
   const getTailwindBgColor = (colorWord: string) => {
-    if (colorWord === "red") return "bg-red-50";
-    if (colorWord === "green") return "bg-green-50";
-    if (colorWord === "amber") return "bg-amber-50";
-    return "bg-blue-50";
+    switch (colorWord) {
+      case "red":
+        return "bg-rose-50";
+      case "green":
+        return "bg-emerald-50";
+      case "amber":
+        return "bg-amber-50";
+      case "blue":
+        return "bg-blue-50";
+      case "slate":
+        return "bg-slate-50";
+      default:
+        return "bg-blue-50";
+    }
+  };
+
+  const getTailwindBorderColor = (colorWord: string) => {
+    switch (colorWord) {
+      case "red":
+        return "border-rose-200";
+      case "green":
+        return "border-emerald-200";
+      case "amber":
+        return "border-amber-200";
+      case "blue":
+        return "border-blue-200";
+      case "slate":
+        return "border-slate-200";
+      default:
+        return "border-blue-200";
+    }
   };
 
   return (
@@ -544,7 +581,7 @@ export default function GradebookPage() {
                             <TableCell>
                               {gradeResult ? (
                                 <div
-                                  className={`inline-flex items-center px-2.5 py-1 rounded-md text-sm font-semibold border ${getTailwindTextColor(gradeResult.color)} ${getTailwindBgColor(gradeResult.color)} border-${gradeResult.color}-200`}
+                                  className={`inline-flex items-center px-2.5 py-1 rounded-md text-sm font-semibold border ${getTailwindTextColor(gradeResult.color)} ${getTailwindBgColor(gradeResult.color)} ${getTailwindBorderColor(gradeResult.color)}`}
                                 >
                                   {gradeResult.grade}{" "}
                                   <span className="ml-1.5 opacity-70 font-normal">
