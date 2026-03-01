@@ -61,12 +61,14 @@ export function AssignSubjectDialog({ classId }: { classId: Id<"classes"> }) {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     try {
+      const teacherId = values.teacherId && values.teacherId !== "unassigned"
+        ? (values.teacherId as Id<"users">)
+        : undefined;
+
       await assignSubject({
         classId,
         subjectId: values.subjectId as Id<"subjects">,
-        teacherId: values.teacherId
-          ? (values.teacherId as Id<"users">)
-          : undefined,
+        teacherId,
       });
 
       toast.success("Subject assigned successfully.");
