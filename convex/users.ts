@@ -2,6 +2,17 @@ import { query, mutation } from "./_generated/server";
 import { v } from "convex/values";
 import { auth } from "./auth";
 
+const ALLOWED_ROLES = v.union(
+  v.literal("superAdmin"),
+  v.literal("proprietor"),
+  v.literal("headteacher"),
+  v.literal("bursar"),
+  v.literal("teacher"),
+  v.literal("boardingMatron"),
+  v.literal("student"),
+  v.literal("parent"),
+);
+
 /**
  * Get the currently authenticated user with their tenant data.
  * Returns null if not authenticated.
@@ -63,13 +74,47 @@ export const updateProfile = mutation({
 });
 
 /**
+ * List all users for the current authenticated user's tenant.
+ * Used for the Users management datatable.
+ */
+export const listTenantUsers = query({
+  args: { tenantId: v.optional(v.id("tenants")) },
+  handler: async (ctx, args) => {
+    const userId = await auth.getUserId(ctx);
+    if (!userId) throw new Error("Not authenticated");
+
+    const user = await ctx.db.get(userId);
+    if (!user) return [];
+
+    // Determine which tenant's users to list
+    // Non-superAdmins are strictly scoped to their own tenant
+    const targetTenantId =
+      user.role === "superAdmin"
+        ? args.tenantId || user.tenantId
+        : user.tenantId;
+
+    if (!targetTenantId) {
+      // If superAdmin wants to see global/system users (no tenant),
+      // we could handle that here, but typically we return [] or error.
+      return [];
+    }
+
+    // List all users in the determined tenant
+    return await ctx.db
+      .query("users")
+      .withIndex("by_tenant", (q) => q.eq("tenantId", targetTenantId))
+      .collect();
+  },
+});
+
+/**
  * Link a user to a tenant using a school code.
  * Called during or after sign-up to associate the user with a school.
  */
 export const linkUserToTenant = mutation({
   args: {
     schoolCode: v.string(),
-    role: v.optional(v.string()),
+    role: v.optional(ALLOWED_ROLES),
   },
   handler: async (ctx, { schoolCode, role }) => {
     const userId = await auth.getUserId(ctx);
@@ -100,5 +145,52 @@ export const linkUserToTenant = mutation({
     await ctx.db.patch(userId, updates);
 
     return { success: true, schoolName: tenant.name };
+  },
+});
+
+/**
+ * Invite a new user to the tenant by creating a shell record.
+ * Status is set to "pending" until they sign in.
+ */
+export const invite = mutation({
+  args: {
+    email: v.string(),
+    name: v.string(),
+    role: ALLOWED_ROLES,
+  },
+  handler: async (ctx, args) => {
+    const userId = await auth.getUserId(ctx);
+    if (!userId) throw new Error("Not authenticated");
+
+    const currentUser = await ctx.db.get(userId);
+    if (!currentUser || !currentUser.tenantId) {
+      throw new Error("You must belong to a school to invite users.");
+    }
+
+    // Only administrative roles can invite users
+    const adminRoles = ["superAdmin", "proprietor", "headteacher"];
+    if (!adminRoles.includes(currentUser.role ?? "")) {
+      throw new Error("Unauthorized to invite users");
+    }
+
+    // Check if user already exists
+    const existing = await ctx.db
+      .query("users")
+      .withIndex("email", (q) => q.eq("email", args.email))
+      .unique();
+
+    if (existing) {
+      throw new Error("A user with this email already exists.");
+    }
+
+    const newUserId = await ctx.db.insert("users", {
+      email: args.email,
+      name: args.name,
+      role: args.role,
+      tenantId: currentUser.tenantId,
+      status: "pending",
+    });
+
+    return newUserId;
   },
 });

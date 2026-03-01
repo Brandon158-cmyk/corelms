@@ -1,160 +1,148 @@
 "use client";
 
 import { useQuery } from "convex/react";
-import { useAuthActions } from "@convex-dev/auth/react";
 import { api } from "@/convex/_generated/api";
-import { Button } from "@/components/ui/button";
-import { Spinner } from "@/components/ui/spinner";
-import { AuthGuard } from "@/components/auth/AuthGuard";
+import { useTermFilter } from "@/components/providers/TermFilterProvider";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { HugeiconsIcon } from "@hugeicons/react";
+import {
+  Book01Icon,
+  UserMultiple02Icon,
+  InformationCircleIcon,
+  Calendar03Icon,
+} from "@hugeicons/core-free-icons";
+import { Badge } from "@/components/ui/badge";
 
-/**
- * Placeholder dashboard page.
- * Displays the authenticated user's info and a sign-out button.
- * Wrapped with AuthGuard in "protected" mode — redirects to /sign-in if not authenticated.
- */
-export default function DashboardPage() {
-  return (
-    <AuthGuard mode="protected">
-      <DashboardContent />
-    </AuthGuard>
-  );
-}
-
-function DashboardContent() {
+export default function Page() {
   const user = useQuery(api.users.currentUser);
-  const { signOut } = useAuthActions();
+  const { mode, selectedTermIds, selectedYearIds, filterLabel } =
+    useTermFilter();
 
-  if (user === undefined) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-brand-bg">
-        <div className="flex flex-col items-center gap-3">
-          <Spinner className="w-8 h-8 text-brand-blue" />
-          <p className="text-sm text-muted-foreground">Loading dashboard...</p>
-        </div>
-      </div>
-    );
-  }
+  // Build query args based on term filter
+  const queryArgs =
+    mode === "terms" && selectedTermIds.length > 0
+      ? { termIds: selectedTermIds }
+      : mode === "years" && selectedYearIds.length > 0
+        ? { yearIds: selectedYearIds }
+        : {};
 
-  if (user === null) {
-    return null;
-  }
+  const classes = useQuery(api.classes.list, queryArgs);
+
+  const activeClassCount =
+    classes?.filter((c) => c.status === "active").length ?? 0;
+  const totalStudents = useQuery(api.students.countStudents);
 
   return (
-    <div className="min-h-screen bg-brand-bg">
-      {/* Top Bar */}
-      <header className="bg-brand-navy text-white px-6 py-4 flex items-center justify-between shadow-lg">
-        <div className="flex items-center gap-3">
-          <div className="flex items-center justify-center w-8 h-8 bg-brand-blue rounded-lg">
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              className="text-white"
-            >
-              <path
-                d="M12 2L2 7L12 12L22 7L12 2Z"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M2 17L12 22L22 17"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M2 12L12 17L22 12"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-          <h1 className="text-lg font-bold">corelms</h1>
+    <div className="flex flex-1 flex-col gap-6">
+      {/* Filter indicator */}
+      {mode !== "all-time" && (
+        <div className="flex items-center gap-2">
+          <HugeiconsIcon
+            icon={Calendar03Icon}
+            className="size-4 text-brand-primary"
+          />
+          <span className="text-sm text-muted-foreground">
+            Showing data for:
+          </span>
+          <Badge variant="outline" className="text-xs">
+            {filterLabel}
+          </Badge>
         </div>
+      )}
 
-        <div className="flex items-center gap-4">
-          <div className="text-right hidden sm:block">
-            <p className="text-sm font-medium">{user.name || user.email}</p>
-            <p className="text-xs text-white/60 capitalize">
-              {(user.role as string) || "User"}{" "}
-              {user.tenant ? `• ${user.tenant.name}` : ""}
+      <div className="grid gap-4 md:grid-cols-3">
+        <Card className="shadow-sm">
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium">
+              Active Classes
+            </CardTitle>
+            <HugeiconsIcon
+              icon={Book01Icon}
+              className="text-brand-primary"
+              size={16}
+            />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-brand-accent">
+              {classes === undefined ? "…" : activeClassCount}
+            </div>
+            <p className="text-xs text-muted-foreground mt-1">
+              {mode === "all-time" ? "All time" : filterLabel}
             </p>
-          </div>
-          <Button
-            variant="outline"
-            size="sm"
-            className="border-white/20 text-white hover:bg-white/10 cursor-pointer"
-            onClick={() => void signOut()}
-          >
-            Sign Out
-          </Button>
-        </div>
-      </header>
+          </CardContent>
+        </Card>
 
-      {/* Dashboard Content */}
-      <main className="max-w-4xl mx-auto px-6 py-12">
-        <div className="bg-white rounded-xl shadow-sm border p-8">
-          <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-brand-blue/10 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                className="text-brand-blue"
-              >
-                <path
-                  d="M9 11l3 3L22 4"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+        <Card className="shadow-sm">
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium">
+              Total Students
+            </CardTitle>
+            <HugeiconsIcon
+              icon={UserMultiple02Icon}
+              className="text-brand-primary"
+              size={16}
+            />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-brand-accent">
+              {totalStudents === undefined ? "…" : totalStudents}
             </div>
-            <h2 className="text-2xl font-bold text-brand-navy mb-2">
-              Welcome to corelms!
-            </h2>
-            <p className="text-muted-foreground">
-              You have successfully signed in. Your role-specific dashboard will
-              be available in the next sprint.
+            <p className="text-xs text-muted-foreground mt-1">
+              Enrolled currently
             </p>
-          </div>
+          </CardContent>
+        </Card>
 
-          {/* User Info Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="bg-brand-bg rounded-lg p-4">
-              <p className="text-xs text-muted-foreground mb-1">Email</p>
-              <p className="text-sm font-medium truncate">{user.email}</p>
+        <Card className="shadow-sm bg-brand-primary-deep text-white border-brand-primary-deep">
+          <CardHeader className="flex flex-row items-center justify-between pb-2">
+            <CardTitle className="text-sm font-medium text-white/90">
+              Current Role
+            </CardTitle>
+            <HugeiconsIcon
+              icon={InformationCircleIcon}
+              className="text-white/60"
+              size={16}
+            />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold capitalize">
+              {user?.role || "Pending"}
             </div>
-            <div className="bg-brand-bg rounded-lg p-4">
-              <p className="text-xs text-muted-foreground mb-1">Role</p>
-              <p className="text-sm font-medium capitalize">
-                {(user.role as string) || "Not assigned"}
-              </p>
-            </div>
-            <div className="bg-brand-bg rounded-lg p-4">
-              <p className="text-xs text-muted-foreground mb-1">School</p>
-              <p className="text-sm font-medium">
-                {user.tenant ? user.tenant.name : "Not linked"}
-              </p>
-            </div>
-          </div>
-        </div>
-      </main>
+            <p className="text-xs text-white/70 mt-1 max-w-[200px] truncate">
+              {user?.tenant ? user.tenant.name : "No school linked"}
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2 mt-4">
+        <Card className="shadow-sm min-h-[300px]">
+          <CardHeader>
+            <CardTitle>Recent Activity</CardTitle>
+            <CardDescription>
+              Updates from your classes and students.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="flex items-center justify-center min-h-[200px] text-muted-foreground text-sm">
+            No recent activity to display.
+          </CardContent>
+        </Card>
+        <Card className="shadow-sm min-h-[300px]">
+          <CardHeader>
+            <CardTitle>Quick Actions</CardTitle>
+            <CardDescription>Shortcut to common tasks.</CardDescription>
+          </CardHeader>
+          <CardContent className="flex items-center justify-center min-h-[200px] text-muted-foreground text-sm">
+            Roles and permissions are being configured.
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
