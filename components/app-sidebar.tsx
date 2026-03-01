@@ -170,6 +170,27 @@ const navData: NavGroup[] = [
     ],
   },
   {
+    title: "Transport",
+    url: "#",
+    items: [
+      {
+        title: "Fleet",
+        url: "/dashboard/transport",
+        allowedRoles: ADMIN_ROLES,
+      },
+      {
+        title: "Routes",
+        url: "/dashboard/transport/routes",
+        allowedRoles: ADMIN_ROLES,
+      },
+      {
+        title: "Trip Log",
+        url: "/dashboard/transport/trips",
+        allowedRoles: [...ADMIN_ROLES, "teacher"],
+      },
+    ],
+  },
+  {
     title: "Communication",
     url: "#",
     items: [

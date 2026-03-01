@@ -607,6 +607,68 @@ const schema = defineSchema({
     .index("by_status", ["status"]),
 
   /**
+   * Transport & Fleet Management (Section 6.6)
+   */
+  vehicles: defineTable({
+    tenantId: v.id("tenants"),
+    name: v.string(), // e.g., "Bus 2"
+    plateNumber: v.string(),
+    capacity: v.number(),
+    driverId: v.optional(v.id("users")),
+    status: v.union(
+      v.literal("active"),
+      v.literal("maintenance"),
+      v.literal("retired"),
+    ),
+  })
+    .index("by_tenant", ["tenantId"])
+    .index("by_status", ["tenantId", "status"]),
+
+  routes: defineTable({
+    tenantId: v.id("tenants"),
+    name: v.string(), // e.g., "Kabulonga Morning"
+    type: v.union(
+      v.literal("morning"),
+      v.literal("afternoon"),
+      v.literal("both"),
+    ),
+    status: v.union(v.literal("active"), v.literal("inactive")),
+  }).index("by_tenant", ["tenantId"]),
+
+  routeStops: defineTable({
+    routeId: v.id("routes"),
+    name: v.string(), // e.g., "Arcades Mall"
+    order: v.number(), // 1, 2, 3…
+    pickupTime: v.optional(v.string()), // e.g., "06:45"
+    dropoffTime: v.optional(v.string()), // e.g., "16:30"
+  }).index("by_route", ["routeId"]),
+
+  tripLogs: defineTable({
+    tenantId: v.id("tenants"),
+    vehicleId: v.id("vehicles"),
+    routeId: v.id("routes"),
+    date: v.string(), // ISO 'YYYY-MM-DD'
+    direction: v.union(v.literal("pickup"), v.literal("dropoff")),
+    boardedStudents: v.array(
+      v.object({
+        studentId: v.id("users"),
+        boardedAt: v.string(), // time string e.g., "07:15"
+      }),
+    ),
+    driverId: v.id("users"),
+    status: v.union(
+      v.literal("in-progress"),
+      v.literal("completed"),
+      v.literal("cancelled"),
+    ),
+    startedAt: v.number(),
+    completedAt: v.optional(v.number()),
+  })
+    .index("by_tenant", ["tenantId"])
+    .index("by_vehicle", ["vehicleId"])
+    .index("by_date", ["tenantId", "date"]),
+
+  /**
    * Communication & Notifications (Section 6.8 & 7)
    */
   announcements: defineTable({

@@ -32,6 +32,7 @@ import type * as tenants from "../tenants.js";
 import type * as terms from "../terms.js";
 import type * as testDiscovery from "../testDiscovery.js";
 import type * as tracking from "../tracking.js";
+import type * as transport from "../transport.js";
 import type * as users from "../users.js";
 
 import type {
@@ -65,6 +66,7 @@ declare const fullApi: ApiFromModules<{
   terms: typeof terms;
   testDiscovery: typeof testDiscovery;
   tracking: typeof tracking;
+  transport: typeof transport;
   users: typeof users;
 }>;
 
