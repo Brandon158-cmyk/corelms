@@ -20,12 +20,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { AssignSubjectDialog } from "@/components/classes/AssignSubjectDialog";
-import { EnrollStudentDialog } from "@/components/classes/EnrollStudentDialog";
+import { EnrollStudentsDialog } from "@/components/classes/EnrollStudentsDialog";
 import {
   BookOpen,
   ChevronLeft,
   GraduationCap,
   Trash2,
+  UserRemove01Icon,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 
@@ -45,6 +46,16 @@ export default function ClassDetailsPage({
     classId ? { classId } : "skip",
   );
   const removeSubject = useMutation(api.classes.removeSubject);
+  const removeStudent = useMutation(api.classes.removeStudent);
+
+  const handleRemoveStudent = async (studentId: Id<"users">) => {
+    try {
+      await removeStudent({ studentId });
+      toast.success("Student un-enrolled from class.");
+    } catch (error) {
+      toast.error("Failed to un-enroll student.");
+    }
+  };
 
   const handleRemoveSubject = async (classSubjectId: Id<"classSubjects">) => {
     try {
@@ -213,7 +224,10 @@ export default function ClassDetailsPage({
                   Manage students enrolled in this class.
                 </p>
               </div>
-              <EnrollStudentDialog classId={classId!} />
+              <EnrollStudentsDialog
+                classId={classId!}
+                classNameName={cls.name}
+              />
             </div>
             {students === undefined ? (
               <div className="flex justify-center p-8">
@@ -240,13 +254,28 @@ export default function ClassDetailsPage({
                       </TableCell>
                       <TableCell>{student.email || "No Email"}</TableCell>
                       <TableCell className="text-right">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="text-brand-primary"
-                        >
-                          View
-                        </Button>
+                        <div className="flex justify-end items-center gap-2">
+                          <Link href={`/dashboard/students/${student._id}`}>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="text-brand-primary"
+                            >
+                              View
+                            </Button>
+                          </Link>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                            onClick={() => handleRemoveStudent(student._id)}
+                          >
+                            <HugeiconsIcon
+                              icon={UserRemove01Icon}
+                              className="w-4 h-4"
+                            />
+                          </Button>
+                        </div>
                       </TableCell>
                     </TableRow>
                   ))}

@@ -246,3 +246,40 @@ export const enrollStudent = mutation({
     return { success: true };
   },
 });
+
+export const removeStudent = mutation({
+  args: {
+    studentId: v.id("users"),
+  },
+  handler: async (ctx, { studentId }) => {
+    const tenantId = await enforceTenantAccess(ctx);
+    if (!tenantId) throw new Error("Unauthorized");
+
+    const student = await ctx.db.get(studentId);
+    if (!student || student.tenantId !== tenantId) {
+      throw new Error("Student not found or unauthorized.");
+    }
+
+    // Set classId to undefined instead of null since it's v.optional
+    await ctx.db.patch(studentId, { classId: undefined });
+    return { success: true };
+  },
+});
+
+export const getUnassignedStudents = query({
+  args: {},
+  handler: async (ctx) => {
+    const tenantId = await enforceTenantAccess(ctx);
+    if (!tenantId) return [];
+
+    // To get unassigned students, we either query all students and filter locally
+    // or use the by_tenant index and filter for missing classId.
+    const allTenantUsers = await ctx.db
+      .query("users")
+      .withIndex("by_tenant", (q: any) => q.eq("tenantId", tenantId))
+      .filter((q: any) => q.eq(q.field("role"), "student"))
+      .collect();
+
+    return allTenantUsers.filter((u) => !u.classId);
+  },
+});
