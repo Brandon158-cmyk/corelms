@@ -303,6 +303,52 @@ const schema = defineSchema({
   })
     .index("by_student", ["studentId"])
     .index("by_tenant", ["tenantId"]),
+
+  /**
+   * Report Cards — generated per-student-per-term snapshots.
+   * Aggregates assessment marks, attendance, and discipline data.
+   */
+  reportCards: defineTable({
+    tenantId: v.id("tenants"),
+    studentId: v.id("users"),
+    classId: v.id("classes"),
+    termId: v.id("terms"),
+    gradingScale: v.union(
+      v.literal("primary"),
+      v.literal("junior_secondary"),
+      v.literal("senior_secondary"),
+    ),
+    subjects: v.array(
+      v.object({
+        subjectId: v.id("subjects"),
+        subjectName: v.string(),
+        totalScore: v.number(),
+        totalOutOf: v.number(),
+        percentage: v.number(),
+        grade: v.string(),
+        color: v.string(),
+        teacherComment: v.optional(v.string()),
+      }),
+    ),
+    attendanceSummary: v.object({
+      totalDays: v.number(),
+      present: v.number(),
+      absent: v.number(),
+      late: v.number(),
+      excused: v.number(),
+    }),
+    disciplineSummary: v.object({
+      totalIncidents: v.number(),
+      totalPointsDeducted: v.number(),
+    }),
+    classTeacherComment: v.optional(v.string()),
+    headteacherComment: v.optional(v.string()),
+    status: v.union(v.literal("draft"), v.literal("published")),
+    generatedAt: v.number(),
+  })
+    .index("by_tenant", ["tenantId"])
+    .index("by_student", ["studentId"])
+    .index("by_class_term", ["classId", "termId"]),
 });
 
 export default schema;

@@ -138,3 +138,46 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Print styles for Report Cards */
+@media print {
+  /* Hide sidebar, header, and toolbar */
+  [data-sidebar],
+  header,
+  .print\\:hidden,
+  nav {
+    display: none !important;
+  }
+
+  /* Remove backgrounds and shadows */
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Full-width content area */
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Ensure tables don't break across pages */
+  table {
+    page-break-inside: auto;
+  }
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  /* Remove card borders for cleaner print */
+  .print\\:shadow-none {
+    box-shadow: none !important;
+  }
+  .print\\:border-none {
+    border: none !important;
+  }
+  .print\\:p-4 {
+    padding: 1rem !important;
+  }
+}

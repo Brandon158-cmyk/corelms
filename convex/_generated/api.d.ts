@@ -19,6 +19,7 @@ import type * as cleanup from "../cleanup.js";
 import type * as discipline from "../discipline.js";
 import type * as grades from "../grades.js";
 import type * as http from "../http.js";
+import type * as reportCards from "../reportCards.js";
 import type * as setup from "../setup.js";
 import type * as students from "../students.js";
 import type * as subjects from "../subjects.js";
@@ -46,6 +47,7 @@ declare const fullApi: ApiFromModules<{
   discipline: typeof discipline;
   grades: typeof grades;
   http: typeof http;
+  reportCards: typeof reportCards;
   setup: typeof setup;
   students: typeof students;
   subjects: typeof subjects;
