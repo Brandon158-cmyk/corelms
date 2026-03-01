@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { SearchForm } from "@/components/search-form";
 import { TermSwitcher } from "@/components/term-switcher";
 import {
   Collapsible,
@@ -23,6 +22,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
+  SidebarSeparator,
 } from "@/components/ui/sidebar";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowRight01Icon } from "@hugeicons/core-free-icons";
@@ -59,9 +59,14 @@ const navData: NavGroup[] = [
     url: "/dashboard",
     items: [
       {
-        title: "Overview",
-        url: "/dashboard",
-        allowedRoles: ALL_ROLES,
+        title: "Behavior & SEN",
+        url: "/dashboard/tracking",
+        allowedRoles: ["superAdmin", "proprietor", "headteacher"],
+      },
+      {
+        title: "Settings",
+        url: "#",
+        allowedRoles: ["superAdmin", "proprietor"],
       },
     ],
   },
@@ -72,6 +77,11 @@ const navData: NavGroup[] = [
       {
         title: "Grades",
         url: "/dashboard/grades",
+        allowedRoles: [...ADMIN_ROLES, "teacher"],
+      },
+      {
+        title: "Students",
+        url: "/dashboard/students",
         allowedRoles: [...ADMIN_ROLES, "teacher"],
       },
       {
@@ -131,7 +141,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     <Sidebar {...props}>
       <SidebarHeader>
         <TermSwitcher />
-        <SearchForm />
+        <SidebarSeparator className="mx-0" />
       </SidebarHeader>
       <SidebarContent className="gap-0">
         {visibleNav.map((item) =>

@@ -17,10 +17,12 @@ import type * as cleanup from "../cleanup.js";
 import type * as grades from "../grades.js";
 import type * as http from "../http.js";
 import type * as setup from "../setup.js";
+import type * as students from "../students.js";
 import type * as subjects from "../subjects.js";
 import type * as tenants from "../tenants.js";
 import type * as terms from "../terms.js";
 import type * as testDiscovery from "../testDiscovery.js";
+import type * as tracking from "../tracking.js";
 import type * as users from "../users.js";
 
 import type {
@@ -39,10 +41,12 @@ declare const fullApi: ApiFromModules<{
   grades: typeof grades;
   http: typeof http;
   setup: typeof setup;
+  students: typeof students;
   subjects: typeof subjects;
   tenants: typeof tenants;
   terms: typeof terms;
   testDiscovery: typeof testDiscovery;
+  tracking: typeof tracking;
   users: typeof users;
 }>;
 

@@ -172,6 +172,78 @@ const schema = defineSchema({
   })
     .index("by_tenant", ["tenantId"])
     .index("by_year", ["yearId"]),
+
+  /**
+   * StudentProfiles table — complete SIS record for a student.
+   * Linked 1:1 with a user role="student" in the users table.
+   * See system.md Section 6.1
+   */
+  studentProfiles: defineTable({
+    userId: v.id("users"), // Foreign key to users
+    tenantId: v.id("tenants"),
+    dateOfBirth: v.optional(v.number()), // Timestamp
+    gender: v.optional(v.union(v.literal("Male"), v.literal("Female"))),
+    nrcNumber: v.optional(v.string()), // For older students
+    birthCertificateOrUnder5Card: v.optional(v.string()),
+    address: v.optional(v.string()),
+
+    // Medical & Emergency
+    medicalConditions: v.optional(v.string()),
+    allergies: v.optional(v.string()),
+    emergencyContactName: v.optional(v.string()),
+    emergencyContactPhone: v.optional(v.string()),
+    emergencyContactRelation: v.optional(v.string()),
+
+    // Parent/Guardian link
+    guardianId: v.optional(v.id("users")), // Parent user account linked
+  })
+    .index("by_user", ["userId"])
+    .index("by_tenant", ["tenantId"]),
+
+  /**
+   * Special Educational Needs (SEN) assessments.
+   * Based on Zambia's MoE Early Grade Screening Tool.
+   */
+  senAssessments: defineTable({
+    tenantId: v.id("tenants"),
+    studentId: v.id("users"),
+    authorId: v.id("users"), // Teacher/Admin who recorded it
+    date: v.number(),
+    visualScore: v.number(), // out of 10
+    hearingScore: v.number(), // out of 10
+    intellectualScore: v.number(), // out of 10
+    totalScore: v.number(),
+    flagged: v.boolean(), // Total <= 14 triggers flag for SENCO
+    notes: v.optional(v.string()),
+    status: v.union(v.literal("draft"), v.literal("submitted")),
+  })
+    .index("by_student", ["studentId"])
+    .index("by_tenant", ["tenantId"]),
+
+  /**
+   * Disciplinary infractions and points system.
+   */
+  disciplineLogs: defineTable({
+    tenantId: v.id("tenants"),
+    studentId: v.id("users"),
+    reporterId: v.id("users"),
+    date: v.number(),
+    category: v.union(
+      v.literal("minor"),
+      v.literal("moderate"),
+      v.literal("severe"),
+    ),
+    infraction: v.string(), // Extracted from Code of Conduct list
+    pointsDeducted: v.number(),
+    restorativeAction: v.optional(v.string()),
+    status: v.union(
+      v.literal("open"),
+      v.literal("resolved"),
+      v.literal("escalated"),
+    ),
+  })
+    .index("by_student", ["studentId"])
+    .index("by_tenant", ["tenantId"]),
 });
 
 export default schema;

@@ -76,11 +76,9 @@ function CreateYearDialog() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button>
-          <HugeiconsIcon icon={Add01Icon} className="mr-2 size-4" />
-          Add Academic Year
-        </Button>
+      <DialogTrigger render={<Button />}>
+        <HugeiconsIcon icon={Add01Icon} className="mr-2 size-4" />
+        Add Academic Year
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -179,11 +177,9 @@ function CreateTermDialog({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button variant="outline" size="sm">
-          <HugeiconsIcon icon={Add01Icon} className="mr-1 size-3.5" />
-          Add Term
-        </Button>
+      <DialogTrigger render={<Button variant="outline" size="sm" />}>
+        <HugeiconsIcon icon={Add01Icon} className="mr-1 size-3.5" />
+        Add Term
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -277,13 +273,13 @@ function YearCard({
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <div className="flex items-center gap-3">
-            <CollapsibleTrigger asChild>
-              <Button variant="ghost" size="icon" className="size-7">
-                <HugeiconsIcon
-                  icon={ArrowDown01Icon}
-                  className={`size-4 transition-transform ${isOpen ? "" : "-rotate-90"}`}
-                />
-              </Button>
+            <CollapsibleTrigger
+              render={<Button variant="ghost" size="icon" className="size-7" />}
+            >
+              <HugeiconsIcon
+                icon={ArrowDown01Icon}
+                className={`size-4 transition-transform ${isOpen ? "" : "-rotate-90"}`}
+              />
             </CollapsibleTrigger>
             <div>
               <div className="flex items-center gap-2">
@@ -403,7 +399,9 @@ export default function TermsPage() {
       {/* Page Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-brand-accent">Academic Terms</h1>
+          <h1 className="text-2xl font-bold text-brand-accent">
+            Academic Terms
+          </h1>
           <p className="text-sm text-muted-foreground mt-1">
             Manage academic years and their terms.
           </p>
