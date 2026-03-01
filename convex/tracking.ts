@@ -95,7 +95,13 @@ export const getDisciplineByStudent = query({
     const tenantId = await enforceTenantAccess(ctx);
     if (!tenantId) return [];
 
-    let logs = await ctx.db
+    // Verify student belongs to the same tenant
+    const student = await ctx.db.get(studentId);
+    if (!student || student.tenantId !== tenantId) {
+      return [];
+    }
+
+    const logs = await ctx.db
       .query("disciplineLogs")
       .withIndex("by_student", (q: any) => q.eq("studentId", studentId))
       .order("desc")
