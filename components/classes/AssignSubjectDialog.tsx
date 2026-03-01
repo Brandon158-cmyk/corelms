@@ -39,7 +39,7 @@ export function AssignSubjectDialog({ classId }: { classId: Id<"classes"> }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const subjects = useQuery(api.subjects.list);
-  const users = useQuery(api.users.listTenantUsers);
+  const users = useQuery(api.users.listTenantUsers, {});
   const assignSubject = useMutation(api.classes.addSubject);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -61,9 +61,10 @@ export function AssignSubjectDialog({ classId }: { classId: Id<"classes"> }) {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     try {
-      const teacherId = values.teacherId && values.teacherId !== "unassigned"
-        ? (values.teacherId as Id<"users">)
-        : undefined;
+      const teacherId =
+        values.teacherId && values.teacherId !== "unassigned"
+          ? (values.teacherId as Id<"users">)
+          : undefined;
 
       await assignSubject({
         classId,

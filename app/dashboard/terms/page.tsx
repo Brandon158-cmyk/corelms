@@ -250,8 +250,8 @@ function YearCard({
   year: {
     _id: Id<"academicYears">;
     name: string;
-    startDate: string;
-    endDate: string;
+    startDate: string | number;
+    endDate: string | number;
     isCurrent: boolean;
   };
 }) {
@@ -261,8 +261,8 @@ function YearCard({
   const updateTerm = useMutation(api.terms.update);
   const [isOpen, setIsOpen] = useState(true);
 
-  const formatDate = (dateStr: string) =>
-    new Date(dateStr).toLocaleDateString("en-ZA", {
+  const formatDate = (date: string | number) =>
+    new Date(date).toLocaleDateString("en-ZA", {
       year: "numeric",
       month: "short",
       day: "numeric",

@@ -112,6 +112,27 @@ const navData: NavGroup[] = [
     ],
   },
   {
+    title: "Finance",
+    url: "#",
+    items: [
+      {
+        title: "Overview",
+        url: "/dashboard/financials",
+        allowedRoles: [...ADMIN_ROLES, "bursar"],
+      },
+      {
+        title: "Fee Structure",
+        url: "/dashboard/financials/fees",
+        allowedRoles: [...ADMIN_ROLES, "bursar"],
+      },
+      {
+        title: "Billing & Invoices",
+        url: "/dashboard/financials/invoices",
+        allowedRoles: [...ADMIN_ROLES, "bursar"],
+      },
+    ],
+  },
+  {
     title: "Administration",
     url: "#",
     items: [

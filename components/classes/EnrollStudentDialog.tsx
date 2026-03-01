@@ -37,7 +37,7 @@ export function EnrollStudentDialog({ classId }: { classId: Id<"classes"> }) {
   const [open, setOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const users = useQuery(api.users.listTenantUsers);
+  const users = useQuery(api.users.listTenantUsers, {});
   const enrollStudent = useMutation(api.classes.enrollStudent);
 
   const form = useForm<z.infer<typeof formSchema>>({

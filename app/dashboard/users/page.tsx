@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/table";
 
 export default function UsersPage() {
-  const users = useQuery(api.users.listTenantUsers);
+  const users = useQuery(api.users.listTenantUsers, {});
 
   return (
     <div className="space-y-6">

@@ -347,9 +347,98 @@ const schema = defineSchema({
     status: v.union(v.literal("draft"), v.literal("published")),
     generatedAt: v.number(),
   })
+    .index("by_student", ["studentId"])
+    .index("by_class_term", ["classId", "termId"]),
+
+  /**
+   * FeeTypes table — definitions of different fees (Tuition, PTA, etc.)
+   */
+  feeTypes: defineTable({
+    tenantId: v.id("tenants"),
+    name: v.string(),
+    description: v.optional(v.string()),
+    amount: v.number(),
+    gradeId: v.optional(v.id("grades")), // if null -> applies to all grades
+    termId: v.optional(v.id("terms")), // if null -> one-time or recurring general fee
+  })
+    .index("by_tenant", ["tenantId"])
+    .index("by_grade", ["gradeId"]),
+
+  /**
+   * Invoices table — student billing snapshots.
+   */
+  invoices: defineTable({
+    tenantId: v.id("tenants"),
+    studentId: v.id("users"),
+    classId: v.id("classes"),
+    termId: v.id("terms"),
+    totalAmount: v.number(),
+    balance: v.number(),
+    status: v.union(
+      v.literal("pending"),
+      v.literal("partial"),
+      v.literal("paid"),
+      v.literal("void"),
+    ),
+    dueDate: v.union(v.string(), v.number()),
+    createdAt: v.number(),
+  })
     .index("by_tenant", ["tenantId"])
     .index("by_student", ["studentId"])
     .index("by_class_term", ["classId", "termId"]),
+
+  /**
+   * InvoiceItems table — line items for each invoice.
+   */
+  invoiceItems: defineTable({
+    invoiceId: v.id("invoices"),
+    feeTypeId: v.id("feeTypes"),
+    amount: v.number(),
+    description: v.string(),
+  }).index("by_invoice", ["invoiceId"]),
+
+  /**
+   * Payments table — transaction records.
+   */
+  payments: defineTable({
+    tenantId: v.id("tenants"),
+    studentId: v.id("users"),
+    invoiceId: v.optional(v.id("invoices")),
+    amount: v.number(),
+    method: v.union(
+      v.literal("momo"),
+      v.literal("cash"),
+      v.literal("bank"),
+      v.literal("cheque"),
+    ),
+    transactionRef: v.optional(v.string()), // e.g. MoMo ID or Deposit Slip #
+    date: v.union(v.string(), v.number()),
+    recordedBy: v.id("users"),
+    notes: v.optional(v.string()),
+  })
+    .index("by_tenant", ["tenantId"])
+    .index("by_student", ["studentId"])
+    .index("by_invoice", ["invoiceId"]),
+
+  /**
+   * Bursaries table — government/private subsidies (CDF, etc.)
+   */
+  bursaries: defineTable({
+    tenantId: v.id("tenants"),
+    studentId: v.id("users"),
+    bursaryType: v.string(), // e.g. "CDF Secondary", "CDF Skills"
+    status: v.union(
+      v.literal("pending"),
+      v.literal("approved"),
+      v.literal("declined"),
+    ),
+    amount: v.optional(v.number()), // if fixed amount
+    percentage: v.optional(v.number()), // if percentage of tuition
+    approvalDate: v.optional(v.union(v.string(), v.number())),
+    notes: v.optional(v.string()),
+  })
+    .index("by_tenant", ["tenantId"])
+    .index("by_student", ["studentId"]),
 });
 
 export default schema;
