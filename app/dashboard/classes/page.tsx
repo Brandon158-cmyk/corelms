@@ -4,6 +4,10 @@ import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
+import { CreateClassDialog } from "@/components/classes/CreateClassDialog";
+import { useTermFilter } from "@/components/providers/TermFilterProvider";
+import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
 import {
   Table,
   TableBody,
@@ -14,7 +18,18 @@ import {
 } from "@/components/ui/table";
 
 export default function ClassesPage() {
-  const classes = useQuery(api.classes.list);
+  const { mode, selectedTermIds, selectedYearIds, filterLabel } =
+    useTermFilter();
+
+  // Build query args based on term filter
+  const queryArgs =
+    mode === "terms" && selectedTermIds.length > 0
+      ? { termIds: selectedTermIds }
+      : mode === "years" && selectedYearIds.length > 0
+        ? { yearIds: selectedYearIds }
+        : {};
+
+  const classes = useQuery(api.classes.list, queryArgs);
 
   return (
     <div className="space-y-6">
@@ -25,11 +40,17 @@ export default function ClassesPage() {
           </h2>
           <p className="text-muted-foreground">
             Manage your school's classes and schedules.
+            {mode !== "all-time" && (
+              <Badge
+                variant="outline"
+                className="ml-2 text-xs font-normal align-middle"
+              >
+                Filtered: {filterLabel}
+              </Badge>
+            )}
           </p>
         </div>
-        <Button className="bg-[#2845D6] hover:bg-[#1A2CA3] text-white">
-          Add Class
-        </Button>
+        <CreateClassDialog />
       </div>
 
       <div className="bg-white border rounded-xl shadow-sm overflow-hidden min-h-[400px]">
@@ -43,25 +64,34 @@ export default function ClassesPage() {
               📚
             </div>
             <h3 className="text-lg font-medium text-gray-900 mb-1">
-              No classes found
+              {mode !== "all-time"
+                ? "No classes found for this filter"
+                : "No classes found"}
             </h3>
             <p className="text-gray-500 mb-4 max-w-sm mx-auto">
-              Get started by creating a new class for this term.
+              {mode !== "all-time"
+                ? `No classes match the current filter (${filterLabel}). Try selecting a different term or "All Time".`
+                : "Get started by creating a new class for this term."}
             </p>
-            <Button
-              variant="outline"
-              className="border-brand-blue/20 text-brand-blue"
-            >
-              Create Initial Class
-            </Button>
+            {mode === "all-time" && (
+              <CreateClassDialog>
+                <Button
+                  variant="outline"
+                  className="border-brand-blue/20 text-brand-blue"
+                >
+                  Create Initial Class
+                </Button>
+              </CreateClassDialog>
+            )}
           </div>
         ) : (
           <Table>
             <TableHeader>
               <TableRow className="bg-gray-50/50">
                 <TableHead>Class Name</TableHead>
+                <TableHead>Grade</TableHead>
+                <TableHead>Term</TableHead>
                 <TableHead>Room</TableHead>
-                <TableHead>Schedule</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
               </TableRow>
@@ -72,8 +102,25 @@ export default function ClassesPage() {
                   <TableCell className="font-medium text-brand-navy">
                     {cls.name}
                   </TableCell>
+                  <TableCell>{cls.gradeName}</TableCell>
+                  <TableCell>
+                    {cls.termName ? (
+                      <span className="text-sm">
+                        {cls.termName}
+                        {cls.yearName && (
+                          <span className="text-muted-foreground">
+                            {" "}
+                            — {cls.yearName}
+                          </span>
+                        )}
+                      </span>
+                    ) : (
+                      <span className="text-muted-foreground text-sm">
+                        No term
+                      </span>
+                    )}
+                  </TableCell>
                   <TableCell>{cls.room || "TBA"}</TableCell>
-                  <TableCell>{cls.schedule || "Not set"}</TableCell>
                   <TableCell>
                     <span
                       className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize ${
@@ -86,13 +133,15 @@ export default function ClassesPage() {
                     </span>
                   </TableCell>
                   <TableCell className="text-right">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="text-brand-blue hover:text-brand-navy"
-                    >
-                      Edit
-                    </Button>
+                    <Link href={`/dashboard/classes/${cls._id}`}>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="text-brand-blue hover:text-brand-navy"
+                      >
+                        View
+                      </Button>
+                    </Link>
                   </TableCell>
                 </TableRow>
               ))}

@@ -125,3 +125,52 @@ export const linkUserToTenant = mutation({
     return { success: true, schoolName: tenant.name };
   },
 });
+
+/**
+ * Invite a new user to the tenant by creating a shell record.
+ * Status is set to "pending" until they sign in.
+ */
+export const invite = mutation({
+  args: {
+    email: v.string(),
+    name: v.string(),
+    role: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const userId = await auth.getUserId(ctx);
+    if (!userId) throw new Error("Not authenticated");
+
+    const currentUser = await ctx.db.get(userId);
+    if (!currentUser || !currentUser.tenantId) {
+      throw new Error("You must belong to a school to invite users.");
+    }
+
+    // Only management or superAdmin can invite
+    if (
+      currentUser.role !== "management" &&
+      currentUser.role !== "superAdmin"
+    ) {
+      throw new Error("Unauthorized to invite users");
+    }
+
+    // Check if user already exists
+    const existing = await ctx.db
+      .query("users")
+      .withIndex("email", (q) => q.eq("email", args.email))
+      .unique();
+
+    if (existing) {
+      throw new Error("A user with this email already exists.");
+    }
+
+    const newUserId = await ctx.db.insert("users", {
+      email: args.email,
+      name: args.name,
+      role: args.role,
+      tenantId: currentUser.tenantId,
+      status: "pending",
+    });
+
+    return newUserId;
+  },
+});

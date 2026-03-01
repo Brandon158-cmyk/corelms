@@ -88,7 +88,7 @@ export function TopHeader() {
 
         {/* User Profile */}
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
+          <DropdownMenuTrigger>
             <button className="flex items-center gap-2 outline-none">
               <div className="text-right hidden sm:block">
                 <p className="text-sm font-medium text-gray-700 leading-none">

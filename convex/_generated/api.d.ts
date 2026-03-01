@@ -10,11 +10,16 @@
 
 import type * as CustomPassword from "../CustomPassword.js";
 import type * as MockPasswordReset from "../MockPasswordReset.js";
+import type * as academicYears from "../academicYears.js";
 import type * as auth from "../auth.js";
 import type * as classes from "../classes.js";
 import type * as cleanup from "../cleanup.js";
+import type * as grades from "../grades.js";
 import type * as http from "../http.js";
+import type * as setup from "../setup.js";
+import type * as subjects from "../subjects.js";
 import type * as tenants from "../tenants.js";
+import type * as terms from "../terms.js";
 import type * as testDiscovery from "../testDiscovery.js";
 import type * as users from "../users.js";
 
@@ -27,11 +32,16 @@ import type {
 declare const fullApi: ApiFromModules<{
   CustomPassword: typeof CustomPassword;
   MockPasswordReset: typeof MockPasswordReset;
+  academicYears: typeof academicYears;
   auth: typeof auth;
   classes: typeof classes;
   cleanup: typeof cleanup;
+  grades: typeof grades;
   http: typeof http;
+  setup: typeof setup;
+  subjects: typeof subjects;
   tenants: typeof tenants;
+  terms: typeof terms;
   testDiscovery: typeof testDiscovery;
   users: typeof users;
 }>;

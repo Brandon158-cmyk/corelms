@@ -1,9 +1,10 @@
 "use client";
 
 import * as React from "react";
-
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { SearchForm } from "@/components/search-form";
-import { VersionSwitcher } from "@/components/version-switcher";
+import { TermSwitcher } from "@/components/term-switcher";
 import {
   Collapsible,
   CollapsibleContent,
@@ -24,197 +25,113 @@ import {
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowRight01Icon } from "@hugeicons/core-free-icons";
 
-// This is sample data.
 const data = {
-  versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
   navMain: [
     {
-      title: "Getting Started",
-      url: "#",
+      title: "Dashboard",
+      url: "/dashboard",
       items: [
         {
-          title: "Installation",
-          url: "#",
-        },
-        {
-          title: "Project Structure",
-          url: "#",
+          title: "Overview",
+          url: "/dashboard",
         },
       ],
     },
     {
-      title: "Build Your Application",
+      title: "Management",
       url: "#",
       items: [
         {
-          title: "Routing",
-          url: "#",
+          title: "Users",
+          url: "/dashboard/users",
         },
         {
-          title: "Data Fetching",
-          url: "#",
-          isActive: true,
+          title: "Grades",
+          url: "/dashboard/grades",
         },
         {
-          title: "Rendering",
-          url: "#",
+          title: "Classes",
+          url: "/dashboard/classes",
         },
         {
-          title: "Caching",
-          url: "#",
+          title: "Subjects",
+          url: "/dashboard/subjects",
         },
         {
-          title: "Styling",
-          url: "#",
-        },
-        {
-          title: "Optimizing",
-          url: "#",
-        },
-        {
-          title: "Configuring",
-          url: "#",
-        },
-        {
-          title: "Testing",
-          url: "#",
-        },
-        {
-          title: "Authentication",
-          url: "#",
-        },
-        {
-          title: "Deploying",
-          url: "#",
-        },
-        {
-          title: "Upgrading",
-          url: "#",
-        },
-        {
-          title: "Examples",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "API Reference",
-      url: "#",
-      items: [
-        {
-          title: "Components",
-          url: "#",
-        },
-        {
-          title: "File Conventions",
-          url: "#",
-        },
-        {
-          title: "Functions",
-          url: "#",
-        },
-        {
-          title: "next.config.js Options",
-          url: "#",
-        },
-        {
-          title: "CLI",
-          url: "#",
-        },
-        {
-          title: "Edge Runtime",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Architecture",
-      url: "#",
-      items: [
-        {
-          title: "Accessibility",
-          url: "#",
-        },
-        {
-          title: "Fast Refresh",
-          url: "#",
-        },
-        {
-          title: "Next.js Compiler",
-          url: "#",
-        },
-        {
-          title: "Supported Browsers",
-          url: "#",
-        },
-        {
-          title: "Turbopack",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Community",
-      url: "#",
-      items: [
-        {
-          title: "Contribution Guide",
-          url: "#",
+          title: "Terms",
+          url: "/dashboard/terms",
         },
       ],
     },
   ],
 };
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const pathname = usePathname();
+
   return (
     <Sidebar {...props}>
       <SidebarHeader>
-        <VersionSwitcher
-          versions={data.versions}
-          defaultVersion={data.versions[0]}
-        />
+        <TermSwitcher />
         <SearchForm />
       </SidebarHeader>
       <SidebarContent className="gap-0">
-        {/* We create a collapsible SidebarGroup for each parent. */}
-        {data.navMain.map((item) => (
-          <Collapsible
-            key={item.title}
-            title={item.title}
-            defaultOpen
-            className="group/collapsible"
-          >
-            <SidebarGroup>
+        {data.navMain.map((item) =>
+          item.items ? (
+            <Collapsible
+              key={item.title}
+              title={item.title}
+              defaultOpen
+              className="group/collapsible"
+            >
+              <SidebarGroup>
+                <SidebarGroupLabel
+                  className="group/label text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sm"
+                  render={<CollapsibleTrigger />}
+                >
+                  {item.title}{" "}
+                  <HugeiconsIcon
+                    icon={ArrowRight01Icon}
+                    strokeWidth={2}
+                    className="ml-auto transition-transform group-data-open/collapsible:rotate-90"
+                  />
+                </SidebarGroupLabel>
+                <CollapsibleContent>
+                  <SidebarGroupContent>
+                    <SidebarMenu>
+                      {item.items.map((subItem) => {
+                        const isActive =
+                          pathname === subItem.url ||
+                          (subItem.url !== "/dashboard" &&
+                            pathname.startsWith(`${subItem.url}/`));
+
+                        return (
+                          <SidebarMenuItem key={subItem.title}>
+                            <SidebarMenuButton
+                              isActive={isActive}
+                              render={<Link href={subItem.url} />}
+                            >
+                              {subItem.title}
+                            </SidebarMenuButton>
+                          </SidebarMenuItem>
+                        );
+                      })}
+                    </SidebarMenu>
+                  </SidebarGroupContent>
+                </CollapsibleContent>
+              </SidebarGroup>
+            </Collapsible>
+          ) : (
+            <SidebarGroup key={item.title}>
               <SidebarGroupLabel
                 className="group/label text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sm"
-                render={<CollapsibleTrigger />}
+                render={<Link href={item.url} />}
               >
-                {item.title}{" "}
-                <HugeiconsIcon
-                  icon={ArrowRight01Icon}
-                  strokeWidth={2}
-                  className="ml-auto transition-transform group-data-open/collapsible:rotate-90"
-                />
+                {item.title}
               </SidebarGroupLabel>
-              <CollapsibleContent>
-                <SidebarGroupContent>
-                  <SidebarMenu>
-                    {item.items.map((item) => (
-                      <SidebarMenuItem key={item.title}>
-                        <SidebarMenuButton
-                          isActive={item.isActive}
-                          render={<a href={item.url} />}
-                        >
-                          {item.title}
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
-                    ))}
-                  </SidebarMenu>
-                </SidebarGroupContent>
-              </CollapsibleContent>
             </SidebarGroup>
-          </Collapsible>
-        ))}
+          ),
+        )}
       </SidebarContent>
       <SidebarRail />
     </Sidebar>

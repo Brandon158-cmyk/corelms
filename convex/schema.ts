@@ -45,10 +45,13 @@ const schema = defineSchema({
     // Custom corelms fields
     role: v.optional(v.string()),
     tenantId: v.optional(v.id("tenants")),
+    status: v.optional(v.string()), // "pending" | "active"
+    classId: v.optional(v.id("classes")), // Link student to a class
   })
     .index("email", ["email"])
     .index("by_tenant", ["tenantId"])
-    .index("by_tenant_role", ["tenantId", "role"]),
+    .index("by_tenant_role", ["tenantId", "role"])
+    .index("by_class", ["classId"]),
 
   /**
    * Tenants table — represents individual schools/organizations.
@@ -82,19 +85,77 @@ const schema = defineSchema({
     .index("by_userId", ["userId"]),
 
   /**
-   * Classes table — represents courses or classrooms in a school.
+   * Grades table — represents top-level educational levels (e.g., "Grade 1")
+   */
+  grades: defineTable({
+    tenantId: v.id("tenants"),
+    name: v.string(),
+    description: v.optional(v.string()),
+  }).index("by_tenant", ["tenantId"]),
+
+  /**
+   * Subjects table — represents areas of study (e.g., "Mathematics")
+   */
+  subjects: defineTable({
+    tenantId: v.id("tenants"),
+    name: v.string(),
+    description: v.optional(v.string()),
+  }).index("by_tenant", ["tenantId"]),
+
+  /**
+   * Classes table — represents a specific cohort within a grade (e.g., "B1")
    */
   classes: defineTable({
     tenantId: v.id("tenants"),
-    name: v.string(), // e.g., "Mathematics 101"
+    gradeId: v.id("grades"),
+    termId: v.optional(v.id("terms")), // Links class to a specific term
+    name: v.string(), // e.g., "B1"
     description: v.optional(v.string()),
-    teacherId: v.optional(v.id("users")), // Primary instructor
+    teacherId: v.optional(v.id("users")), // Homeroom teacher
     room: v.optional(v.string()),
-    schedule: v.optional(v.string()),
     status: v.union(v.literal("active"), v.literal("archived")),
   })
     .index("by_tenant", ["tenantId"])
+    .index("by_grade", ["gradeId"])
+    .index("by_term", ["termId"])
     .index("by_tenant_teacher", ["tenantId", "teacherId"]),
+
+  /**
+   * ClassSubjects table — links a subject to a class and assigns a teacher
+   */
+  classSubjects: defineTable({
+    classId: v.id("classes"),
+    subjectId: v.id("subjects"),
+    teacherId: v.optional(v.id("users")),
+  })
+    .index("by_class", ["classId"])
+    .index("by_subject", ["subjectId"])
+    .index("by_teacher", ["teacherId"]),
+
+  /**
+   * AcademicYears table — represents a school year (e.g., "2026")
+   */
+  academicYears: defineTable({
+    tenantId: v.id("tenants"),
+    name: v.string(),
+    startDate: v.number(),
+    endDate: v.number(),
+    isCurrent: v.boolean(),
+  }).index("by_tenant", ["tenantId"]),
+
+  /**
+   * Terms table — represents a term within an academic year (e.g., "Term 1 - 2026")
+   */
+  terms: defineTable({
+    tenantId: v.id("tenants"),
+    yearId: v.id("academicYears"),
+    name: v.string(),
+    startDate: v.number(),
+    endDate: v.number(),
+    isCurrent: v.boolean(),
+  })
+    .index("by_tenant", ["tenantId"])
+    .index("by_year", ["yearId"]),
 });
 
 export default schema;

@@ -1,6 +1,7 @@
 import { query, mutation } from "./_generated/server";
 import { v } from "convex/values";
 import { getAuthUserId } from "@convex-dev/auth/server";
+import { Id } from "./_generated/dataModel";
 
 /**
  * Ensures the currently authenticated user belongs to the requested tenant.
@@ -13,35 +14,89 @@ async function enforceTenantAccess(ctx: any) {
   }
 
   const user = await ctx.db.get(userId);
-  if (!user || (!user.tenantId && user.role !== "superAdmin")) {
-    throw new Error("No tenant associated with user");
+  if (!user || !user.tenantId) {
+    return null;
   }
 
   return user.tenantId;
 }
 
+/**
+ * List all classes for the current user's tenant.
+ * Optionally filter by termIds (array) or yearIds (array).
+ */
 export const list = query({
-  args: {},
-  handler: async (ctx) => {
+  args: {
+    termIds: v.optional(v.array(v.id("terms"))),
+    yearIds: v.optional(v.array(v.id("academicYears"))),
+  },
+  handler: async (ctx, args) => {
     const tenantId = await enforceTenantAccess(ctx);
 
     // Super admins without a tenantId yet (e.g. initial setup) won't have classes
     if (!tenantId) return [];
 
-    return await ctx.db
+    const classes = await ctx.db
       .query("classes")
-      .withIndex("by_tenant", (q) => q.eq("tenantId", tenantId))
+      .withIndex("by_tenant", (q: any) => q.eq("tenantId", tenantId))
       .collect();
+
+    // Apply term filter if provided
+    let filtered = classes;
+
+    if (args.termIds && args.termIds.length > 0) {
+      // Filter by specific term IDs
+      filtered = classes.filter(
+        (cls: any) => cls.termId && args.termIds!.includes(cls.termId),
+      );
+    } else if (args.yearIds && args.yearIds.length > 0) {
+      // Filter by year IDs — need to resolve which terms belong to those years
+      const allTerms = await ctx.db
+        .query("terms")
+        .withIndex("by_tenant", (q: any) => q.eq("tenantId", tenantId))
+        .collect();
+
+      const termIdsInYears = allTerms
+        .filter((t: any) => args.yearIds!.includes(t.yearId))
+        .map((t: any) => t._id);
+
+      filtered = classes.filter(
+        (cls: any) => cls.termId && termIdsInYears.includes(cls.termId),
+      );
+    }
+
+    return Promise.all(
+      filtered.map(async (cls: any) => {
+        const grade = await ctx.db.get(cls.gradeId);
+        let termName = null;
+        let yearName = null;
+        if (cls.termId) {
+          const term = (await ctx.db.get(cls.termId)) as any;
+          if (term) {
+            termName = term.name;
+            const year = (await ctx.db.get(term.yearId)) as any;
+            yearName = year?.name || null;
+          }
+        }
+        return {
+          ...cls,
+          gradeName: grade?.name || "Unknown Grade",
+          termName,
+          yearName,
+        };
+      }),
+    );
   },
 });
 
 export const create = mutation({
   args: {
+    gradeId: v.id("grades"),
+    termId: v.optional(v.id("terms")),
     name: v.string(),
     description: v.optional(v.string()),
     teacherId: v.optional(v.id("users")),
     room: v.optional(v.string()),
-    schedule: v.optional(v.string()),
     status: v.union(v.literal("active"), v.literal("archived")),
   },
   handler: async (ctx, args) => {
@@ -55,5 +110,137 @@ export const create = mutation({
       tenantId,
     });
     return newClassId;
+  },
+});
+
+export const get = query({
+  args: { classId: v.id("classes") },
+  handler: async (ctx, { classId }) => {
+    const tenantId = await enforceTenantAccess(ctx);
+    if (!tenantId) return null;
+
+    const cls = await ctx.db.get(classId);
+    if (!cls || cls.tenantId !== tenantId) return null;
+
+    const grade = await ctx.db.get(cls.gradeId);
+    let termName = null;
+    let yearName = null;
+    if (cls.termId) {
+      const term = (await ctx.db.get(cls.termId)) as any;
+      if (term) {
+        termName = term.name;
+        const year = (await ctx.db.get(term.yearId)) as any;
+        yearName = year?.name || null;
+      }
+    }
+
+    return {
+      ...cls,
+      gradeName: grade?.name || "Unknown Grade",
+      termName,
+      yearName,
+    };
+  },
+});
+
+export const getSubjects = query({
+  args: { classId: v.id("classes") },
+  handler: async (ctx, { classId }) => {
+    const tenantId = await enforceTenantAccess(ctx);
+    if (!tenantId) return [];
+
+    const classSubjects = await ctx.db
+      .query("classSubjects")
+      .withIndex("by_class", (q: any) => q.eq("classId", classId))
+      .collect();
+
+    return Promise.all(
+      classSubjects.map(async (cs: any) => {
+        const subject = await ctx.db.get(cs.subjectId);
+        const teacher = cs.teacherId ? await ctx.db.get(cs.teacherId) : null;
+        return {
+          ...cs,
+          subjectName: subject?.name || "Unknown Subject",
+          teacherName: teacher?.name || "Unassigned",
+        };
+      }),
+    );
+  },
+});
+
+export const addSubject = mutation({
+  args: {
+    classId: v.id("classes"),
+    subjectId: v.id("subjects"),
+    teacherId: v.optional(v.id("users")),
+  },
+  handler: async (ctx, args) => {
+    const tenantId = await enforceTenantAccess(ctx);
+    if (!tenantId) throw new Error("Unauthorized");
+
+    // Check if subject is already added to this class
+    const existing = await ctx.db
+      .query("classSubjects")
+      .withIndex("by_class", (q: any) => q.eq("classId", args.classId))
+      .filter((q: any) => q.eq(q.field("subjectId"), args.subjectId))
+      .first();
+
+    if (existing) {
+      throw new Error("This subject is already assigned to this class.");
+    }
+
+    await ctx.db.insert("classSubjects", {
+      classId: args.classId,
+      subjectId: args.subjectId,
+      teacherId: args.teacherId,
+    });
+    return { success: true };
+  },
+});
+
+export const removeSubject = mutation({
+  args: { classSubjectId: v.id("classSubjects") },
+  handler: async (ctx, { classSubjectId }) => {
+    const tenantId = await enforceTenantAccess(ctx);
+    if (!tenantId) throw new Error("Unauthorized");
+
+    await ctx.db.delete(classSubjectId);
+    return { success: true };
+  },
+});
+
+export const getStudents = query({
+  args: { classId: v.id("classes") },
+  handler: async (ctx, { classId }) => {
+    const tenantId = await enforceTenantAccess(ctx);
+    if (!tenantId) return [];
+
+    return await ctx.db
+      .query("users")
+      .withIndex("by_class", (q: any) => q.eq("classId", classId))
+      .collect();
+  },
+});
+
+export const enrollStudent = mutation({
+  args: {
+    classId: v.id("classes"),
+    studentId: v.id("users"),
+  },
+  handler: async (ctx, { classId, studentId }) => {
+    const tenantId = await enforceTenantAccess(ctx);
+    if (!tenantId) throw new Error("Unauthorized");
+
+    const student = await ctx.db.get(studentId);
+    if (!student || student.tenantId !== tenantId) {
+      throw new Error("Student not found or unauthorized.");
+    }
+
+    if (student.role !== "student") {
+      throw new Error("Only users with the student role can be enrolled.");
+    }
+
+    await ctx.db.patch(studentId, { classId });
+    return { success: true };
   },
 });

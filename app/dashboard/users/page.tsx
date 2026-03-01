@@ -4,6 +4,7 @@ import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
+import { InviteUserDialog } from "@/components/users/InviteUserDialog";
 import {
   Table,
   TableBody,
@@ -31,9 +32,7 @@ export default function UsersPage() {
           <Button variant="outline" className="border-gray-200">
             Import CSV
           </Button>
-          <Button className="bg-[#2845D6] hover:bg-[#1A2CA3] text-white">
-            Invite User
-          </Button>
+          <InviteUserDialog />
         </div>
       </div>
 
@@ -53,12 +52,14 @@ export default function UsersPage() {
             <p className="text-gray-500 mb-4 max-w-sm mx-auto">
               Invite teachers, staff, and students to join your school.
             </p>
-            <Button
-              variant="outline"
-              className="border-brand-blue/20 text-brand-blue"
-            >
-              Invite First User
-            </Button>
+            <InviteUserDialog>
+              <Button
+                variant="outline"
+                className="border-brand-blue/20 text-brand-blue"
+              >
+                Invite First User
+              </Button>
+            </InviteUserDialog>
           </div>
         ) : (
           <Table>
@@ -89,8 +90,14 @@ export default function UsersPage() {
                     </span>
                   </TableCell>
                   <TableCell>
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize bg-green-100 text-green-800">
-                      Active
+                    <span
+                      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize ${
+                        user.status === "pending"
+                          ? "bg-yellow-100 text-yellow-800"
+                          : "bg-green-100 text-green-800"
+                      }`}
+                    >
+                      {user.status || "Active"}
                     </span>
                   </TableCell>
                   <TableCell className="text-right">
