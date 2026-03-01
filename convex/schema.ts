@@ -545,6 +545,112 @@ const schema = defineSchema({
     .index("by_tenant", ["tenantId"])
     .index("by_payrun", ["payrunId"])
     .index("by_user", ["userId"]),
+
+  /**
+   * Hostel & Boarding Management (Section 6.4)
+   */
+  hostels: defineTable({
+    tenantId: v.id("tenants"),
+    name: v.string(),
+    gender: v.union(v.literal("boys"), v.literal("girls"), v.literal("mixed")),
+    capacity: v.number(),
+    wardenId: v.optional(v.id("users")),
+  }).index("by_tenant", ["tenantId"]),
+
+  dormitories: defineTable({
+    tenantId: v.id("tenants"),
+    hostelId: v.id("hostels"),
+    name: v.string(),
+    bedCount: v.number(),
+    floor: v.optional(v.string()),
+  })
+    .index("by_tenant", ["tenantId"])
+    .index("by_hostel", ["hostelId"]),
+
+  hostelAllocations: defineTable({
+    tenantId: v.id("tenants"),
+    studentId: v.id("users"),
+    hostelId: v.id("hostels"),
+    dormitoryId: v.id("dormitories"),
+    bedNumber: v.optional(v.string()),
+    termId: v.id("terms"),
+    status: v.union(v.literal("active"), v.literal("inactive")),
+  })
+    .index("by_tenant", ["tenantId"])
+    .index("by_student", ["studentId"])
+    .index("by_dorm", ["dormitoryId"]),
+
+  exeatRequests: defineTable({
+    tenantId: v.id("tenants"),
+    studentId: v.id("users"),
+    type: v.union(
+      v.literal("weekend"),
+      v.literal("medical"),
+      v.literal("family"),
+      v.literal("holiday"),
+    ),
+    leaveDate: v.number(),
+    returnDate: v.number(),
+    hostName: v.string(),
+    hostContact: v.string(),
+    status: v.union(
+      v.literal("pending"),
+      v.literal("approved"),
+      v.literal("rejected"),
+      v.literal("returned"),
+    ),
+    approvedBy: v.optional(v.id("users")),
+    notes: v.optional(v.string()),
+  })
+    .index("by_student", ["studentId"])
+    .index("by_status", ["status"]),
+
+  /**
+   * Communication & Notifications (Section 6.8 & 7)
+   */
+  announcements: defineTable({
+    tenantId: v.id("tenants"),
+    title: v.string(),
+    content: v.string(),
+    audience: v.union(
+      v.literal("all"),
+      v.literal("staff"),
+      v.literal("parents"),
+      v.literal("students"),
+    ),
+    authorId: v.id("users"),
+    priority: v.union(v.literal("normal"), v.literal("urgent")),
+    expiresAt: v.optional(v.number()),
+    createdAt: v.number(),
+  })
+    .index("by_tenant", ["tenantId"])
+    .index("by_audience", ["tenantId", "audience"]),
+
+  communicationLogs: defineTable({
+    tenantId: v.id("tenants"),
+    senderId: v.id("users"),
+    type: v.union(v.literal("sms"), v.literal("email")),
+    recipientInfo: v.string(), // Phone or Email
+    subject: v.optional(v.string()),
+    body: v.string(),
+    status: v.union(
+      v.literal("sent"),
+      v.literal("failed"),
+      v.literal("pending"),
+    ),
+    sentAt: v.number(),
+    meta: v.optional(v.any()), // Provider ref, cost, etc.
+  })
+    .index("by_tenant", ["tenantId"])
+    .index("by_sender", ["senderId"]),
+
+  communicationTemplates: defineTable({
+    tenantId: v.id("tenants"),
+    name: v.string(),
+    type: v.union(v.literal("sms"), v.literal("email")),
+    content: v.string(), // e.g., "Hello {{name}}, your balance is {{balance}}"
+    category: v.optional(v.string()), // e.g., "fees", "attendance", "general"
+  }).index("by_tenant", ["tenantId"]),
 });
 
 export default schema;

@@ -31,7 +31,7 @@ import {
 export function TermSwitcher() {
   const user = useQuery(api.users.currentUser);
   const years = useQuery(api.academicYears.list);
-  const allTerms = useQuery(api.terms.list, {});
+  const allTerms = useQuery(api.terms.listTerms, {});
   const {
     mode,
     selectedYearIds,

@@ -52,7 +52,7 @@ export function CreateClassDialog({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const createClass = useMutation(api.classes.create);
   const grades = useQuery(api.grades.list);
-  const allTerms = useQuery(api.terms.list, {});
+  const allTerms = useQuery(api.terms.listTerms, {});
   const years = useQuery(api.academicYears.list);
 
   const form = useForm<z.infer<typeof formSchema>>({

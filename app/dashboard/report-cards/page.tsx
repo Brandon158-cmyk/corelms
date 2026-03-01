@@ -48,7 +48,7 @@ type GradingScale = "primary" | "junior_secondary" | "senior_secondary";
 export default function ReportCardsPage() {
   const { selectedTermIds } = useTermFilter();
   const classes = useQuery(api.classes.list, {});
-  const terms = useQuery(api.terms.list, {});
+  const terms = useQuery(api.terms.listTerms, {});
 
   const [selectedClassId, setSelectedClassId] = useState<string>("");
   const [selectedTermId, setSelectedTermId] = useState<string>("");

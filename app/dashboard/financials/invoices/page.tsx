@@ -52,7 +52,7 @@ import {
 
 export default function InvoicesPage() {
   const { mode, selectedTermIds } = useTermFilter();
-  const terms = useQuery(api.terms.list, {});
+  const terms = useQuery(api.terms.listTerms, {});
   const classes = useQuery(api.classes.list, {});
 
   const [selectedClassId, setSelectedClassId] = useState<string>("");

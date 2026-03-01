@@ -19,6 +19,7 @@ import type * as cleanup from "../cleanup.js";
 import type * as discipline from "../discipline.js";
 import type * as financials from "../financials.js";
 import type * as grades from "../grades.js";
+import type * as hostels from "../hostels.js";
 import type * as http from "../http.js";
 import type * as payroll from "../payroll.js";
 import type * as reportCards from "../reportCards.js";
@@ -50,6 +51,7 @@ declare const fullApi: ApiFromModules<{
   discipline: typeof discipline;
   financials: typeof financials;
   grades: typeof grades;
+  hostels: typeof hostels;
   http: typeof http;
   payroll: typeof payroll;
   reportCards: typeof reportCards;

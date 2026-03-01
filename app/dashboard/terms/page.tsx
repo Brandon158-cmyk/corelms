@@ -255,7 +255,7 @@ function YearCard({
     isCurrent: boolean;
   };
 }) {
-  const terms = useQuery(api.terms.list, { yearId: year._id });
+  const terms = useQuery(api.terms.listTerms, { yearId: year._id });
   const removeYear = useMutation(api.academicYears.remove);
   const removeTerm = useMutation(api.terms.remove);
   const updateTerm = useMutation(api.terms.update);

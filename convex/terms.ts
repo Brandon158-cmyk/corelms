@@ -26,7 +26,7 @@ async function getTenantUser(ctx: any) {
  * List all terms for the current user's tenant.
  * Optionally filter by yearId.
  */
-export const list = query({
+export const listTerms = query({
   args: {
     yearId: v.optional(v.id("academicYears")),
   },

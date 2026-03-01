@@ -154,6 +154,22 @@ const navData: NavGroup[] = [
     ],
   },
   {
+    title: "Boarding Management",
+    url: "#",
+    items: [
+      {
+        title: "Dormitories & Hostels",
+        url: "/dashboard/hostels",
+        allowedRoles: [...ADMIN_ROLES, "teacher"],
+      },
+      {
+        title: "Gate Passes (Exeats)",
+        url: "/dashboard/hostels/exeat",
+        allowedRoles: [...ADMIN_ROLES, "teacher"],
+      },
+    ],
+  },
+  {
     title: "Administration",
     url: "#",
     items: [
