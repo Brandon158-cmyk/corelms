@@ -148,6 +148,29 @@ const schema = defineSchema({
     .index("by_teacher", ["teacherId"]),
 
   /**
+   * Attendance table — daily or subject-level attendance records.
+   */
+  attendance: defineTable({
+    tenantId: v.id("tenants"),
+    classId: v.id("classes"),
+    subjectId: v.optional(v.id("subjects")), // Optional: if missing -> daily class attendance
+    studentId: v.id("users"),
+    date: v.string(), // ISO String 'YYYY-MM-DD'
+    status: v.union(
+      v.literal("present"),
+      v.literal("absent"),
+      v.literal("late"),
+      v.literal("excused"),
+    ),
+    notes: v.optional(v.string()),
+    markedBy: v.id("users"), // Teacher or Admin ID
+  })
+    .index("by_tenant", ["tenantId"])
+    .index("by_class_date", ["classId", "date"])
+    .index("by_class_subject_date", ["classId", "subjectId", "date"])
+    .index("by_student", ["studentId"]),
+
+  /**
    * AcademicYears table — represents a school year (e.g., "2026").
    */
   academicYears: defineTable({
