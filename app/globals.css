@@ -163,11 +163,11 @@
 
   /* Ensure tables don't break across pages */
   table {
-    page-break-inside: auto;
+    break-inside: auto;
   }
   tr {
-    page-break-inside: avoid;
-    page-break-after: auto;
+    break-inside: avoid;
+    break-after: auto;
   }
 
   /* Remove card borders for cleaner print */
