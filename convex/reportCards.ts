@@ -408,6 +408,9 @@ export const updateComments = mutation({
     const tenantId = await enforceTenantAccess(ctx);
     if (!tenantId) throw new Error("Unauthorized");
 
+    const hasClearance = await checkAdminOrTeacher(ctx);
+    if (!hasClearance) throw new Error("Unauthorized role.");
+
     const report = await ctx.db.get(args.reportId);
     if (!report || report.tenantId !== tenantId) {
       throw new Error("Report card not found");
