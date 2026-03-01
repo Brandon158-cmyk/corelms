@@ -402,11 +402,7 @@ export const updateComments = mutation({
     if (!tenantId) throw new Error("Unauthorized");
 
     const hasClearance = await checkAdminOrTeacher(ctx);
-    if (!hasClearance) {
-      throw new Error(
-        "Unauthorized: Only teachers and admins can update report card comments",
-      );
-    }
+    if (!hasClearance) throw new Error("Unauthorized role.");
 
     const report = await ctx.db.get(args.reportId);
     if (!report || report.tenantId !== tenantId) {
@@ -435,11 +431,7 @@ export const publish = mutation({
     if (!tenantId) throw new Error("Unauthorized");
 
     const hasClearance = await checkAdminOrTeacher(ctx);
-    if (!hasClearance) {
-      throw new Error(
-        "Unauthorized: Only teachers and admins can publish report cards",
-      );
-    }
+    if (!hasClearance) throw new Error("Unauthorized role.");
 
     const report = await ctx.db.get(reportId);
     if (!report || report.tenantId !== tenantId) {

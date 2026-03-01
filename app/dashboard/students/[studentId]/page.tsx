@@ -44,7 +44,7 @@ import {
 } from "@hugeicons/core-free-icons";
 import { Spinner } from "@/components/ui/spinner";
 import { toast } from "sonner";
-import { getAuthUserId } from "@convex-dev/auth/server";
+import { toast } from "sonner";
 
 export default function StudentProfilePage(props: {
   params: Promise<{ studentId: Id<"users"> }>;
