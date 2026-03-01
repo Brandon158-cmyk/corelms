@@ -669,6 +669,45 @@ const schema = defineSchema({
     .index("by_date", ["tenantId", "date"]),
 
   /**
+   * Timetable & Scheduling (Section 7.3)
+   */
+  timetableSlots: defineTable({
+    tenantId: v.id("tenants"),
+    day: v.union(
+      v.literal("monday"),
+      v.literal("tuesday"),
+      v.literal("wednesday"),
+      v.literal("thursday"),
+      v.literal("friday"),
+    ),
+    periodNumber: v.number(), // 1, 2, 3…
+    startTime: v.string(), // "07:30"
+    endTime: v.string(), // "08:10"
+    type: v.union(
+      v.literal("lesson"),
+      v.literal("break"),
+      v.literal("assembly"),
+    ),
+    label: v.optional(v.string()), // e.g., "Morning Break", "Assembly"
+  })
+    .index("by_tenant", ["tenantId"])
+    .index("by_day", ["tenantId", "day"]),
+
+  timetableEntries: defineTable({
+    tenantId: v.id("tenants"),
+    slotId: v.id("timetableSlots"),
+    classId: v.id("classes"),
+    subjectId: v.id("subjects"),
+    teacherId: v.optional(v.id("users")),
+    room: v.optional(v.string()),
+    termId: v.optional(v.id("terms")),
+  })
+    .index("by_tenant", ["tenantId"])
+    .index("by_class", ["classId"])
+    .index("by_slot", ["slotId"])
+    .index("by_teacher", ["teacherId"]),
+
+  /**
    * Communication & Notifications (Section 6.8 & 7)
    */
   announcements: defineTable({
