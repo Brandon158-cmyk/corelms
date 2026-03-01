@@ -35,7 +35,7 @@ const formSchema = z.object({
   email: z.string().email({
     message: "Please enter a valid email address.",
   }),
-  role: z.enum(["teacher", "staff", "student", "parent"]),
+  role: z.enum(["teacher", "bursar", "boardingMatron", "student", "parent"]),
 });
 
 export function InviteUserDialog({ children }: { children?: React.ReactNode }) {
@@ -75,11 +75,8 @@ export function InviteUserDialog({ children }: { children?: React.ReactNode }) {
   }
 
   // Hide the button completely if not authorized to invite
-  if (
-    currentUser &&
-    currentUser.role !== "superAdmin" &&
-    currentUser.role !== "management"
-  ) {
+  const adminRoles = ["superAdmin", "proprietor", "headteacher"];
+  if (currentUser && !adminRoles.includes(currentUser.role ?? "")) {
     return null;
   }
 
@@ -88,7 +85,7 @@ export function InviteUserDialog({ children }: { children?: React.ReactNode }) {
       <DialogTrigger
         render={
           (children as React.ReactElement) || (
-            <Button className="bg-brand-blue hover:bg-brand-royal text-white">
+            <Button className="bg-brand-primary hover:bg-brand-primary-dark text-white">
               Invite User
             </Button>
           )
@@ -135,9 +132,14 @@ export function InviteUserDialog({ children }: { children?: React.ReactNode }) {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="teacher">Teacher</SelectItem>
-                    <SelectItem value="staff">Staff</SelectItem>
+                    <SelectItem value="bursar">
+                      Bursar / Finance Officer
+                    </SelectItem>
+                    <SelectItem value="boardingMatron">
+                      Boarding Matron
+                    </SelectItem>
                     <SelectItem value="student">Student</SelectItem>
-                    <SelectItem value="parent">Parent</SelectItem>
+                    <SelectItem value="parent">Parent / Guardian</SelectItem>
                   </SelectContent>
                 </Select>
                 <FieldError errors={[form.formState.errors.role]} />
@@ -156,7 +158,7 @@ export function InviteUserDialog({ children }: { children?: React.ReactNode }) {
             </Button>
             <Button
               type="submit"
-              className="bg-brand-blue hover:bg-brand-royal text-white"
+              className="bg-brand-primary hover:bg-brand-primary-dark text-white"
               disabled={isSubmitting}
             >
               {isSubmitting ? "Inviting..." : "Send Invite"}

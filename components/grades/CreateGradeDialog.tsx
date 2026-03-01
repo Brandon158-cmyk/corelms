@@ -69,7 +69,7 @@ export function CreateGradeDialog({
       <DialogTrigger
         render={
           (children as React.ReactElement) || (
-            <Button className="bg-brand-blue hover:bg-brand-royal text-white">
+            <Button className="bg-brand-primary hover:bg-brand-primary-dark text-white">
               Add Grade
             </Button>
           )
@@ -115,7 +115,7 @@ export function CreateGradeDialog({
             </Button>
             <Button
               type="submit"
-              className="bg-brand-blue hover:bg-brand-royal text-white min-w-[120px]"
+              className="bg-brand-primary hover:bg-brand-primary-dark text-white min-w-[120px]"
               disabled={isSubmitting}
             >
               {isSubmitting ? "Creating..." : "Create Grade"}

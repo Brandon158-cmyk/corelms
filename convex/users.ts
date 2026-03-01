@@ -145,11 +145,9 @@ export const invite = mutation({
       throw new Error("You must belong to a school to invite users.");
     }
 
-    // Only management or superAdmin can invite
-    if (
-      currentUser.role !== "management" &&
-      currentUser.role !== "superAdmin"
-    ) {
+    // Only administrative roles can invite users
+    const adminRoles = ["superAdmin", "proprietor", "headteacher"];
+    if (!adminRoles.includes(currentUser.role ?? "")) {
       throw new Error("Unauthorized to invite users");
     }
 

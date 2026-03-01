@@ -67,7 +67,7 @@ export const list = query({
 
     return Promise.all(
       filtered.map(async (cls: any) => {
-        const grade = await ctx.db.get(cls.gradeId);
+        const grade = (await ctx.db.get(cls.gradeId)) as any;
         let termName = null;
         let yearName = null;
         if (cls.termId) {
@@ -122,7 +122,7 @@ export const get = query({
     const cls = await ctx.db.get(classId);
     if (!cls || cls.tenantId !== tenantId) return null;
 
-    const grade = await ctx.db.get(cls.gradeId);
+    const grade = (await ctx.db.get(cls.gradeId)) as any;
     let termName = null;
     let yearName = null;
     if (cls.termId) {
@@ -156,8 +156,10 @@ export const getSubjects = query({
 
     return Promise.all(
       classSubjects.map(async (cs: any) => {
-        const subject = await ctx.db.get(cs.subjectId);
-        const teacher = cs.teacherId ? await ctx.db.get(cs.teacherId) : null;
+        const subject = (await ctx.db.get(cs.subjectId)) as any;
+        const teacher = cs.teacherId
+          ? ((await ctx.db.get(cs.teacherId)) as any)
+          : null;
         return {
           ...cs,
           subjectName: subject?.name || "Unknown Subject",

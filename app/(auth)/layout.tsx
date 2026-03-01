@@ -5,8 +5,8 @@ import { AuthGuard } from "@/components/auth/AuthGuard";
 
 /**
  * Auth layout — split-screen design.
- * Left: Branded panel with corelms branding (navy background).
- * Right: Auth form content (white background).
+ * Left: Branded panel with CoreLMS branding (orange gradient).
+ * Right: Auth form content (warm white background).
  * Wrapped with AuthGuard in "guest" mode — redirects to /dashboard if authenticated.
  */
 export default function AuthLayout({ children }: { children: ReactNode }) {
@@ -14,13 +14,13 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
     <AuthGuard mode="guest">
       <div className="flex min-h-screen">
         {/* Left Brand Panel */}
-        <div className="hidden lg:flex lg:w-[45%] bg-brand-navy items-center justify-center relative flex-col overflow-hidden">
-          {/* Subtle Background Pattern on the Left Edge */}
+        <div className="hidden lg:flex lg:w-[45%] bg-brand-primary-deep items-center justify-center relative flex-col overflow-hidden">
+          {/* Subtle Dot Pattern */}
           <div
-            className="absolute left-0 top-0 bottom-0 w-3/4 opacity-30 pointer-events-none"
+            className="absolute left-0 top-0 bottom-0 w-3/4 opacity-20 pointer-events-none"
             style={{
               backgroundImage:
-                "radial-gradient(circle at 2px 2px, rgba(255,255,255,0.8) 1px, transparent 0)",
+                "radial-gradient(circle at 2px 2px, rgba(255,255,255,0.7) 1px, transparent 0)",
               backgroundSize: "32px 32px",
               maskImage: "linear-gradient(to right, black, transparent)",
               WebkitMaskImage: "linear-gradient(to right, black, transparent)",
@@ -28,7 +28,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
           />
 
           <div className="relative z-10 flex items-center gap-4 text-white hover:opacity-90 transition-opacity">
-            {/* Logo Ipsum abstract geometric shape (isometric cubes/layers) */}
+            {/* Logo — isometric cube/layer mark */}
             <svg
               width="48"
               height="48"

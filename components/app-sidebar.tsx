@@ -3,6 +3,8 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
 import { SearchForm } from "@/components/search-form";
 import { TermSwitcher } from "@/components/term-switcher";
 import {
@@ -25,49 +27,105 @@ import {
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowRight01Icon } from "@hugeicons/core-free-icons";
 
-const data = {
-  navMain: [
-    {
-      title: "Dashboard",
-      url: "/dashboard",
-      items: [
-        {
-          title: "Overview",
-          url: "/dashboard",
-        },
-      ],
-    },
-    {
-      title: "Management",
-      url: "#",
-      items: [
-        {
-          title: "Users",
-          url: "/dashboard/users",
-        },
-        {
-          title: "Grades",
-          url: "/dashboard/grades",
-        },
-        {
-          title: "Classes",
-          url: "/dashboard/classes",
-        },
-        {
-          title: "Subjects",
-          url: "/dashboard/subjects",
-        },
-        {
-          title: "Terms",
-          url: "/dashboard/terms",
-        },
-      ],
-    },
-  ],
+/**
+ * Role-based navigation structure aligned with system.md Section 8.1.
+ * Each item specifies which roles are allowed to see it.
+ */
+type NavSubItem = {
+  title: string;
+  url: string;
+  allowedRoles: string[];
 };
+
+type NavGroup = {
+  title: string;
+  url: string;
+  items?: NavSubItem[];
+  allowedRoles?: string[];
+};
+
+/** All roles that can access administrative features */
+const ADMIN_ROLES = ["superAdmin", "proprietor", "headteacher"];
+
+/** All staff-level roles (admin + operational staff) */
+const STAFF_ROLES = [...ADMIN_ROLES, "bursar", "teacher", "boardingMatron"];
+
+/** Every role in the system */
+const ALL_ROLES = [...STAFF_ROLES, "student", "parent"];
+
+const navData: NavGroup[] = [
+  {
+    title: "Dashboard",
+    url: "/dashboard",
+    items: [
+      {
+        title: "Overview",
+        url: "/dashboard",
+        allowedRoles: ALL_ROLES,
+      },
+    ],
+  },
+  {
+    title: "Academic",
+    url: "#",
+    items: [
+      {
+        title: "Grades",
+        url: "/dashboard/grades",
+        allowedRoles: [...ADMIN_ROLES, "teacher"],
+      },
+      {
+        title: "Classes",
+        url: "/dashboard/classes",
+        allowedRoles: [...ADMIN_ROLES, "teacher", "student"],
+      },
+      {
+        title: "Subjects",
+        url: "/dashboard/subjects",
+        allowedRoles: [...ADMIN_ROLES, "teacher"],
+      },
+      {
+        title: "Terms",
+        url: "/dashboard/terms",
+        allowedRoles: ADMIN_ROLES,
+      },
+    ],
+  },
+  {
+    title: "Administration",
+    url: "#",
+    items: [
+      {
+        title: "Users",
+        url: "/dashboard/users",
+        allowedRoles: ADMIN_ROLES,
+      },
+    ],
+  },
+];
+
+/**
+ * Filter navigation items based on the current user's role.
+ */
+function filterNavByRole(groups: NavGroup[], userRole: string): NavGroup[] {
+  return groups
+    .map((group) => {
+      const filteredItems = group.items?.filter((item) =>
+        item.allowedRoles.includes(userRole),
+      );
+
+      if (!filteredItems || filteredItems.length === 0) return null;
+
+      return { ...group, items: filteredItems };
+    })
+    .filter(Boolean) as NavGroup[];
+}
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
+  const user = useQuery(api.users.currentUser);
+  const userRole = (user?.role as string) || "student";
+  const visibleNav = filterNavByRole(navData, userRole);
 
   return (
     <Sidebar {...props}>
@@ -76,7 +134,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SearchForm />
       </SidebarHeader>
       <SidebarContent className="gap-0">
-        {data.navMain.map((item) =>
+        {visibleNav.map((item) =>
           item.items ? (
             <Collapsible
               key={item.title}

@@ -45,7 +45,7 @@ export default function Page() {
         <div className="flex items-center gap-2">
           <HugeiconsIcon
             icon={Calendar03Icon}
-            className="size-4 text-brand-blue"
+            className="size-4 text-brand-primary"
           />
           <span className="text-sm text-muted-foreground">
             Showing data for:
@@ -64,12 +64,12 @@ export default function Page() {
             </CardTitle>
             <HugeiconsIcon
               icon={Book01Icon}
-              className="text-brand-blue"
+              className="text-brand-primary"
               size={16}
             />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-brand-navy">
+            <div className="text-2xl font-bold text-brand-accent">
               {classes === undefined ? "…" : activeClassCount}
             </div>
             <p className="text-xs text-muted-foreground mt-1">
@@ -85,12 +85,12 @@ export default function Page() {
             </CardTitle>
             <HugeiconsIcon
               icon={UserMultiple02Icon}
-              className="text-brand-blue"
+              className="text-brand-primary"
               size={16}
             />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-brand-navy">
+            <div className="text-2xl font-bold text-brand-accent">
               {totalStudents}
             </div>
             <p className="text-xs text-muted-foreground mt-1">
@@ -99,7 +99,7 @@ export default function Page() {
           </CardContent>
         </Card>
 
-        <Card className="shadow-sm bg-brand-navy text-white border-brand-navy">
+        <Card className="shadow-sm bg-brand-primary-deep text-white border-brand-primary-deep">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-white/90">
               Current Role

@@ -54,7 +54,7 @@ export function AssignSubjectDialog({ classId }: { classId: Id<"classes"> }) {
     users?.filter(
       (u) =>
         u.role === "teacher" ||
-        u.role === "management" ||
+        u.role === "headteacher" ||
         u.role === "superAdmin",
     ) || [];
 
@@ -85,7 +85,7 @@ export function AssignSubjectDialog({ classId }: { classId: Id<"classes"> }) {
         render={
           <Button
             size="sm"
-            className="bg-brand-blue hover:bg-brand-royal text-white"
+            className="bg-brand-primary hover:bg-brand-primary-dark text-white"
           >
             <HugeiconsIcon icon={PlusSignIcon} className="w-4 h-4 mr-2" />
             Add Subject
@@ -186,7 +186,7 @@ export function AssignSubjectDialog({ classId }: { classId: Id<"classes"> }) {
             </Button>
             <Button
               type="submit"
-              className="bg-brand-blue hover:bg-brand-royal text-white min-w-[100px]"
+              className="bg-brand-primary hover:bg-brand-primary-dark text-white min-w-[100px]"
               disabled={isSubmitting}
             >
               {isSubmitting ? "Saving..." : "Assign"}

@@ -37,7 +37,7 @@ export default function SignInPage() {
     <div>
       {/* Header */}
       <div className="mb-8">
-        {/* Mobile logo - visible only on small screens */}
+        {/* Mobile logo — visible only on small screens */}
         <div className="flex items-center gap-2 mb-6 lg:hidden">
           <svg
             width="32"
@@ -45,7 +45,7 @@ export default function SignInPage() {
             viewBox="0 0 32 32"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="text-brand-navy"
+            className="text-brand-primary-deep"
           >
             <path
               d="M16 2.66663L2.66663 9.33329L16 16L29.3333 9.33329L16 2.66663Z"
@@ -70,12 +70,12 @@ export default function SignInPage() {
               strokeLinejoin="round"
             />
           </svg>
-          <span className="text-xl font-bold text-brand-navy tracking-tight">
+          <span className="text-xl font-bold text-brand-accent tracking-tight">
             corelms
           </span>
         </div>
 
-        <h2 className="text-2xl font-bold text-brand-navy">
+        <h2 className="text-2xl font-bold text-brand-accent">
           Log in to your account
         </h2>
         <p className="text-muted-foreground mt-1.5 text-sm">
@@ -172,7 +172,7 @@ export default function SignInPage() {
 
         <Button
           type="submit"
-          className="w-full h-11 text-sm font-semibold bg-brand-blue hover:bg-brand-royal text-white cursor-pointer transition-colors"
+          className="w-full h-11 text-sm font-semibold bg-brand-primary hover:bg-brand-primary-dark text-white cursor-pointer transition-colors"
           disabled={isLoading}
         >
           {isLoading ? (
@@ -192,14 +192,14 @@ export default function SignInPage() {
           Don&apos;t have an account?{" "}
           <Link
             href="/sign-up"
-            className="font-medium text-brand-blue hover:text-brand-royal transition-colors"
+            className="font-medium text-brand-primary hover:text-brand-primary-dark transition-colors"
           >
             Register
           </Link>
         </p>
         <Link
           href="/forgot-password"
-          className="text-sm font-medium text-brand-blue hover:text-brand-royal transition-colors inline-block"
+          className="text-sm font-medium text-brand-primary hover:text-brand-primary-dark transition-colors inline-block"
         >
           Forgot your password?
         </Link>

@@ -59,7 +59,7 @@ export const create = mutation({
       throw new Error("User does not belong to a school");
     }
 
-    if (user.role !== "management" && user.role !== "superAdmin") {
+    if (!["superAdmin", "proprietor", "headteacher"].includes(user.role ?? "")) {
       throw new Error("Unauthorized to create grades");
     }
 
@@ -93,7 +93,7 @@ export const update = mutation({
       throw new Error("Grade not found or unauthorized");
     }
 
-    if (user.role !== "management" && user.role !== "superAdmin") {
+    if (!["superAdmin", "proprietor", "headteacher"].includes(user.role ?? "")) {
       throw new Error("Unauthorized to update grades");
     }
 
@@ -124,7 +124,7 @@ export const remove = mutation({
       throw new Error("Grade not found or unauthorized");
     }
 
-    if (user.role !== "management" && user.role !== "superAdmin") {
+    if (!["superAdmin", "proprietor", "headteacher"].includes(user.role ?? "")) {
       throw new Error("Unauthorized to delete grades");
     }
 

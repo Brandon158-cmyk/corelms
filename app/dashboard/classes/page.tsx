@@ -35,7 +35,7 @@ export default function ClassesPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight text-brand-navy">
+          <h2 className="text-2xl font-bold tracking-tight text-brand-accent">
             Classes
           </h2>
           <p className="text-muted-foreground">
@@ -56,11 +56,11 @@ export default function ClassesPage() {
       <div className="bg-white border rounded-xl shadow-sm overflow-hidden min-h-[400px]">
         {classes === undefined ? (
           <div className="flex justify-center p-12">
-            <Spinner className="w-8 h-8 text-brand-blue" />
+            <Spinner className="w-8 h-8 text-brand-primary" />
           </div>
         ) : classes.length === 0 ? (
           <div className="p-12 text-center h-full flex flex-col items-center justify-center">
-            <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-brand-blue font-bold">
+            <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-brand-primary font-bold">
               📚
             </div>
             <h3 className="text-lg font-medium text-gray-900 mb-1">
@@ -77,7 +77,7 @@ export default function ClassesPage() {
               <CreateClassDialog>
                 <Button
                   variant="outline"
-                  className="border-brand-blue/20 text-brand-blue"
+                  className="border-brand-primary/20 text-brand-primary"
                 >
                   Create Initial Class
                 </Button>
@@ -99,7 +99,7 @@ export default function ClassesPage() {
             <TableBody>
               {classes.map((cls) => (
                 <TableRow key={cls._id}>
-                  <TableCell className="font-medium text-brand-navy">
+                  <TableCell className="font-medium text-brand-accent">
                     {cls.name}
                   </TableCell>
                   <TableCell>{cls.gradeName}</TableCell>
@@ -137,7 +137,7 @@ export default function ClassesPage() {
                       <Button
                         variant="ghost"
                         size="sm"
-                        className="text-brand-blue hover:text-brand-navy"
+                        className="text-brand-primary hover:text-brand-accent"
                       >
                         View
                       </Button>

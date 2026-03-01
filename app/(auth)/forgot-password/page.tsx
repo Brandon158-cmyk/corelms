@@ -18,7 +18,6 @@ export default function ForgotPasswordPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Handle step 1: Request OTP
   async function handleRequestCode(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError(null);
@@ -39,23 +38,21 @@ export default function ForgotPasswordPage() {
     }
   }
 
-  // Handle step 2: Verify OTP and set new password
   async function handleVerifyAndReset(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError(null);
     setIsLoading(true);
 
     const formData = new FormData(e.currentTarget);
-    formData.set("email", email); // Pass the email from step 1
+    formData.set("email", email);
     formData.set("flow", "reset-verification");
 
     try {
       await signIn("password", formData);
-      // Wait a moment for authentication state to catch up
       setTimeout(() => {
         router.push("/dashboard");
       }, 500);
-    } catch (err: any) {
+    } catch {
       setError("Invalid reset code or password too weak. Please try again.");
     } finally {
       setIsLoading(false);
@@ -73,7 +70,7 @@ export default function ForgotPasswordPage() {
             viewBox="0 0 32 32"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="text-brand-navy"
+            className="text-brand-primary-deep"
           >
             <path
               d="M16 2.66663L2.66663 9.33329L16 16L29.3333 9.33329L16 2.66663Z"
@@ -98,12 +95,12 @@ export default function ForgotPasswordPage() {
               strokeLinejoin="round"
             />
           </svg>
-          <span className="text-xl font-bold text-brand-navy tracking-tight">
+          <span className="text-xl font-bold text-brand-accent tracking-tight">
             corelms
           </span>
         </div>
 
-        <h2 className="text-2xl font-bold text-brand-navy">
+        <h2 className="text-2xl font-bold text-brand-accent">
           {step === "forgot"
             ? "Forgot your password?"
             : "Check the server console"}
@@ -158,7 +155,7 @@ export default function ForgotPasswordPage() {
                 type="email"
                 required
                 placeholder="Enter your email"
-                className="pl-10 h-11 uppercase-text-none"
+                className="pl-10 h-11"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 autoComplete="email"
@@ -168,7 +165,7 @@ export default function ForgotPasswordPage() {
 
           <Button
             type="submit"
-            className="w-full h-11 text-sm font-semibold bg-brand-blue hover:bg-brand-royal text-white cursor-pointer transition-colors"
+            className="w-full h-11 text-sm font-semibold bg-brand-primary hover:bg-brand-primary-dark text-white cursor-pointer transition-colors"
             disabled={isLoading}
           >
             {isLoading ? (
@@ -211,7 +208,7 @@ export default function ForgotPasswordPage() {
 
           <Button
             type="submit"
-            className="w-full h-11 text-sm font-semibold bg-brand-blue hover:bg-brand-royal text-white cursor-pointer transition-colors"
+            className="w-full h-11 text-sm font-semibold bg-brand-primary hover:bg-brand-primary-dark text-white cursor-pointer transition-colors"
             disabled={isLoading}
           >
             {isLoading ? (
@@ -239,7 +236,7 @@ export default function ForgotPasswordPage() {
       <div className="mt-6 text-center">
         <Link
           href="/sign-in"
-          className="inline-flex items-center gap-2 text-sm font-medium text-brand-blue hover:text-brand-royal transition-colors"
+          className="inline-flex items-center gap-2 text-sm font-medium text-brand-primary hover:text-brand-primary-dark transition-colors"
         >
           <svg
             width="16"

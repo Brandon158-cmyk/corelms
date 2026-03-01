@@ -79,7 +79,7 @@ export const create = mutation({
   handler: async (ctx, args) => {
     const { tenantId, role } = await getTenantUser(ctx);
 
-    if (role !== "management" && role !== "superAdmin") {
+    if (!["superAdmin", "proprietor", "headteacher"].includes(role ?? "")) {
       throw new Error("Unauthorized to create academic years");
     }
 
@@ -123,7 +123,7 @@ export const update = mutation({
   handler: async (ctx, args) => {
     const { tenantId, role } = await getTenantUser(ctx);
 
-    if (role !== "management" && role !== "superAdmin") {
+    if (!["superAdmin", "proprietor", "headteacher"].includes(role ?? "")) {
       throw new Error("Unauthorized to update academic years");
     }
 
@@ -165,7 +165,7 @@ export const remove = mutation({
   handler: async (ctx, { yearId }) => {
     const { tenantId, role } = await getTenantUser(ctx);
 
-    if (role !== "management" && role !== "superAdmin") {
+    if (!["superAdmin", "proprietor", "headteacher"].includes(role ?? "")) {
       throw new Error("Unauthorized to delete academic years");
     }
 

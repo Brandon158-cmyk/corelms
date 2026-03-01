@@ -3,14 +3,16 @@ import { authTables } from "@convex-dev/auth/server";
 import { v } from "convex/values";
 
 /**
- * User roles across the multi-tenant corelms platform.
- * Each role maps to a specific dashboard and permission set.
+ * User roles across the multi-tenant CoreLMS platform.
+ * Aligned with system.md Section 8.1 Roles & Permissions Matrix.
  */
 export const USER_ROLES = v.union(
   v.literal("superAdmin"),
-  v.literal("management"),
+  v.literal("proprietor"),
+  v.literal("headteacher"),
+  v.literal("bursar"),
   v.literal("teacher"),
-  v.literal("staff"),
+  v.literal("boardingMatron"),
   v.literal("student"),
   v.literal("parent"),
 );
@@ -24,13 +26,22 @@ export const TENANT_STATUS = v.union(
   v.literal("suspended"),
 );
 
+/**
+ * School type classification per system.md Section 1.1.
+ */
+export const SCHOOL_TYPE = v.union(
+  v.literal("public"),
+  v.literal("private"),
+  v.literal("grantAided"),
+  v.literal("community"),
+  v.literal("international"),
+);
+
 const schema = defineSchema({
-  // Convex Auth managed tables (authAccounts, authSessions, authRefreshTokens, etc.)
   ...authTables,
 
   /**
    * Override the default users table from authTables to add custom fields.
-   * Must include all default auth fields as optional + our custom fields.
    * See: https://labs.convex.dev/auth/setup/schema#customizing-the-users-table
    */
   users: defineTable({
@@ -42,11 +53,11 @@ const schema = defineSchema({
     phone: v.optional(v.string()),
     phoneVerificationTime: v.optional(v.number()),
     isAnonymous: v.optional(v.boolean()),
-    // Custom corelms fields
+    // Custom CoreLMS fields
     role: v.optional(v.string()),
     tenantId: v.optional(v.id("tenants")),
-    status: v.optional(v.string()), // "pending" | "active"
-    classId: v.optional(v.id("classes")), // Link student to a class
+    status: v.optional(v.string()),
+    classId: v.optional(v.id("classes")),
   })
     .index("email", ["email"])
     .index("by_tenant", ["tenantId"])
@@ -55,11 +66,16 @@ const schema = defineSchema({
 
   /**
    * Tenants table — represents individual schools/organizations.
-   * Each tenant has a unique schoolCode used during sign-up.
+   * Extended with system.md Section 1.1 fields: schoolType, educationLevel,
+   * emisNumber, and eczCentreCode.
    */
   tenants: defineTable({
     name: v.string(),
     schoolCode: v.string(),
+    schoolType: v.optional(SCHOOL_TYPE),
+    educationLevel: v.optional(v.array(v.string())),
+    emisNumber: v.optional(v.string()),
+    eczCentreCode: v.optional(v.string()),
     address: v.optional(v.string()),
     phone: v.optional(v.string()),
     email: v.optional(v.string()),
@@ -73,7 +89,6 @@ const schema = defineSchema({
 
   /**
    * Password reset tokens for the forgot-password flow.
-   * Tokens expire after a configurable duration.
    */
   passwordResetTokens: defineTable({
     userId: v.id("users"),
@@ -85,7 +100,7 @@ const schema = defineSchema({
     .index("by_userId", ["userId"]),
 
   /**
-   * Grades table — represents top-level educational levels (e.g., "Grade 1")
+   * Grades table — top-level educational levels (e.g., "Grade 1").
    */
   grades: defineTable({
     tenantId: v.id("tenants"),
@@ -94,7 +109,7 @@ const schema = defineSchema({
   }).index("by_tenant", ["tenantId"]),
 
   /**
-   * Subjects table — represents areas of study (e.g., "Mathematics")
+   * Subjects table — areas of study (e.g., "Mathematics").
    */
   subjects: defineTable({
     tenantId: v.id("tenants"),
@@ -103,15 +118,15 @@ const schema = defineSchema({
   }).index("by_tenant", ["tenantId"]),
 
   /**
-   * Classes table — represents a specific cohort within a grade (e.g., "B1")
+   * Classes table — a specific cohort within a grade (e.g., "B1").
    */
   classes: defineTable({
     tenantId: v.id("tenants"),
     gradeId: v.id("grades"),
-    termId: v.optional(v.id("terms")), // Links class to a specific term
-    name: v.string(), // e.g., "B1"
+    termId: v.optional(v.id("terms")),
+    name: v.string(),
     description: v.optional(v.string()),
-    teacherId: v.optional(v.id("users")), // Homeroom teacher
+    teacherId: v.optional(v.id("users")),
     room: v.optional(v.string()),
     status: v.union(v.literal("active"), v.literal("archived")),
   })
@@ -121,7 +136,7 @@ const schema = defineSchema({
     .index("by_tenant_teacher", ["tenantId", "teacherId"]),
 
   /**
-   * ClassSubjects table — links a subject to a class and assigns a teacher
+   * ClassSubjects table — links a subject to a class and assigns a teacher.
    */
   classSubjects: defineTable({
     classId: v.id("classes"),
@@ -133,7 +148,7 @@ const schema = defineSchema({
     .index("by_teacher", ["teacherId"]),
 
   /**
-   * AcademicYears table — represents a school year (e.g., "2026")
+   * AcademicYears table — represents a school year (e.g., "2026").
    */
   academicYears: defineTable({
     tenantId: v.id("tenants"),
@@ -144,7 +159,8 @@ const schema = defineSchema({
   }).index("by_tenant", ["tenantId"]),
 
   /**
-   * Terms table — represents a term within an academic year (e.g., "Term 1 - 2026")
+   * Terms table — represents a term within an academic year.
+   * Defaults to a three-term structure per system.md Section 2.1.
    */
   terms: defineTable({
     tenantId: v.id("tenants"),

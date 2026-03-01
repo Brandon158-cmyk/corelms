@@ -58,7 +58,7 @@ export default function ClassDetailsPage({
   if (cls === undefined) {
     return (
       <div className="flex h-[400px] w-full items-center justify-center">
-        <Spinner className="h-8 w-8 text-brand-blue" />
+        <Spinner className="h-8 w-8 text-brand-primary" />
       </div>
     );
   }
@@ -74,7 +74,7 @@ export default function ClassDetailsPage({
         </p>
         <Link
           href="/dashboard/classes"
-          className="text-brand-blue hover:underline mt-4"
+          className="text-brand-primary hover:underline mt-4"
         >
           Return to Classes
         </Link>
@@ -88,7 +88,7 @@ export default function ClassDetailsPage({
       <div>
         <Link
           href="/dashboard/classes"
-          className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-brand-blue hover:underline mb-4"
+          className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-brand-primary hover:underline mb-4"
         >
           <HugeiconsIcon icon={ChevronLeft} className="mr-1 h-4 w-4" />
           Back to Classes
@@ -96,7 +96,7 @@ export default function ClassDetailsPage({
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
           <div>
             <div className="flex items-center gap-3 mb-1">
-              <h1 className="text-3xl font-bold tracking-tight text-brand-navy">
+              <h1 className="text-3xl font-bold tracking-tight text-brand-accent">
                 {cls.name}
               </h1>
               <Badge
@@ -133,14 +133,14 @@ export default function ClassDetailsPage({
         <TabsList className="bg-white border rounded-lg p-1 h-auto grid grid-cols-2 max-w-[400px]">
           <TabsTrigger
             value="subjects"
-            className="data-[state=active]:bg-brand-blue data-[state=active]:text-white data-[state=active]:shadow-sm py-2"
+            className="data-[state=active]:bg-brand-primary data-[state=active]:text-white data-[state=active]:shadow-sm py-2"
           >
             <HugeiconsIcon icon={BookOpen} className="w-4 h-4 mr-2" />
             Subjects
           </TabsTrigger>
           <TabsTrigger
             value="students"
-            className="data-[state=active]:bg-brand-blue data-[state=active]:text-white data-[state=active]:shadow-sm py-2"
+            className="data-[state=active]:bg-brand-primary data-[state=active]:text-white data-[state=active]:shadow-sm py-2"
           >
             <HugeiconsIcon icon={GraduationCap} className="w-4 h-4 mr-2" />
             Enrolled Students
@@ -151,7 +151,7 @@ export default function ClassDetailsPage({
           <div className="rounded-xl border bg-white shadow-sm overflow-hidden flex flex-col">
             <div className="flex items-center justify-between p-4 border-b">
               <div>
-                <h3 className="font-semibold text-lg text-brand-navy">
+                <h3 className="font-semibold text-lg text-brand-accent">
                   Assigned Subjects
                 </h3>
                 <p className="text-sm text-muted-foreground">
@@ -162,7 +162,7 @@ export default function ClassDetailsPage({
             </div>
             {subjects === undefined ? (
               <div className="flex justify-center p-8">
-                <Spinner className="w-6 h-6 text-brand-blue" />
+                <Spinner className="w-6 h-6 text-brand-primary" />
               </div>
             ) : subjects.length === 0 ? (
               <div className="p-8 text-center text-gray-500">
@@ -206,7 +206,7 @@ export default function ClassDetailsPage({
           <div className="rounded-xl border bg-white shadow-sm overflow-hidden flex flex-col">
             <div className="flex items-center justify-between p-4 border-b">
               <div>
-                <h3 className="font-semibold text-lg text-brand-navy">
+                <h3 className="font-semibold text-lg text-brand-accent">
                   Class Roster
                 </h3>
                 <p className="text-sm text-muted-foreground">
@@ -217,7 +217,7 @@ export default function ClassDetailsPage({
             </div>
             {students === undefined ? (
               <div className="flex justify-center p-8">
-                <Spinner className="w-6 h-6 text-brand-blue" />
+                <Spinner className="w-6 h-6 text-brand-primary" />
               </div>
             ) : students.length === 0 ? (
               <div className="p-8 text-center text-gray-500">
@@ -243,7 +243,7 @@ export default function ClassDetailsPage({
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="text-brand-blue"
+                          className="text-brand-primary"
                         >
                           View
                         </Button>

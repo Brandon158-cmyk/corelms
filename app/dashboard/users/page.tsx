@@ -21,7 +21,7 @@ export default function UsersPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight text-brand-navy">
+          <h2 className="text-2xl font-bold tracking-tight text-brand-accent">
             Users
           </h2>
           <p className="text-muted-foreground">
@@ -39,11 +39,11 @@ export default function UsersPage() {
       <div className="bg-white border rounded-xl shadow-sm overflow-hidden min-h-[400px]">
         {users === undefined ? (
           <div className="flex justify-center p-12">
-            <Spinner className="w-8 h-8 text-brand-blue" />
+            <Spinner className="w-8 h-8 text-brand-primary" />
           </div>
         ) : users.length === 0 ? (
           <div className="p-12 text-center h-full flex flex-col items-center justify-center">
-            <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-brand-blue font-bold">
+            <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-brand-primary font-bold">
               👥
             </div>
             <h3 className="text-lg font-medium text-gray-900 mb-1">
@@ -55,7 +55,7 @@ export default function UsersPage() {
             <InviteUserDialog>
               <Button
                 variant="outline"
-                className="border-brand-blue/20 text-brand-blue"
+                className="border-brand-primary/20 text-brand-primary"
               >
                 Invite First User
               </Button>
@@ -76,7 +76,7 @@ export default function UsersPage() {
                 <TableRow key={user._id}>
                   <TableCell>
                     <div className="flex flex-col">
-                      <span className="font-medium text-brand-navy">
+                      <span className="font-medium text-brand-accent">
                         {user.name || "Pending user"}
                       </span>
                       <span className="text-xs text-muted-foreground">
@@ -85,7 +85,7 @@ export default function UsersPage() {
                     </div>
                   </TableCell>
                   <TableCell>
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize bg-blue-50 text-brand-blue border border-brand-blue/10">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize bg-blue-50 text-brand-primary border border-brand-primary/10">
                       {(user.role as string) || "Not assigned"}
                     </span>
                   </TableCell>
@@ -104,7 +104,7 @@ export default function UsersPage() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="text-brand-blue hover:text-brand-navy"
+                      className="text-brand-primary hover:text-brand-accent"
                     >
                       Manage
                     </Button>

@@ -336,7 +336,7 @@ function YearCard({
                     <div className="flex items-center gap-3">
                       <HugeiconsIcon
                         icon={Calendar03Icon}
-                        className="size-4 text-brand-blue"
+                        className="size-4 text-brand-primary"
                       />
                       <div>
                         <div className="flex items-center gap-2">
@@ -403,7 +403,7 @@ export default function TermsPage() {
       {/* Page Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-brand-navy">Academic Terms</h1>
+          <h1 className="text-2xl font-bold text-brand-accent">Academic Terms</h1>
           <p className="text-sm text-muted-foreground mt-1">
             Manage academic years and their terms.
           </p>
@@ -425,7 +425,7 @@ export default function TermsPage() {
               icon={Calendar03Icon}
               className="size-12 text-muted-foreground/40 mb-4"
             />
-            <h3 className="text-lg font-semibold text-brand-navy mb-1">
+            <h3 className="text-lg font-semibold text-brand-accent mb-1">
               No academic years yet
             </h3>
             <p className="text-sm text-muted-foreground max-w-md">

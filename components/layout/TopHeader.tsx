@@ -61,7 +61,7 @@ export function TopHeader() {
           <Input
             type="search"
             placeholder="Search students, classes, or settings..."
-            className="w-full pl-9 bg-gray-50/50 border-gray-200 focus-visible:ring-brand-blue"
+            className="w-full pl-9 bg-gray-50/50 border-gray-200 focus-visible:ring-brand-primary"
           />
         </div>
       </div>
@@ -99,7 +99,7 @@ export function TopHeader() {
                   {user?.tenant ? `• ${user.tenant.name}` : ""}
                 </p>
               </div>
-              <div className="w-9 h-9 rounded-full bg-brand-blue/10 border border-brand-blue/20 flex items-center justify-center text-brand-blue font-semibold">
+              <div className="w-9 h-9 rounded-full bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center text-brand-primary font-semibold">
                 {user?.name
                   ? user.name.charAt(0).toUpperCase()
                   : user?.email?.charAt(0).toUpperCase() || "U"}

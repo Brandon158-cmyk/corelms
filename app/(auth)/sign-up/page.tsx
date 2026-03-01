@@ -19,9 +19,11 @@ import {
 } from "@/components/ui/select";
 
 const ROLES = [
-  { value: "management", label: "Management / Admin" },
-  { value: "teacher", label: "Teacher" },
-  { value: "staff", label: "Staff (Bursar, Librarian, Registrar)" },
+  { value: "proprietor", label: "School Proprietor / Board" },
+  { value: "headteacher", label: "Principal / Headteacher" },
+  { value: "bursar", label: "Bursar / Finance Officer" },
+  { value: "teacher", label: "Teacher / Instructor" },
+  { value: "boardingMatron", label: "Boarding Matron" },
   { value: "student", label: "Student" },
   { value: "parent", label: "Parent / Guardian" },
 ] as const;
@@ -33,30 +35,20 @@ export default function SignUpPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [schoolCode, setSchoolCode] = useState("");
   const [role, setRole] = useState("");
-  const [schoolValidation, setSchoolValidation] = useState<{
-    valid: boolean;
-    schoolName: string | null;
-  } | null>(null);
 
-  // Query to validate school code in real-time
   const validationResult = useQuery(
     api.tenants.validateSchoolCode,
     schoolCode.length >= 3 ? { schoolCode } : "skip",
   );
 
-  // Update validation state when query result changes
   const handleSchoolCodeChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const code = e.target.value.toUpperCase();
       setSchoolCode(code);
-      if (code.length < 3) {
-        setSchoolValidation(null);
-      }
     },
     [],
   );
 
-  // Show validation result
   const displayValidation = schoolCode.length >= 3 ? validationResult : null;
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -102,7 +94,7 @@ export default function SignUpPage() {
     <div>
       {/* Header */}
       <div className="mb-6">
-        {/* Mobile logo - visible only on small screens */}
+        {/* Mobile logo — visible only on small screens */}
         <div className="flex items-center gap-2 mb-6 lg:hidden">
           <svg
             width="32"
@@ -110,7 +102,7 @@ export default function SignUpPage() {
             viewBox="0 0 32 32"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="text-brand-navy"
+            className="text-brand-primary-deep"
           >
             <path
               d="M16 2.66663L2.66663 9.33329L16 16L29.3333 9.33329L16 2.66663Z"
@@ -135,12 +127,12 @@ export default function SignUpPage() {
               strokeLinejoin="round"
             />
           </svg>
-          <span className="text-xl font-bold text-brand-navy tracking-tight">
+          <span className="text-xl font-bold text-brand-accent tracking-tight">
             corelms
           </span>
         </div>
 
-        <h2 className="text-2xl font-bold text-brand-navy">
+        <h2 className="text-2xl font-bold text-brand-accent">
           Create your account
         </h2>
         <p className="text-muted-foreground mt-1.5 text-sm">
@@ -286,10 +278,7 @@ export default function SignUpPage() {
         {/* Role */}
         <div className="space-y-2">
           <Label htmlFor="signup-role">Your Role</Label>
-          <Select
-            value={role}
-            onValueChange={(val, _event) => setRole(val ?? "")}
-          >
+          <Select value={role} onValueChange={(val) => setRole(val ?? "")}>
             <SelectTrigger id="signup-role" className="h-11">
               <SelectValue placeholder="Select your role" />
             </SelectTrigger>
@@ -346,7 +335,7 @@ export default function SignUpPage() {
 
         <Button
           type="submit"
-          className="w-full h-11 text-sm font-semibold bg-brand-blue hover:bg-brand-royal text-white cursor-pointer transition-colors"
+          className="w-full h-11 text-sm font-semibold bg-brand-primary hover:bg-brand-primary-dark text-white cursor-pointer transition-colors"
           disabled={isLoading}
         >
           {isLoading ? (
@@ -366,7 +355,7 @@ export default function SignUpPage() {
           Already have an account?{" "}
           <Link
             href="/sign-in"
-            className="font-medium text-brand-blue hover:text-brand-royal transition-colors"
+            className="font-medium text-brand-primary hover:text-brand-primary-dark transition-colors"
           >
             Sign In
           </Link>

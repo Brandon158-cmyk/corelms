@@ -75,7 +75,7 @@ export function EnrollStudentDialog({ classId }: { classId: Id<"classes"> }) {
         render={
           <Button
             size="sm"
-            className="bg-brand-blue hover:bg-brand-royal text-white"
+            className="bg-brand-primary hover:bg-brand-primary-dark text-white"
           >
             <HugeiconsIcon icon={UserAdd01Icon} className="w-4 h-4 mr-2" />
             Enroll Student
@@ -138,7 +138,7 @@ export function EnrollStudentDialog({ classId }: { classId: Id<"classes"> }) {
             </Button>
             <Button
               type="submit"
-              className="bg-brand-blue hover:bg-brand-royal text-white min-w-[100px]"
+              className="bg-brand-primary hover:bg-brand-primary-dark text-white min-w-[100px]"
               disabled={isSubmitting}
             >
               {isSubmitting ? "Enrolling..." : "Enroll"}
