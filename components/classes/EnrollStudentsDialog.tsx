@@ -78,7 +78,7 @@ export function EnrollStudentsDialog({
         render={
           <Button
             variant="default"
-            className="gap-2 bg-brand-primary hover:bg-brand-primary-dark text-white shadow-sm"
+            className="gap-2 bg-brand-primary hover:bg-brand-primary-dark text-white shadow-sm h-10 px-4"
           />
         }
       >

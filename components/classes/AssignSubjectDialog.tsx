@@ -84,14 +84,14 @@ export function AssignSubjectDialog({ classId }: { classId: Id<"classes"> }) {
       <DialogTrigger
         render={
           <Button
-            size="sm"
-            className="bg-brand-primary hover:bg-brand-primary-dark text-white"
-          >
-            <HugeiconsIcon icon={PlusSignIcon} className="w-4 h-4 mr-2" />
-            Add Subject
-          </Button>
+            variant="default"
+            className="gap-2 bg-brand-primary hover:bg-brand-primary-dark text-white shadow-sm h-10 px-4"
+          />
         }
-      />
+      >
+        <HugeiconsIcon icon={PlusSignIcon} className="size-4" />
+        Add Subject
+      </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Assign Subject</DialogTitle>

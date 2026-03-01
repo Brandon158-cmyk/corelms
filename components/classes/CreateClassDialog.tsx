@@ -20,6 +20,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Controller } from "react-hook-form";
 import { Field, FieldLabel, FieldError } from "@/components/ui/field";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { PlusSignIcon } from "@hugeicons/core-free-icons";
 import {
   Select,
   SelectContent,
@@ -93,7 +95,8 @@ export function CreateClassDialog({
       <DialogTrigger
         render={
           (children as React.ReactElement) || (
-            <Button className="bg-brand-primary hover:bg-brand-primary-dark text-white">
+            <Button className="gap-2 bg-brand-primary hover:bg-brand-primary-dark text-white shadow-sm h-10 px-4">
+              <HugeiconsIcon icon={PlusSignIcon} className="size-4" />
               Add Class
             </Button>
           )
