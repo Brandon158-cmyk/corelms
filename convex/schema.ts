@@ -439,6 +439,112 @@ const schema = defineSchema({
   })
     .index("by_tenant", ["tenantId"])
     .index("by_student", ["studentId"]),
+
+  /**
+   * Personnel & Staff Management (Section 5)
+   */
+
+  /**
+   * StaffProfiles table — extended details for employees.
+   */
+  staffProfiles: defineTable({
+    tenantId: v.id("tenants"),
+    userId: v.id("users"),
+    designation: v.string(), // e.g., "Senior Teacher", "Head of Dept"
+    idNumber: v.string(), // NRC or Passport
+    tczNumber: v.optional(v.string()), // Teaching Council of Zambia registration
+    tczExpiry: v.optional(v.union(v.string(), v.number())),
+    contractType: v.union(
+      v.literal("permanent"),
+      v.literal("contract"),
+      v.literal("part-time"),
+      v.literal("probation"),
+    ),
+    dateJoined: v.union(v.string(), v.number()),
+    qualifications: v.array(v.string()),
+    bankName: v.optional(v.string()),
+    accountNumber: v.optional(v.string()),
+    basicSalary: v.number(),
+    allowanceHousing: v.optional(v.number()),
+    allowanceTransport: v.optional(v.number()),
+    allowanceOther: v.optional(v.number()),
+  })
+    .index("by_tenant", ["tenantId"])
+    .index("by_user", ["userId"]),
+
+  /**
+   * StaffAttendance table — daily worker presence records.
+   */
+  staffAttendance: defineTable({
+    tenantId: v.id("tenants"),
+    userId: v.id("users"),
+    date: v.union(v.string(), v.number()),
+    status: v.union(
+      v.literal("present"),
+      v.literal("absent"),
+      v.literal("late"),
+      v.literal("sick"),
+      v.literal("on-leave"),
+    ),
+    checkIn: v.optional(v.string()), // time string e.g. "07:30"
+    checkOut: v.optional(v.string()),
+    notes: v.optional(v.string()),
+  })
+    .index("by_tenant", ["tenantId"])
+    .index("by_user_date", ["userId", "date"]),
+
+  /**
+   * Payruns table — monthly organizational payroll snapshots.
+   */
+  payruns: defineTable({
+    tenantId: v.id("tenants"),
+    month: v.number(), // 1-12
+    year: v.number(),
+    status: v.union(
+      v.literal("draft"),
+      v.literal("pending-approval"),
+      v.literal("approved"),
+      v.literal("paid"),
+      v.literal("void"),
+    ),
+    totalGross: v.number(),
+    totalNet: v.number(),
+    totalTax: v.number(), // Total PAYE
+    totalNAPSA: v.number(),
+    totalNHIMA: v.number(),
+    processedBy: v.id("users"),
+    processedAt: v.number(),
+  })
+    .index("by_tenant", ["tenantId"])
+    .index("by_month_year", ["month", "year"]),
+
+  /**
+   * Payslips table — individual tax and deduction breakdowns.
+   */
+  payslips: defineTable({
+    tenantId: v.id("tenants"),
+    payrunId: v.id("payruns"),
+    userId: v.id("users"),
+    month: v.number(),
+    year: v.number(),
+    basicPay: v.number(),
+    housingAllowance: v.number(),
+    transportAllowance: v.number(),
+    otherAllowances: v.number(),
+    grossEarnings: v.number(),
+    paye: v.number(),
+    napsaEmployee: v.number(),
+    napsaEmployer: v.number(),
+    nhimaEmployee: v.number(),
+    nhimaEmployer: v.number(),
+    skillsLevy: v.number(), // 0.5% employer cost
+    otherDeductions: v.number(),
+    netPay: v.number(),
+    status: v.union(v.literal("draft"), v.literal("sent"), v.literal("paid")),
+  })
+    .index("by_tenant", ["tenantId"])
+    .index("by_payrun", ["payrunId"])
+    .index("by_user", ["userId"]),
 });
 
 export default schema;

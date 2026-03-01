@@ -133,6 +133,27 @@ const navData: NavGroup[] = [
     ],
   },
   {
+    title: "Human Resources",
+    url: "#",
+    items: [
+      {
+        title: "Staff Directory",
+        url: "/dashboard/hr/staff",
+        allowedRoles: ADMIN_ROLES,
+      },
+      {
+        title: "Staff Attendance",
+        url: "/dashboard/hr/attendance",
+        allowedRoles: [...ADMIN_ROLES, "teacher", "bursar"],
+      },
+      {
+        title: "Payroll",
+        url: "/dashboard/hr/payroll",
+        allowedRoles: [...ADMIN_ROLES, "bursar"],
+      },
+    ],
+  },
+  {
     title: "Administration",
     url: "#",
     items: [
