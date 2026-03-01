@@ -63,7 +63,11 @@ const schema = defineSchema({
     .index("by_tenant", ["tenantId"])
     .index("by_tenant_role", ["tenantId", "role"])
     .index("by_class", ["classId"])
-    .index("by_tenant_and_class", ["tenantId", "classId"]),
+    .index("by_tenant_and_class", ["tenantId", "classId"])
+    .searchIndex("search_name", {
+      searchField: "name",
+      filterFields: ["tenantId", "role"],
+    }),
 
   /**
    * Tenants table — represents individual schools/organizations.
@@ -116,7 +120,12 @@ const schema = defineSchema({
     tenantId: v.id("tenants"),
     name: v.string(),
     description: v.optional(v.string()),
-  }).index("by_tenant", ["tenantId"]),
+  })
+    .index("by_tenant", ["tenantId"])
+    .searchIndex("search_name", {
+      searchField: "name",
+      filterFields: ["tenantId"],
+    }),
 
   /**
    * Classes table — a specific cohort within a grade (e.g., "B1").
@@ -134,7 +143,11 @@ const schema = defineSchema({
     .index("by_tenant", ["tenantId"])
     .index("by_grade", ["gradeId"])
     .index("by_term", ["termId"])
-    .index("by_tenant_teacher", ["tenantId", "teacherId"]),
+    .index("by_tenant_teacher", ["tenantId", "teacherId"])
+    .searchIndex("search_name", {
+      searchField: "name",
+      filterFields: ["tenantId"],
+    }),
 
   /**
    * ClassSubjects table — links a subject to a class and assigns a teacher.

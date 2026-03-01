@@ -22,6 +22,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { UniversalSearch } from "@/components/layout/UniversalSearch";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   SearchIcon,
@@ -64,7 +65,7 @@ export default function DashboardLayout({
           <AppSidebar />
           <SidebarInset>
             <header className="bg-background sticky top-0 flex h-16 shrink-0 items-center justify-between gap-2 border-b px-4 z-10 w-full">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-1">
                 <SidebarTrigger className="-ml-1" />
                 <Separator
                   orientation="vertical"
@@ -83,19 +84,19 @@ export default function DashboardLayout({
                 </Breadcrumb>
               </div>
 
-              <div className="flex items-center gap-4">
-                {/* Search Bar */}
-                <div className="relative w-full max-w-sm ml-auto md:w-auto md:max-w-none">
+              {/* Mobile Search Icon (visible only on small screens) */}
+              <div className="flex items-center justify-end gap-4 flex-1">
+                <button className="sm:hidden relative p-2 text-muted-foreground hover:bg-muted hover:text-foreground rounded-full transition-colors">
                   <HugeiconsIcon
                     icon={SearchIcon}
                     strokeWidth={2}
-                    className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground"
+                    className="size-5"
                   />
-                  <Input
-                    type="search"
-                    placeholder="Search students, classes..."
-                    className="pl-9 h-10 w-[250px] lg:w-[350px] bg-muted/60 border-muted hover:border-brand-primary/50 transition-colors focus-visible:ring-2 focus-visible:ring-brand-primary/50 rounded-full shadow-sm"
-                  />
+                </button>
+
+                {/* Desktop Search Bar (Right aligned, prominent outline) */}
+                <div className="hidden sm:flex relative w-full lg:w-[400px] xl:w-[500px]">
+                  <UniversalSearch />
                 </div>
 
                 <Separator

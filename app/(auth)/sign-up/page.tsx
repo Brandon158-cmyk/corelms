@@ -92,51 +92,12 @@ export default function SignUpPage() {
 
   return (
     <div>
-      {/* Header */}
-      <div className="mb-6">
-        {/* Mobile logo — visible only on small screens */}
-        <div className="flex items-center gap-2 mb-6 lg:hidden">
-          <svg
-            width="32"
-            height="32"
-            viewBox="0 0 32 32"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="text-brand-primary-deep"
-          >
-            <path
-              d="M16 2.66663L2.66663 9.33329L16 16L29.3333 9.33329L16 2.66663Z"
-              fill="currentColor"
-              fillOpacity="0.2"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M2.66663 22.6667L16 29.3333L29.3333 22.6667"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M2.66663 16L16 22.6667L29.3333 16"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <span className="text-xl font-bold text-brand-accent tracking-tight">
-            corelms
-          </span>
-        </div>
-
-        <h2 className="text-2xl font-bold text-brand-accent">
-          Create your account
+      <div className="mb-6 text-center sm:text-left">
+        <h2 className="text-2xl font-bold text-brand-accent tracking-tight">
+          Create account
         </h2>
-        <p className="text-muted-foreground mt-1.5 text-sm">
-          Enter your details to get started with corelms
+        <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
+          Join corelms today to start managing your school more effectively.
         </p>
       </div>
 

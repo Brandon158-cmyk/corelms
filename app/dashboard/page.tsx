@@ -3,146 +3,113 @@
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useTermFilter } from "@/components/providers/TermFilterProvider";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
-  Book01Icon,
-  UserMultiple02Icon,
-  InformationCircleIcon,
   Calendar03Icon,
+  InformationCircleIcon,
 } from "@hugeicons/core-free-icons";
 import { Badge } from "@/components/ui/badge";
+import { Spinner } from "@/components/ui/spinner";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+
+// Specific Dashboards
+import { AdminDashboard } from "@/components/dashboard/AdminDashboard";
+import { TeacherDashboard } from "@/components/dashboard/TeacherDashboard";
+import { StudentDashboard } from "@/components/dashboard/StudentDashboard";
+import { ParentDashboard } from "@/components/dashboard/ParentDashboard";
 
 export default function Page() {
   const user = useQuery(api.users.currentUser);
-  const { mode, selectedTermIds, selectedYearIds, filterLabel } =
-    useTermFilter();
+  const { mode, filterLabel } = useTermFilter();
 
-  // Build query args based on term filter
-  const queryArgs =
-    mode === "terms" && selectedTermIds.length > 0
-      ? { termIds: selectedTermIds }
-      : mode === "years" && selectedYearIds.length > 0
-        ? { yearIds: selectedYearIds }
-        : {};
+  if (user === undefined) {
+    return (
+      <div className="flex flex-1 items-center justify-center p-10">
+        <Spinner className="size-8" />
+      </div>
+    );
+  }
 
-  const classes = useQuery(api.classes.list, queryArgs);
+  if (user === null) {
+    return (
+      <Alert className="max-w-2xl mx-auto mt-10">
+        <HugeiconsIcon icon={InformationCircleIcon} className="size-4" />
+        <AlertTitle>Not Logged In</AlertTitle>
+        <AlertDescription>
+          You must be logged in to view this page.
+        </AlertDescription>
+      </Alert>
+    );
+  }
 
-  const activeClassCount =
-    classes?.filter((c) => c.status === "active").length ?? 0;
-  const totalStudents = useQuery(api.students.countStudents);
+  // Render correct dashboard based on role
+  let DashboardContent = null;
+
+  switch (user.role) {
+    case "superAdmin":
+    case "proprietor":
+    case "headteacher":
+    case "bursar":
+      DashboardContent = <AdminDashboard />;
+      break;
+    case "teacher":
+      DashboardContent = <TeacherDashboard />;
+      break;
+    case "student":
+      DashboardContent = <StudentDashboard />;
+      break;
+    case "parent":
+      DashboardContent = <ParentDashboard user={user} />;
+      break;
+    default:
+      DashboardContent = (
+        <Alert className="max-w-2xl mt-10 border-orange-500/30 bg-orange-500/10 text-orange-800">
+          <HugeiconsIcon
+            icon={InformationCircleIcon}
+            className="size-4"
+            color="#f97316"
+          />
+          <AlertTitle className="text-orange-900">
+            Role assignment pending
+          </AlertTitle>
+          <AlertDescription className="text-orange-800">
+            Your account is currently waiting for an administrator to assign you
+            a role and link you to a school.
+          </AlertDescription>
+        </Alert>
+      );
+  }
 
   return (
     <div className="flex flex-1 flex-col gap-6">
-      {/* Filter indicator */}
-      {mode !== "all-time" && (
-        <div className="flex items-center gap-2">
-          <HugeiconsIcon
-            icon={Calendar03Icon}
-            className="size-4 text-brand-primary"
-          />
-          <span className="text-sm text-muted-foreground">
-            Showing data for:
-          </span>
-          <Badge variant="outline" className="text-xs">
-            {filterLabel}
-          </Badge>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-brand-accent tracking-tight">
+            Welcome back, {user.name?.split(" ")[0]}
+          </h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            Here's what's happening at {user.tenant?.name || "your school"}.
+          </p>
         </div>
-      )}
 
-      <div className="grid gap-4 md:grid-cols-3">
-        <Card className="shadow-sm">
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">
-              Active Classes
-            </CardTitle>
-            <HugeiconsIcon
-              icon={Book01Icon}
-              className="text-brand-primary"
-              size={16}
-            />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-brand-accent">
-              {classes === undefined ? "…" : activeClassCount}
+        {/* Filter indicator */}
+        {mode !== "all-time" &&
+          user.role !== "student" &&
+          user.role !== "parent" && (
+            <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-lg border shadow-sm">
+              <HugeiconsIcon
+                icon={Calendar03Icon}
+                className="size-4 text-brand-primary"
+              />
+              <span className="text-sm text-muted-foreground">View:</span>
+              <Badge variant="outline" className="text-xs bg-muted/50">
+                {filterLabel}
+              </Badge>
             </div>
-            <p className="text-xs text-muted-foreground mt-1">
-              {mode === "all-time" ? "All time" : filterLabel}
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card className="shadow-sm">
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">
-              Total Students
-            </CardTitle>
-            <HugeiconsIcon
-              icon={UserMultiple02Icon}
-              className="text-brand-primary"
-              size={16}
-            />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-brand-accent">
-              {totalStudents === undefined ? "…" : totalStudents}
-            </div>
-            <p className="text-xs text-muted-foreground mt-1">
-              Enrolled currently
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card className="shadow-sm bg-brand-primary-deep text-white border-brand-primary-deep">
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-white/90">
-              Current Role
-            </CardTitle>
-            <HugeiconsIcon
-              icon={InformationCircleIcon}
-              className="text-white/60"
-              size={16}
-            />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold capitalize">
-              {user?.role || "Pending"}
-            </div>
-            <p className="text-xs text-white/70 mt-1 max-w-[200px] truncate">
-              {user?.tenant ? user.tenant.name : "No school linked"}
-            </p>
-          </CardContent>
-        </Card>
+          )}
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 mt-4">
-        <Card className="shadow-sm min-h-[300px]">
-          <CardHeader>
-            <CardTitle>Recent Activity</CardTitle>
-            <CardDescription>
-              Updates from your classes and students.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="flex items-center justify-center min-h-[200px] text-muted-foreground text-sm">
-            No recent activity to display.
-          </CardContent>
-        </Card>
-        <Card className="shadow-sm min-h-[300px]">
-          <CardHeader>
-            <CardTitle>Quick Actions</CardTitle>
-            <CardDescription>Shortcut to common tasks.</CardDescription>
-          </CardHeader>
-          <CardContent className="flex items-center justify-center min-h-[200px] text-muted-foreground text-sm">
-            Roles and permissions are being configured.
-          </CardContent>
-        </Card>
-      </div>
+      {DashboardContent}
     </div>
   );
 }

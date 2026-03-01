@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/card";
 import { AcademicNav } from "@/components/academic/AcademicNav";
 import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/ui/spinner";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";

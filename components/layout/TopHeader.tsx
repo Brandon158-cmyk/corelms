@@ -21,7 +21,7 @@ export function TopHeader() {
 
   return (
     <header className="h-16 border-b bg-white flex items-center justify-between px-4 md:px-6 shrink-0 shadow-sm z-10 w-full relative">
-      <div className="flex items-center gap-4 flex-1">
+      <div className="flex items-center gap-4">
         {/* Mobile Sidebar Trigger placeholder (if we add sheet later) */}
         <button className="md:hidden p-2 -ml-2 text-gray-600">
           <svg
@@ -39,10 +39,12 @@ export function TopHeader() {
             />
           </svg>
         </button>
+      </div>
 
-        {/* Universal Search */}
-        <div className="relative w-full max-w-md hidden sm:flex items-center">
-          <div className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-500">
+      {/* Universal Search - Centered */}
+      <div className="flex-1 flex justify-center max-w-2xl px-4">
+        <div className="relative w-full hidden sm:flex items-center group">
+          <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-white/80">
             <svg
               width="18"
               height="18"
@@ -61,7 +63,7 @@ export function TopHeader() {
           <Input
             type="search"
             placeholder="Search students, classes, or settings..."
-            className="w-full pl-9 bg-gray-50/50 border-gray-200 focus-visible:ring-brand-primary"
+            className="w-full pl-10 bg-brand-primary text-white border-transparent placeholder:text-white/70 hover:bg-brand-primary-deep focus-visible:ring-brand-primary focus-visible:ring-offset-2 transition-all shadow-sm h-10 rounded-full"
           />
         </div>
       </div>

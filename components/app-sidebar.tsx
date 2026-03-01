@@ -59,6 +59,11 @@ const navData: NavGroup[] = [
     url: "/dashboard",
     items: [
       {
+        title: "Overview",
+        url: "/dashboard",
+        allowedRoles: ALL_ROLES,
+      },
+      {
         title: "Behavior & SEN",
         url: "/dashboard/tracking",
         allowedRoles: ["superAdmin", "proprietor", "headteacher"],
