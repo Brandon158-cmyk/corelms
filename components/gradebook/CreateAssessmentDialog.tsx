@@ -71,7 +71,7 @@ export function CreateAssessmentDialog({
         title: values.title,
         type: values.type as any,
         totalScore: Number(values.totalScore),
-        date: new Date(values.date).getTime(),
+        date: values.date,
       });
       toast.success("Assessment created successfully.");
       setOpen(false);

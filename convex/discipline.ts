@@ -28,7 +28,7 @@ async function getTenantUser(ctx: any) {
 export const logIncident = mutation({
   args: {
     studentId: v.id("users"),
-    date: v.number(),
+    date: v.string(),
     category: v.union(
       v.literal("minor"),
       v.literal("moderate"),

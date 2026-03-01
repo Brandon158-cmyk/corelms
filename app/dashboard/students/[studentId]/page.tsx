@@ -111,9 +111,7 @@ export default function StudentProfilePage(props: {
     try {
       await updateProfile({
         studentId: params.studentId,
-        dateOfBirth: formData.dateOfBirth
-          ? new Date(formData.dateOfBirth).getTime()
-          : undefined,
+        dateOfBirth: formData.dateOfBirth || undefined,
         gender: formData.gender,
         nrcNumber: formData.nrcNumber,
         address: formData.address,
@@ -142,9 +140,9 @@ export default function StudentProfilePage(props: {
     return <div>Student not found.</div>;
   }
 
-  const formatDOB = (ts?: number) => {
-    if (!ts) return "Not provided";
-    return new Date(ts).toLocaleDateString("en-ZA", {
+  const formatDOB = (dateStr?: string) => {
+    if (!dateStr) return "Not provided";
+    return new Date(dateStr).toLocaleDateString("en-ZA", {
       year: "numeric",
       month: "long",
       day: "numeric",

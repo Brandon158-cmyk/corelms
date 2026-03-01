@@ -36,7 +36,7 @@ export const createAssessment = mutation({
       v.literal("project"),
     ),
     totalScore: v.number(),
-    date: v.number(),
+    date: v.string(),
   },
   handler: async (ctx, args) => {
     const tenantId = await enforceTenantAccess(ctx);

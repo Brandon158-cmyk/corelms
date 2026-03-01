@@ -97,7 +97,7 @@ export function LogIncidentDialog({
       await logIncident({
         ...result.data,
         studentId: result.data.studentId as Id<"users">,
-        date: new Date(result.data.date).getTime(),
+        date: result.data.date,
       });
       toast.success("Incident logged successfully");
       setOpen(false);

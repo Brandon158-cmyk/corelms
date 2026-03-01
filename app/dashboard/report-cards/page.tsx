@@ -46,7 +46,7 @@ import { toast } from "sonner";
 type GradingScale = "primary" | "junior_secondary" | "senior_secondary";
 
 export default function ReportCardsPage() {
-  const { mode, selectedTermIds } = useTermFilter();
+  const { selectedTermIds } = useTermFilter();
   const classes = useQuery(api.classes.list, {});
   const terms = useQuery(api.terms.list, {});
 
@@ -79,8 +79,9 @@ export default function ReportCardsPage() {
         termId: effectiveTermId as Id<"terms">,
       });
       toast.success(`Published ${result.count} report card(s)`);
-    } catch (err: any) {
-      toast.error(err.message || "Failed to publish");
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Failed to publish";
+      toast.error(message);
     }
   };
 

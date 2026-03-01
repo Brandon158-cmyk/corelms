@@ -18,7 +18,11 @@ async function enforceTenantAccess(ctx: any) {
     return null;
   }
 
-  return user.tenantId;
+  return {
+    tenantId: user.tenantId,
+    role: user.role || "student",
+    userId: user._id,
+  };
 }
 
 /**
@@ -31,10 +35,11 @@ export const list = query({
     yearIds: v.optional(v.array(v.id("academicYears"))),
   },
   handler: async (ctx, args) => {
-    const tenantId = await enforceTenantAccess(ctx);
+    const access = await enforceTenantAccess(ctx);
 
     // Super admins without a tenantId yet (e.g. initial setup) won't have classes
-    if (!tenantId) return [];
+    if (!access) return [];
+    const { tenantId } = access;
 
     const classes = await ctx.db
       .query("classes")
@@ -100,9 +105,42 @@ export const create = mutation({
     status: v.union(v.literal("active"), v.literal("archived")),
   },
   handler: async (ctx, args) => {
-    const tenantId = await enforceTenantAccess(ctx);
-    if (!tenantId) {
+    const access = await enforceTenantAccess(ctx);
+    if (!access) {
       throw new Error("Cannot create class without a tenant");
+    }
+    const { tenantId, role } = access;
+
+    // RBAC: Only authorized roles can create classes
+    const allowedRoles = ["superAdmin", "proprietor", "headteacher"];
+    if (!allowedRoles.includes(role)) {
+      throw new Error("Unauthorized: Only administrators can create classes");
+    }
+
+    // Referential Integrity & Tenant Isolation: Grade
+    const grade = await ctx.db.get(args.gradeId);
+    if (!grade || grade.tenantId !== tenantId) {
+      throw new Error("Invalid grade: Grade not found or unauthorized");
+    }
+
+    // Referential Integrity & Tenant Isolation: Term (if present)
+    if (args.termId) {
+      const term = await ctx.db.get(args.termId);
+      if (!term || term.tenantId !== tenantId) {
+        throw new Error("Invalid term: Term not found or unauthorized");
+      }
+    }
+
+    // Referential Integrity & Tenant Isolation: Teacher (if present)
+    if (args.teacherId) {
+      const teacher = await ctx.db.get(args.teacherId);
+      if (
+        !teacher ||
+        teacher.tenantId !== tenantId ||
+        teacher.role !== "teacher"
+      ) {
+        throw new Error("Invalid teacher: Teacher not found or unauthorized");
+      }
     }
 
     const newClassId = await ctx.db.insert("classes", {
@@ -116,8 +154,9 @@ export const create = mutation({
 export const get = query({
   args: { classId: v.id("classes") },
   handler: async (ctx, { classId }) => {
-    const tenantId = await enforceTenantAccess(ctx);
-    if (!tenantId) return null;
+    const access = await enforceTenantAccess(ctx);
+    if (!access) return null;
+    const { tenantId } = access;
 
     const cls = await ctx.db.get(classId);
     if (!cls || cls.tenantId !== tenantId) return null;
@@ -146,8 +185,13 @@ export const get = query({
 export const getSubjects = query({
   args: { classId: v.id("classes") },
   handler: async (ctx, { classId }) => {
-    const tenantId = await enforceTenantAccess(ctx);
-    if (!tenantId) return [];
+    const access = await enforceTenantAccess(ctx);
+    if (!access) return [];
+    const { tenantId } = access;
+
+    // Verify class ownership
+    const cls = await ctx.db.get(classId);
+    if (!cls || cls.tenantId !== tenantId) return [];
 
     const classSubjects = await ctx.db
       .query("classSubjects")
@@ -177,8 +221,33 @@ export const addSubject = mutation({
     teacherId: v.optional(v.id("users")),
   },
   handler: async (ctx, args) => {
-    const tenantId = await enforceTenantAccess(ctx);
-    if (!tenantId) throw new Error("Unauthorized");
+    const access = await enforceTenantAccess(ctx);
+    if (!access) throw new Error("Unauthorized");
+    const { tenantId } = access;
+
+    // Verify class ownership
+    const cls = await ctx.db.get(args.classId);
+    if (!cls || cls.tenantId !== tenantId) {
+      throw new Error("Class not found or unauthorized");
+    }
+
+    // Verify subject ownership
+    const subject = await ctx.db.get(args.subjectId);
+    if (!subject || subject.tenantId !== tenantId) {
+      throw new Error("Subject not found or unauthorized");
+    }
+
+    // Verify teacher ownership if provided
+    if (args.teacherId) {
+      const teacher = await ctx.db.get(args.teacherId);
+      if (
+        !teacher ||
+        teacher.tenantId !== tenantId ||
+        teacher.role !== "teacher"
+      ) {
+        throw new Error("Teacher not found or unauthorized");
+      }
+    }
 
     // Check if subject is already added to this class
     const existing = await ctx.db
@@ -203,8 +272,20 @@ export const addSubject = mutation({
 export const removeSubject = mutation({
   args: { classSubjectId: v.id("classSubjects") },
   handler: async (ctx, { classSubjectId }) => {
-    const tenantId = await enforceTenantAccess(ctx);
-    if (!tenantId) throw new Error("Unauthorized");
+    const access = await enforceTenantAccess(ctx);
+    if (!access) throw new Error("Unauthorized");
+    const { tenantId } = access;
+
+    // Verify record exists and belongs to this tenant
+    const association = await ctx.db.get(classSubjectId);
+    if (!association) {
+      throw new Error("Association not found");
+    }
+
+    const cls = await ctx.db.get(association.classId);
+    if (!cls || cls.tenantId !== tenantId) {
+      throw new Error("Unauthorized access to class subject");
+    }
 
     await ctx.db.delete(classSubjectId);
     return { success: true };
@@ -214,8 +295,13 @@ export const removeSubject = mutation({
 export const getStudents = query({
   args: { classId: v.id("classes") },
   handler: async (ctx, { classId }) => {
-    const tenantId = await enforceTenantAccess(ctx);
-    if (!tenantId) return [];
+    const access = await enforceTenantAccess(ctx);
+    if (!access) return [];
+    const { tenantId } = access;
+
+    // Verify class ownership
+    const cls = await ctx.db.get(classId);
+    if (!cls || cls.tenantId !== tenantId) return [];
 
     return await ctx.db
       .query("users")
@@ -230,8 +316,15 @@ export const enrollStudent = mutation({
     studentId: v.id("users"),
   },
   handler: async (ctx, { classId, studentId }) => {
-    const tenantId = await enforceTenantAccess(ctx);
-    if (!tenantId) throw new Error("Unauthorized");
+    const access = await enforceTenantAccess(ctx);
+    if (!access) throw new Error("Unauthorized");
+    const { tenantId } = access;
+
+    // Verify class ownership
+    const cls = await ctx.db.get(classId);
+    if (!cls || cls.tenantId !== tenantId) {
+      throw new Error("Class not found or unauthorized");
+    }
 
     const student = await ctx.db.get(studentId);
     if (!student || student.tenantId !== tenantId) {
@@ -252,8 +345,9 @@ export const removeStudent = mutation({
     studentId: v.id("users"),
   },
   handler: async (ctx, { studentId }) => {
-    const tenantId = await enforceTenantAccess(ctx);
-    if (!tenantId) throw new Error("Unauthorized");
+    const access = await enforceTenantAccess(ctx);
+    if (!access) throw new Error("Unauthorized");
+    const { tenantId } = access;
 
     const student = await ctx.db.get(studentId);
     if (!student || student.tenantId !== tenantId) {
@@ -269,8 +363,9 @@ export const removeStudent = mutation({
 export const getUnassignedStudents = query({
   args: {},
   handler: async (ctx) => {
-    const tenantId = await enforceTenantAccess(ctx);
-    if (!tenantId) return [];
+    const access = await enforceTenantAccess(ctx);
+    if (!access) return [];
+    const { tenantId } = access;
 
     // To get unassigned students, we either query all students and filter locally
     // or use the by_tenant index and filter for missing classId.

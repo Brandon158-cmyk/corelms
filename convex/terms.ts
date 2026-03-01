@@ -62,7 +62,9 @@ export const list = query({
     );
 
     // Sort by startDate ascending
-    return enriched.sort((a: any, b: any) => a.startDate - b.startDate);
+    return enriched.sort((a: any, b: any) =>
+      a.startDate.localeCompare(b.startDate),
+    );
   },
 });
 
@@ -125,8 +127,8 @@ export const create = mutation({
   args: {
     yearId: v.id("academicYears"),
     name: v.string(),
-    startDate: v.number(),
-    endDate: v.number(),
+    startDate: v.string(),
+    endDate: v.string(),
     isCurrent: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
@@ -176,8 +178,8 @@ export const update = mutation({
   args: {
     termId: v.id("terms"),
     name: v.optional(v.string()),
-    startDate: v.optional(v.number()),
-    endDate: v.optional(v.number()),
+    startDate: v.optional(v.string()),
+    endDate: v.optional(v.string()),
     isCurrent: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {

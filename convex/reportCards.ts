@@ -1,24 +1,16 @@
-import { query, mutation } from "./_generated/server";
+import { query, mutation, QueryCtx, MutationCtx } from "./_generated/server";
 import { v } from "convex/values";
 import { getAuthUserId } from "@convex-dev/auth/server";
 import { Id } from "./_generated/dataModel";
-
-// ─── Grading helpers (pure functions, duplicated from lib/grading.ts for server use) ───
-
-type GradingScaleType = "primary" | "junior_secondary" | "senior_secondary";
-
-interface GradingResult {
-  grade: string;
-  percentage: number;
-  color: string;
-}
+import { GradingResult, GradingScaleType } from "../lib/grading";
 
 function calculateGradeServer(
   score: number,
   outOf: number,
   scaleType: GradingScaleType,
 ): GradingResult {
-  if (outOf === 0) return { grade: "N/A", percentage: 0, color: "slate" };
+  if (outOf === 0)
+    return { grade: "N/A", score: 0, outOf: 0, percentage: 0, color: "slate" };
 
   const percentage = Math.round((score / outOf) * 100);
 
@@ -39,7 +31,7 @@ function calculateGradeServer(
       grade = "Division Four";
       color = "amber";
     }
-    return { grade, percentage, color };
+    return { grade, score, outOf, percentage, color };
   }
 
   if (scaleType === "junior_secondary") {
@@ -58,7 +50,7 @@ function calculateGradeServer(
       grade = "Pass";
       color = "amber";
     }
-    return { grade, percentage, color };
+    return { grade, score, outOf, percentage, color };
   }
 
   // senior_secondary
@@ -89,12 +81,12 @@ function calculateGradeServer(
     grade = "8 (Satisfactory)";
     color = "amber";
   }
-  return { grade, percentage, color };
+  return { grade, score, outOf, percentage, color };
 }
 
 // ─── Auth helpers ───
 
-async function enforceTenantAccess(ctx: any) {
+async function enforceTenantAccess(ctx: QueryCtx | MutationCtx) {
   const userId = await getAuthUserId(ctx);
   if (!userId) throw new Error("unauthorized");
   const user = await ctx.db.get(userId);
@@ -102,10 +94,12 @@ async function enforceTenantAccess(ctx: any) {
   return user.tenantId;
 }
 
-async function checkAdminOrTeacher(ctx: any): Promise<boolean> {
+async function checkAdminOrTeacher(
+  ctx: QueryCtx | MutationCtx,
+): Promise<boolean> {
   const userId = await getAuthUserId(ctx);
   if (!userId) return false;
-  const user = await ctx.db.get(userId);
+  const user = await ctx.db.get(userId as Id<"users">);
   const allowedRoles = ["superAdmin", "proprietor", "headteacher", "teacher"];
   return allowedRoles.includes(user?.role ?? "");
 }
@@ -188,9 +182,8 @@ export const generate = mutation({
     }
 
     // 7. Fetch attendance records for the term date range
-    // Convert term dates to ISO strings for range comparison
-    const termStartDate = new Date(term.startDate).toISOString().split("T")[0];
-    const termEndDate = new Date(term.endDate).toISOString().split("T")[0];
+    const termStartDate = term.startDate;
+    const termEndDate = term.endDate;
 
     const allAttendance = await ctx.db
       .query("attendance")
@@ -210,7 +203,7 @@ export const generate = mutation({
       .collect();
 
     const termDiscipline = allDiscipline.filter(
-      (d: any) => d.date >= term.startDate && d.date <= term.endDate,
+      (d: any) => d.date >= termStartDate && d.date <= termEndDate,
     );
 
     // 9. Generate report card for each student
@@ -408,6 +401,13 @@ export const updateComments = mutation({
     const tenantId = await enforceTenantAccess(ctx);
     if (!tenantId) throw new Error("Unauthorized");
 
+    const hasClearance = await checkAdminOrTeacher(ctx);
+    if (!hasClearance) {
+      throw new Error(
+        "Unauthorized: Only teachers and admins can update report card comments",
+      );
+    }
+
     const report = await ctx.db.get(args.reportId);
     if (!report || report.tenantId !== tenantId) {
       throw new Error("Report card not found");
@@ -434,6 +434,13 @@ export const publish = mutation({
     const tenantId = await enforceTenantAccess(ctx);
     if (!tenantId) throw new Error("Unauthorized");
 
+    const hasClearance = await checkAdminOrTeacher(ctx);
+    if (!hasClearance) {
+      throw new Error(
+        "Unauthorized: Only teachers and admins can publish report cards",
+      );
+    }
+
     const report = await ctx.db.get(reportId);
     if (!report || report.tenantId !== tenantId) {
       throw new Error("Report card not found");
@@ -454,6 +461,13 @@ export const publishAll = mutation({
   handler: async (ctx, args) => {
     const tenantId = await enforceTenantAccess(ctx);
     if (!tenantId) throw new Error("Unauthorized");
+
+    const hasClearance = await checkAdminOrTeacher(ctx);
+    if (!hasClearance) {
+      throw new Error(
+        "Unauthorized: Only teachers and admins can publish report cards",
+      );
+    }
 
     const reports = await ctx.db
       .query("reportCards")

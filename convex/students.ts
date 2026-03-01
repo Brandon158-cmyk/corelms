@@ -54,7 +54,7 @@ export const getProfile = query({
 export const updateProfile = mutation({
   args: {
     studentId: v.id("users"),
-    dateOfBirth: v.optional(v.number()),
+    dateOfBirth: v.optional(v.string()),
     gender: v.optional(v.union(v.literal("Male"), v.literal("Female"))),
     nrcNumber: v.optional(v.string()),
     birthCertificateOrUnder5Card: v.optional(v.string()),

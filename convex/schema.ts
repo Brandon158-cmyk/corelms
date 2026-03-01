@@ -62,7 +62,8 @@ const schema = defineSchema({
     .index("email", ["email"])
     .index("by_tenant", ["tenantId"])
     .index("by_tenant_role", ["tenantId", "role"])
-    .index("by_class", ["classId"]),
+    .index("by_class", ["classId"])
+    .index("by_tenant_and_class", ["tenantId", "classId"]),
 
   /**
    * Tenants table — represents individual schools/organizations.
@@ -176,8 +177,8 @@ const schema = defineSchema({
   academicYears: defineTable({
     tenantId: v.id("tenants"),
     name: v.string(),
-    startDate: v.number(),
-    endDate: v.number(),
+    startDate: v.string(), // ISO String 'YYYY-MM-DD'
+    endDate: v.string(), // ISO String 'YYYY-MM-DD'
     isCurrent: v.boolean(),
   }).index("by_tenant", ["tenantId"]),
 
@@ -189,8 +190,8 @@ const schema = defineSchema({
     tenantId: v.id("tenants"),
     yearId: v.id("academicYears"),
     name: v.string(),
-    startDate: v.number(),
-    endDate: v.number(),
+    startDate: v.string(), // ISO String 'YYYY-MM-DD'
+    endDate: v.string(), // ISO String 'YYYY-MM-DD'
     isCurrent: v.boolean(),
   })
     .index("by_tenant", ["tenantId"])
@@ -204,7 +205,7 @@ const schema = defineSchema({
   studentProfiles: defineTable({
     userId: v.id("users"), // Foreign key to users
     tenantId: v.id("tenants"),
-    dateOfBirth: v.optional(v.number()), // Timestamp
+    dateOfBirth: v.optional(v.string()), // ISO String 'YYYY-MM-DD'
     gender: v.optional(v.union(v.literal("Male"), v.literal("Female"))),
     nrcNumber: v.optional(v.string()), // For older students
     birthCertificateOrUnder5Card: v.optional(v.string()),
@@ -239,7 +240,7 @@ const schema = defineSchema({
       v.literal("project"),
     ),
     totalScore: v.number(), // the maximum possible score (e.g., 100)
-    date: v.number(), // Timestamp of the assessment
+    date: v.string(), // ISO String 'YYYY-MM-DD'
     teacherId: v.id("users"), // Author
     status: v.union(v.literal("draft"), v.literal("published")),
   })
@@ -267,7 +268,7 @@ const schema = defineSchema({
     tenantId: v.id("tenants"),
     studentId: v.id("users"),
     authorId: v.id("users"), // Teacher/Admin who recorded it
-    date: v.number(),
+    date: v.string(), // ISO String 'YYYY-MM-DD'
     visualScore: v.number(), // out of 10
     hearingScore: v.number(), // out of 10
     intellectualScore: v.number(), // out of 10
@@ -286,7 +287,7 @@ const schema = defineSchema({
     tenantId: v.id("tenants"),
     studentId: v.id("users"),
     reporterId: v.id("users"),
-    date: v.number(),
+    date: v.string(), // ISO String 'YYYY-MM-DD'
     category: v.union(
       v.literal("minor"),
       v.literal("moderate"),

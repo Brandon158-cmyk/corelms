@@ -40,10 +40,13 @@ export function GenerateReportDialog({
   const [loading, setLoading] = useState(false);
   const generate = useMutation(api.reportCards.generate);
 
-  // Fetch class & term info for the summary
-  const classInfo = useQuery(api.classes.get, { classId });
-  const termInfo = useQuery(api.terms.get, { termId });
-  const students = useQuery(api.classes.getStudents, { classId });
+  // Fetch class & term info for the summary (only fetch when dialog is open)
+  const classInfo = useQuery(api.classes.get, open ? { classId } : "skip");
+  const termInfo = useQuery(api.terms.get, open ? { termId } : "skip");
+  const students = useQuery(
+    api.classes.getStudents,
+    open ? { classId } : "skip",
+  );
 
   const handleGenerate = async () => {
     setLoading(true);
@@ -51,8 +54,10 @@ export function GenerateReportDialog({
       const result = await generate({ classId, termId, gradingScale });
       toast.success(`Successfully generated ${result.count} report card(s)!`);
       setOpen(false);
-    } catch (err: any) {
-      toast.error(err.message || "Failed to generate report cards");
+    } catch (err: unknown) {
+      const message =
+        err instanceof Error ? err.message : "Failed to generate report cards";
+      toast.error(message);
     } finally {
       setLoading(false);
     }

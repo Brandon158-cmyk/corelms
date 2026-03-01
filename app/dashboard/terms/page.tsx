@@ -62,8 +62,8 @@ function CreateYearDialog() {
 
     await createYear({
       name,
-      startDate: new Date(startDate).getTime(),
-      endDate: new Date(endDate).getTime(),
+      startDate,
+      endDate,
       isCurrent,
     });
 
@@ -163,8 +163,8 @@ function CreateTermDialog({
     await createTerm({
       yearId,
       name,
-      startDate: new Date(startDate).getTime(),
-      endDate: new Date(endDate).getTime(),
+      startDate,
+      endDate,
       isCurrent,
     });
 
@@ -250,8 +250,8 @@ function YearCard({
   year: {
     _id: Id<"academicYears">;
     name: string;
-    startDate: number;
-    endDate: number;
+    startDate: string;
+    endDate: string;
     isCurrent: boolean;
   };
 }) {
@@ -261,8 +261,8 @@ function YearCard({
   const updateTerm = useMutation(api.terms.update);
   const [isOpen, setIsOpen] = useState(true);
 
-  const formatDate = (ts: number) =>
-    new Date(ts).toLocaleDateString("en-ZA", {
+  const formatDate = (dateStr: string) =>
+    new Date(dateStr).toLocaleDateString("en-ZA", {
       year: "numeric",
       month: "short",
       day: "numeric",

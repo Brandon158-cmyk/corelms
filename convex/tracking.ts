@@ -40,7 +40,7 @@ async function checkAdminOrTeacher(ctx: any): Promise<boolean> {
 export const logDiscipline = mutation({
   args: {
     studentId: v.id("users"),
-    date: v.number(),
+    date: v.string(),
     category: v.union(
       v.literal("minor"),
       v.literal("moderate"),
@@ -147,7 +147,7 @@ export const listRecentDiscipline = query({
 export const submitSENAssessment = mutation({
   args: {
     studentId: v.id("users"),
-    date: v.number(),
+    date: v.string(),
     visualScore: v.number(),
     hearingScore: v.number(),
     intellectualScore: v.number(),

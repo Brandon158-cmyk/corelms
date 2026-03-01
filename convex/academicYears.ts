@@ -41,7 +41,9 @@ export const list = query({
       .collect();
 
     // Sort by startDate descending (most recent first)
-    return years.sort((a: any, b: any) => b.startDate - a.startDate);
+    return years.sort((a: any, b: any) =>
+      b.startDate.localeCompare(a.startDate),
+    );
   },
 });
 
@@ -72,8 +74,8 @@ export const get = query({
 export const create = mutation({
   args: {
     name: v.string(),
-    startDate: v.number(),
-    endDate: v.number(),
+    startDate: v.string(),
+    endDate: v.string(),
     isCurrent: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
@@ -116,8 +118,8 @@ export const update = mutation({
   args: {
     yearId: v.id("academicYears"),
     name: v.optional(v.string()),
-    startDate: v.optional(v.number()),
-    endDate: v.optional(v.number()),
+    startDate: v.optional(v.string()),
+    endDate: v.optional(v.string()),
     isCurrent: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {

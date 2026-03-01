@@ -2,6 +2,17 @@ import { query, mutation } from "./_generated/server";
 import { v } from "convex/values";
 import { auth } from "./auth";
 
+const ALLOWED_ROLES = v.union(
+  v.literal("superAdmin"),
+  v.literal("proprietor"),
+  v.literal("headteacher"),
+  v.literal("bursar"),
+  v.literal("teacher"),
+  v.literal("boardingMatron"),
+  v.literal("student"),
+  v.literal("parent"),
+);
+
 /**
  * Get the currently authenticated user with their tenant data.
  * Returns null if not authenticated.
@@ -103,7 +114,7 @@ export const listTenantUsers = query({
 export const linkUserToTenant = mutation({
   args: {
     schoolCode: v.string(),
-    role: v.optional(v.string()),
+    role: v.optional(ALLOWED_ROLES),
   },
   handler: async (ctx, { schoolCode, role }) => {
     const userId = await auth.getUserId(ctx);
@@ -145,7 +156,7 @@ export const invite = mutation({
   args: {
     email: v.string(),
     name: v.string(),
-    role: v.string(),
+    role: ALLOWED_ROLES,
   },
   handler: async (ctx, args) => {
     const userId = await auth.getUserId(ctx);
