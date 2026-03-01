@@ -78,7 +78,10 @@ export const updateProfile = mutation({
  * Used for the Users management datatable.
  */
 export const listTenantUsers = query({
-  args: { tenantId: v.optional(v.id("tenants")) },
+  args: {
+    tenantId: v.optional(v.id("tenants")),
+    role: v.optional(v.string()),
+  },
   handler: async (ctx, args) => {
     const userId = await auth.getUserId(ctx);
     if (!userId) throw new Error("Not authenticated");
@@ -99,11 +102,18 @@ export const listTenantUsers = query({
       return [];
     }
 
-    // List all users in the determined tenant
-    return await ctx.db
+    // List users in the determined tenant
+    let query = ctx.db
       .query("users")
-      .withIndex("by_tenant", (q) => q.eq("tenantId", targetTenantId))
-      .collect();
+      .withIndex("by_tenant", (q) => q.eq("tenantId", targetTenantId));
+
+    const results = await query.collect();
+
+    if (args.role) {
+      return results.filter((u) => u.role === args.role);
+    }
+
+    return results;
   },
 });
 

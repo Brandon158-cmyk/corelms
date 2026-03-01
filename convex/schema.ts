@@ -602,6 +602,7 @@ const schema = defineSchema({
     approvedBy: v.optional(v.id("users")),
     notes: v.optional(v.string()),
   })
+    .index("by_tenant", ["tenantId"])
     .index("by_student", ["studentId"])
     .index("by_status", ["status"]),
 

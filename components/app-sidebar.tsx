@@ -170,6 +170,22 @@ const navData: NavGroup[] = [
     ],
   },
   {
+    title: "Communication",
+    url: "#",
+    items: [
+      {
+        title: "Communication Hub",
+        url: "/dashboard/communication",
+        allowedRoles: [...ADMIN_ROLES, "bursar", "teacher"],
+      },
+      {
+        title: "Notice Board",
+        url: "/dashboard/communication",
+        allowedRoles: ["student", "parent"],
+      },
+    ],
+  },
+  {
     title: "Administration",
     url: "#",
     items: [
