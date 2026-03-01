@@ -122,7 +122,7 @@ export function TermSwitcher() {
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start" className="w-[220px]">
             {/* All Time option */}
-            <DropdownMenuItem onSelect={selectAllTime}>
+            <DropdownMenuItem onClick={selectAllTime}>
               <HugeiconsIcon
                 icon={InfinityCircleIcon}
                 strokeWidth={2}
@@ -152,7 +152,7 @@ export function TermSwitcher() {
                 return (
                   <DropdownMenuItem
                     key={year._id}
-                    onSelect={() => selectYear(year._id)}
+                    onClick={() => selectYear(year._id)}
                   >
                     <HugeiconsIcon
                       icon={Calendar03Icon}
@@ -191,7 +191,7 @@ export function TermSwitcher() {
                   </DropdownMenuSubTrigger>
                   <DropdownMenuSubContent>
                     {/* Select entire year */}
-                    <DropdownMenuItem onSelect={() => selectYear(year._id)}>
+                    <DropdownMenuItem onClick={() => selectYear(year._id)}>
                       All of {year.name}
                       {isYearSelected && (
                         <HugeiconsIcon
@@ -209,7 +209,7 @@ export function TermSwitcher() {
                       return (
                         <DropdownMenuItem
                           key={term._id}
-                          onSelect={() => selectTerm(term._id)}
+                          onClick={() => selectTerm(term._id)}
                         >
                           {term.name}
                           {isTermSelected && (

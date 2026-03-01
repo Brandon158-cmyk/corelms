@@ -11,6 +11,7 @@
 import type * as CustomPassword from "../CustomPassword.js";
 import type * as MockPasswordReset from "../MockPasswordReset.js";
 import type * as academicYears from "../academicYears.js";
+import type * as assessments from "../assessments.js";
 import type * as attendance from "../attendance.js";
 import type * as auth from "../auth.js";
 import type * as classes from "../classes.js";
@@ -36,6 +37,7 @@ declare const fullApi: ApiFromModules<{
   CustomPassword: typeof CustomPassword;
   MockPasswordReset: typeof MockPasswordReset;
   academicYears: typeof academicYears;
+  assessments: typeof assessments;
   attendance: typeof attendance;
   auth: typeof auth;
   classes: typeof classes;

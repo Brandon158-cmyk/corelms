@@ -75,8 +75,8 @@ const navData: NavGroup[] = [
     url: "#",
     items: [
       {
-        title: "Grades",
-        url: "/dashboard/grades",
+        title: "Assessments",
+        url: "/dashboard/gradebook",
         allowedRoles: [...ADMIN_ROLES, "teacher"],
       },
       {
@@ -94,6 +94,7 @@ const navData: NavGroup[] = [
         url: "/dashboard/attendance",
         allowedRoles: [...ADMIN_ROLES, "teacher"],
       },
+
       {
         title: "Subjects",
         url: "/dashboard/subjects",

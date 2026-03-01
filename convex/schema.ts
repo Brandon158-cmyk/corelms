@@ -224,6 +224,42 @@ const schema = defineSchema({
     .index("by_tenant", ["tenantId"]),
 
   /**
+   * Assessments table — stores assessment headers (exams, quizzes, etc.)
+   */
+  assessments: defineTable({
+    tenantId: v.id("tenants"),
+    classId: v.id("classes"),
+    subjectId: v.id("subjects"),
+    termId: v.id("terms"),
+    title: v.string(), // e.g., "Mid-Term Math Test"
+    type: v.union(
+      v.literal("assignment"),
+      v.literal("quiz"),
+      v.literal("exam"),
+      v.literal("project"),
+    ),
+    totalScore: v.number(), // the maximum possible score (e.g., 100)
+    date: v.number(), // Timestamp of the assessment
+    teacherId: v.id("users"), // Author
+    status: v.union(v.literal("draft"), v.literal("published")),
+  })
+    .index("by_tenant", ["tenantId"])
+    .index("by_class_subject", ["classId", "subjectId"])
+    .index("by_term", ["termId"]),
+
+  /**
+   * Assessment Marks table — stores individual student scores.
+   */
+  assessmentMarks: defineTable({
+    assessmentId: v.id("assessments"),
+    studentId: v.id("users"),
+    score: v.number(), // The raw score achieved
+    comments: v.optional(v.string()), // Optional teacher feedback
+  })
+    .index("by_assessment", ["assessmentId"])
+    .index("by_student", ["studentId"]),
+
+  /**
    * Special Educational Needs (SEN) assessments.
    * Based on Zambia's MoE Early Grade Screening Tool.
    */
