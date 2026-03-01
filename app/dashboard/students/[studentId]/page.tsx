@@ -158,7 +158,7 @@ export default function StudentProfilePage(props: {
     );
 
   return (
-    <div className="flex flex-1 flex-col gap-6 p-6 lg:p-8 bg-brand-bg/30">
+    <div className="flex flex-1 flex-col gap-6">
       {/* Header Actions */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>

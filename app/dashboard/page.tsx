@@ -39,7 +39,7 @@ export default function Page() {
   const totalStudents = 0; // will be computed when student queries are wired
 
   return (
-    <div className="flex flex-1 flex-col gap-6 p-6 lg:p-8 bg-brand-bg/30">
+    <div className="flex flex-1 flex-col gap-6">
       {/* Filter indicator */}
       {mode !== "all-time" && (
         <div className="flex items-center gap-2">

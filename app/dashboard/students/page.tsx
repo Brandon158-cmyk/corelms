@@ -61,7 +61,7 @@ export default function StudentsDirectoryPage() {
   });
 
   return (
-    <div className="flex flex-1 flex-col gap-6 p-6 lg:p-8 bg-brand-bg/30">
+    <div className="flex flex-1 flex-col gap-6">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-brand-accent">

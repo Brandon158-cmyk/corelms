@@ -395,7 +395,7 @@ export default function TermsPage() {
   const years = useQuery(api.academicYears.list);
 
   return (
-    <div className="flex flex-1 flex-col gap-6 p-6 lg:p-8 bg-brand-bg/30">
+    <div className="flex flex-1 flex-col gap-6">
       {/* Page Header */}
       <div className="flex items-center justify-between">
         <div>

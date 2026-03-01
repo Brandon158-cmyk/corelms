@@ -98,9 +98,15 @@ export default function ReportCardsPage() {
       </div>
 
       {/* Filters */}
-      <Card className="shadow-sm">
+      <Card className="shadow-sm border-t-4 border-t-brand-primary">
         <CardHeader className="pb-4">
-          <CardTitle className="text-base">Select Class &amp; Term</CardTitle>
+          <CardTitle className="text-lg font-semibold flex items-center gap-2">
+            <HugeiconsIcon
+              icon={Calendar03Icon}
+              className="size-5 text-brand-primary"
+            />
+            Select Class & Term
+          </CardTitle>
           <CardDescription>
             Choose a class and term to view or generate report cards.
           </CardDescription>
@@ -189,10 +195,10 @@ export default function ReportCardsPage() {
 
       {/* Results */}
       {selectedClassId && effectiveTermId ? (
-        <Card className="shadow-sm">
-          <CardHeader className="flex flex-row items-center justify-between">
+        <Card className="shadow-sm border-t-4 border-t-brand-primary">
+          <CardHeader className="flex flex-row items-center justify-between border-b pb-3">
             <div>
-              <CardTitle className="text-base flex items-center gap-2">
+              <CardTitle className="text-lg font-semibold flex items-center gap-2">
                 <HugeiconsIcon
                   icon={File01Icon}
                   className="size-5 text-brand-primary"
@@ -214,7 +220,7 @@ export default function ReportCardsPage() {
               </Button>
             )}
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-0">
             {reportCards === undefined ? (
               <div className="flex justify-center py-12">
                 <Spinner className="text-brand-primary" />
@@ -233,17 +239,31 @@ export default function ReportCardsPage() {
                 </p>
               </div>
             ) : (
-              <div className="rounded-md border overflow-x-auto">
+              <div className="rounded-none border-x-0 border-b-0">
                 <Table>
-                  <TableHeader>
+                  <TableHeader className="bg-muted/50">
                     <TableRow>
-                      <TableHead>Student</TableHead>
-                      <TableHead className="text-center">Subjects</TableHead>
-                      <TableHead className="text-center">Avg %</TableHead>
-                      <TableHead className="text-center">Attendance</TableHead>
-                      <TableHead className="text-center">Discipline</TableHead>
-                      <TableHead className="text-center">Status</TableHead>
-                      <TableHead className="text-right">Actions</TableHead>
+                      <TableHead className="font-semibold text-brand-accent">
+                        Student
+                      </TableHead>
+                      <TableHead className="text-center font-semibold text-brand-accent">
+                        Subjects
+                      </TableHead>
+                      <TableHead className="text-center font-semibold text-brand-accent">
+                        Avg %
+                      </TableHead>
+                      <TableHead className="text-center font-semibold text-brand-accent">
+                        Attendance
+                      </TableHead>
+                      <TableHead className="text-center font-semibold text-brand-accent">
+                        Discipline
+                      </TableHead>
+                      <TableHead className="text-center font-semibold text-brand-accent">
+                        Status
+                      </TableHead>
+                      <TableHead className="text-right font-semibold text-brand-accent">
+                        Actions
+                      </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
