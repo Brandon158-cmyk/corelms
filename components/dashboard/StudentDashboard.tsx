@@ -35,7 +35,7 @@ export function StudentDashboard() {
   if (stats === undefined) {
     return (
       <div className="flex h-[400px] items-center justify-center">
-        <Spinner className="size-8 text-[var(--color-accent-primary)]" />
+        <Spinner className="size-8 text-(--color-accent-primary)" />
       </div>
     );
   }
@@ -50,7 +50,7 @@ export function StudentDashboard() {
     <div className="flex flex-col gap-10 pb-12">
       {/* ── SECTION 1: Academic Performance Rail ───────────────────────────────── */}
       <div
-        className="grid grid-cols-2 md:grid-cols-4 border-b border-[var(--color-border-default)] bg-white sticky top-0 z-20"
+        className="grid grid-cols-2 md:grid-cols-4 border-b border-(--color-border-default) bg-white sticky top-0 z-20"
         style={{
           margin: "0 calc(var(--space-lg) * -1)",
           padding: "var(--space-md) var(--space-lg)",
@@ -64,7 +64,7 @@ export function StudentDashboard() {
             <span className="text-2xl font-bold text-foreground font-sans">
               3.8
             </span>
-            <span className="text-[10px] text-[var(--color-category-green)] font-bold">
+            <span className="text-[10px] text-(--color-category-green) font-bold">
               EXCELLENT
             </span>
           </div>
@@ -90,7 +90,7 @@ export function StudentDashboard() {
             <span className="text-2xl font-bold text-foreground font-sans">
               420
             </span>
-            <Badge className="bg-[rgba(201,162,39,0.1)] text-[var(--color-warning)] text-[9px] font-bold uppercase border-0">
+            <Badge className="bg-[rgba(201,162,39,0.1)] text-(--color-warning) text-[9px] font-bold uppercase border-0">
               +15 XP
             </Badge>
           </div>
@@ -107,7 +107,7 @@ export function StudentDashboard() {
               {[1, 2, 3, 4, 5].map((i) => (
                 <div
                   key={i}
-                  className={`size-5 rounded-full border-1.5 border-white ${i <= 3 ? "bg-[var(--color-accent-primary)] text-white" : "bg-slate-200 text-slate-500"} flex items-center justify-center text-[7px] font-bold`}
+                  className={`size-5 rounded-full border-1.5 border-white ${i <= 3 ? "bg-(--color-accent-primary) text-white" : "bg-slate-200 text-slate-500"} flex items-center justify-center text-[7px] font-bold`}
                 >
                   ✓
                 </div>
@@ -147,7 +147,7 @@ export function StudentDashboard() {
               onClick={() => setActiveSegment(item.id)}
               className={`flex items-center justify-between p-3.5 rounded-md transition-all text-left ${
                 activeSegment === item.id
-                  ? "bg-white shadow-sm border border-[var(--color-border-default)] text-[var(--color-accent-primary)] font-bold"
+                  ? "bg-white shadow-sm border border-(--color-border-default) text-(--color-accent-primary) font-bold"
                   : "text-muted-foreground hover:text-foreground hover:bg-white/50"
               }`}
             >
@@ -156,7 +156,7 @@ export function StudentDashboard() {
                 <span className="text-[13px]">{item.label}</span>
               </div>
               {activeSegment === item.id && (
-                <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent-primary)]" />
+                <div className="w-1.5 h-1.5 rounded-full bg-(--color-accent-primary)" />
               )}
             </button>
           ))}
@@ -175,7 +175,7 @@ export function StudentDashboard() {
             </div>
             <div className="p-4 bg-[rgba(26,92,58,0.06)] border border-[rgba(26,92,58,0.1)] rounded-xl relative overflow-hidden group hover:shadow-md transition-all">
               <div className="flex items-center gap-3 relative z-10">
-                <div className="size-10 rounded-lg bg-white shadow-sm border border-[var(--color-border-default)] flex items-center justify-center text-[var(--color-category-green)]">
+                <div className="size-10 rounded-lg bg-white shadow-sm border border-(--color-border-default) flex items-center justify-center text-(--color-category-green)">
                   <HugeiconsIcon icon={Award01Icon} size={20} />
                 </div>
                 <div className="flex flex-col">
@@ -200,7 +200,7 @@ export function StudentDashboard() {
             <div className="flex flex-col gap-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Current Class Card */}
-                <div className="bg-white border-l-[3px] border-l-[var(--color-accent-primary)] border border-[var(--color-border-default)] rounded-r-xl p-6 shadow-sm flex flex-col">
+                <div className="bg-white border-l-[3px] border-l-(--color-accent-primary) border border-(--color-border-default) rounded-r-xl p-6 shadow-sm flex flex-col">
                   <div className="flex items-start justify-between mb-2">
                     <span className="text-[10px] font-bold text-muted-foreground uppercase opacity-60 tracking-widest">
                       Enrolled Class
@@ -236,7 +236,7 @@ export function StudentDashboard() {
                 </div>
 
                 {/* Upcoming Event */}
-                <div className="bg-white border-l-[3px] border-l-[var(--color-warning)] border border-[var(--color-border-default)] rounded-r-xl p-6 shadow-sm flex flex-col justify-center">
+                <div className="bg-white border-l-[3px] border-l-(--color-warning) border border-(--color-border-default) rounded-r-xl p-6 shadow-sm flex flex-col justify-center">
                   <span className="text-[10px] font-bold text-muted-foreground uppercase opacity-60 tracking-widest">
                     Coming Up Next
                   </span>
@@ -244,7 +244,7 @@ export function StudentDashboard() {
                     Maths Mid-Term Assessment
                   </h3>
                   <div className="flex items-center gap-3 mt-6 text-[11px] font-medium text-muted-foreground tracking-wide uppercase">
-                    <span className="flex items-center gap-1.5 text-[var(--color-warning)]">
+                    <span className="flex items-center gap-1.5 text-(--color-warning)">
                       <HugeiconsIcon icon={Calendar03Icon} size={14} /> Next
                       Thursday
                     </span>
@@ -253,8 +253,8 @@ export function StudentDashboard() {
               </div>
 
               {/* Assignments Due List */}
-              <div className="bg-white border border-[var(--color-border-default)] rounded-xl shadow-sm overflow-hidden">
-                <div className="px-6 py-5 border-b border-[var(--color-border-default)] bg-[var(--color-surface-secondary)]/30 flex items-center justify-between">
+              <div className="bg-white border border-(--color-border-default) rounded-xl shadow-sm overflow-hidden">
+                <div className="px-6 py-5 border-b border-(--color-border-default) bg-(--color-surface-secondary)/30 flex items-center justify-between">
                   <div>
                     <h3 className="text-base font-bold text-foreground font-sans">
                       Active Tasks & Due
@@ -267,18 +267,18 @@ export function StudentDashboard() {
                     {stats.upcomingAssignments.length} ACTIONS
                   </Badge>
                 </div>
-                <div className="divide-y divide-[var(--color-border-default)]">
+                <div className="divide-y divide-(--color-border-default)">
                   {stats.upcomingAssignments.length > 0 ? (
                     stats.upcomingAssignments.map((a: any) => (
                       <div
                         key={a._id}
-                        className="p-4 flex items-center gap-6 hover:bg-[var(--color-surface-secondary)]/50 transition-colors group"
+                        className="p-4 flex items-center gap-6 hover:bg-(--color-surface-secondary)/50 transition-colors group"
                       >
                         <div className="size-10 rounded-lg bg-[rgba(201,162,39,0.08)] text-[var(--color-warning)] flex items-center justify-center">
                           <HugeiconsIcon icon={TaskDaily01Icon} size={20} />
                         </div>
                         <div className="flex-1">
-                          <h4 className="text-sm font-bold text-foreground group-hover:text-[var(--color-accent-primary)] transition-colors">
+                          <h4 className="text-sm font-bold text-foreground group-hover:text-(--color-accent-primary) transition-colors">
                             {a.title}
                           </h4>
                           <div className="flex items-center gap-3 mt-1 text-[11px] text-muted-foreground font-medium uppercase tracking-wider">
@@ -287,7 +287,7 @@ export function StudentDashboard() {
                               Due {format(new Date(a.dueDate), "MMM dd, yyyy")}
                             </span>
                             <span className="w-1 h-1 rounded-full bg-muted-foreground/30" />
-                            <span className="flex items-center gap-1.5 font-bold text-[var(--color-category-green)]">
+                            <span className="flex items-center gap-1.5 font-bold text-(--color-category-green)">
                               <HugeiconsIcon
                                 icon={CheckmarkCircle02Icon}
                                 size={12}
@@ -299,7 +299,7 @@ export function StudentDashboard() {
                         <Link href={`/dashboard/lms/assignments?id=${a._id}`}>
                           <Button
                             size="sm"
-                            className="h-9 px-5 bg-[var(--color-accent-primary)] text-white font-bold uppercase tracking-wider text-[10px] shadow-sm hover:translate-x-1 transition-all"
+                            className="h-9 px-5 bg-(--color-accent-primary) text-white font-bold uppercase tracking-wider text-[10px] shadow-sm hover:translate-x-1 transition-all"
                           >
                             Start Task{" "}
                             <HugeiconsIcon

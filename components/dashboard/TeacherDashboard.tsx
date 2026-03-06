@@ -28,7 +28,7 @@ export function TeacherDashboard() {
   if (stats === undefined) {
     return (
       <div className="flex h-[400px] items-center justify-center">
-        <Spinner className="size-8 text-[var(--color-accent-primary)]" />
+        <Spinner className="size-8 text-(--color-accent-primary)" />
       </div>
     );
   }
@@ -257,7 +257,7 @@ export function TeacherDashboard() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="text-[11px] font-bold uppercase tracking-wider text-[var(--color-accent-primary)]"
+                  className="text-[11px] font-bold uppercase tracking-wider text-(--color-accent-primary)"
                 >
                   Grading History
                 </Button>
@@ -291,7 +291,7 @@ export function TeacherDashboard() {
                         <Button
                           variant="outline"
                           size="sm"
-                          className="h-8 text-[10px] font-bold uppercase tracking-wider border-[var(--color-accent-primary)] text-[var(--color-accent-primary)] hover:bg-[var(--color-accent-primary)] hover:text-white transition-all"
+                          className="h-8 text-[10px] font-bold uppercase tracking-wider border-(--color-accent-primary) text-(--color-accent-primary) hover:bg-(--color-accent-primary) hover:text-white transition-all"
                         >
                           Grade Now
                         </Button>

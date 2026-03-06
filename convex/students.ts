@@ -201,3 +201,55 @@ export const countStudents = query({
     return students.length;
   },
 });
+/**
+ * Retrieves a student's performance history including LMS submissions and assessment marks.
+ */
+export const getPerformanceHistory = query({
+  args: { studentId: v.id("users") },
+  handler: async (ctx, { studentId }) => {
+    const tenantId = await enforceTenantAccess(ctx);
+    if (!tenantId) return null;
+
+    // Fetch LMS Submissions
+    const submissions = await ctx.db
+      .query("lmsSubmissions")
+      .withIndex("by_tenant", (q) => q.eq("tenantId", tenantId))
+      .filter((q) => q.eq(q.field("studentId"), studentId))
+      .collect();
+
+    const submissionsWithDetails = await Promise.all(
+      submissions.map(async (s) => {
+        const assignment = await ctx.db.get(s.assignmentId);
+        return {
+          ...s,
+          title: assignment?.title || "Unknown Assignment",
+          totalMarks: assignment?.totalMarks || 100,
+        };
+      }),
+    );
+
+    // Fetch Assessment Marks
+    const marks = await ctx.db
+      .query("assessmentMarks")
+      .withIndex("by_student", (q) => q.eq("studentId", studentId))
+      .collect();
+
+    const marksWithDetails = await Promise.all(
+      marks.map(async (m) => {
+        const assessment = await ctx.db.get(m.assessmentId);
+        return {
+          ...m,
+          title: assessment?.title || "Unknown Assessment",
+          totalScore: assessment?.totalScore || 100,
+          type: assessment?.type || "assignment",
+          date: assessment?.date || Date.now(),
+        };
+      }),
+    );
+
+    return {
+      submissions: submissionsWithDetails,
+      marks: marksWithDetails,
+    };
+  },
+});
