@@ -59,13 +59,73 @@ export default function ForgotPasswordPage() {
     }
   }
 
+  /* Shared input style — references design tokens */
+  const inputStyle = {
+    height: "var(--input-height)",
+    borderRadius: "var(--radius-sm-token)",
+    border: "1px solid var(--color-border-input)",
+    fontFamily: "var(--font-family-body)",
+    fontSize: "var(--font-size-body)",
+  };
+
+  const labelStyle = {
+    fontFamily: "var(--font-family-body)",
+    fontSize: "var(--font-size-body)",
+    fontWeight: "var(--font-weight-medium)" as const,
+    color: "var(--color-text-body)",
+  };
+
+  /* Primary button style — solid maroon, uppercase */
+  const primaryButtonStyle = {
+    height: "var(--input-height)",
+    background: "var(--color-accent-primary)",
+    color: "var(--color-text-inverse)",
+    borderRadius: "var(--radius-sm-token)",
+    textTransform: "uppercase" as const,
+    fontFamily: "var(--font-family-body)",
+    fontWeight: "var(--font-weight-medium)" as const,
+    fontSize: "var(--font-size-body)",
+    letterSpacing: "var(--letter-spacing-uppercase)",
+  };
+
+  /* Secondary/ghost button style */
+  const ghostButtonStyle = {
+    height: "var(--input-height)",
+    background: "var(--color-surface-primary)",
+    border: "var(--button-border-width) solid var(--color-accent-primary)",
+    color: "var(--color-accent-primary)",
+    borderRadius: "var(--radius-sm-token)",
+    textTransform: "uppercase" as const,
+    fontFamily: "var(--font-family-body)",
+    fontWeight: "var(--font-weight-medium)" as const,
+    fontSize: "var(--font-size-body)",
+    letterSpacing: "var(--letter-spacing-uppercase)",
+  };
+
   return (
     <div>
-      <div className="mb-6 text-center sm:text-left">
-        <h2 className="text-2xl font-bold text-brand-accent tracking-tight">
+      {/* Page heading — serif */}
+      <div style={{ marginBottom: "var(--space-lg)" }}>
+        <h2
+          style={{
+            fontFamily: "var(--font-family-heading)",
+            fontSize: "var(--font-size-section-heading)",
+            fontWeight: "var(--font-weight-bold)",
+            color: "var(--color-text-heading)",
+            lineHeight: "var(--line-height-tight)",
+          }}
+        >
           {step === "forgot" ? "Reset password" : "Verify OTP"}
         </h2>
-        <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
+        <p
+          style={{
+            fontFamily: "var(--font-family-body)",
+            fontSize: "var(--font-size-body)",
+            color: "var(--color-text-secondary)",
+            marginTop: "var(--space-sm)",
+            lineHeight: "var(--line-height-relaxed)",
+          }}
+        >
           {step === "forgot"
             ? "Enter your email address and we'll send you a temporary code to reset your password."
             : "Enter the verification code sent to your email address to proceed."}
@@ -74,23 +134,41 @@ export default function ForgotPasswordPage() {
 
       {/* Error Alert */}
       {error && (
-        <div className="mb-4 rounded-lg border border-destructive/30 bg-destructive/5 px-4 py-3 text-sm text-destructive">
+        <div
+          style={{
+            marginBottom: "var(--space-md)",
+            borderRadius: "var(--radius-sm-token)",
+            border: "1px solid var(--color-accent-secondary)",
+            background: "rgba(163, 58, 42, 0.06)",
+            padding: "var(--space-sm) var(--space-md)",
+            fontSize: "var(--font-size-body)",
+            color: "var(--color-accent-secondary)",
+            fontFamily: "var(--font-family-body)",
+          }}
+        >
           {error}
         </div>
       )}
 
       {/* Step 1: Request Code */}
       {step === "forgot" ? (
-        <form onSubmit={handleRequestCode} className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="reset-email">Email</Label>
+        <form
+          onSubmit={handleRequestCode}
+          className="flex flex-col"
+          style={{ gap: "var(--space-md)" }}
+        >
+          <div className="flex flex-col" style={{ gap: "var(--space-sm)" }}>
+            <Label htmlFor="reset-email" style={labelStyle}>
+              Email
+            </Label>
             <div className="relative">
               <svg
                 width="18"
                 height="18"
                 viewBox="0 0 24 24"
                 fill="none"
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                className="absolute left-3 top-1/2 -translate-y-1/2"
+                style={{ color: "var(--color-text-placeholder)" }}
               >
                 <rect
                   x="2"
@@ -115,7 +193,8 @@ export default function ForgotPasswordPage() {
                 type="email"
                 required
                 placeholder="Enter your email"
-                className="pl-10 h-11"
+                className="pl-10"
+                style={inputStyle}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 autoComplete="email"
@@ -125,85 +204,105 @@ export default function ForgotPasswordPage() {
 
           <Button
             type="submit"
-            className="w-full h-11 text-sm font-semibold bg-brand-primary hover:bg-brand-primary-dark text-white cursor-pointer transition-colors"
+            className="w-full cursor-pointer transition-colors"
+            style={primaryButtonStyle}
             disabled={isLoading}
           >
             {isLoading ? (
               <span className="flex items-center gap-2">
-                <Spinner className="w-4 h-4" /> Sending...
+                <Spinner className="w-4 h-4" /> SENDING...
               </span>
             ) : (
-              "Send Reset Code"
+              "SEND RESET CODE"
             )}
           </Button>
         </form>
       ) : (
         /* Step 2: Verify Code and Set New Password */
-        <form onSubmit={handleVerifyAndReset} className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="reset-code">8-Character Reset Code</Label>
+        <form
+          onSubmit={handleVerifyAndReset}
+          className="flex flex-col"
+          style={{ gap: "var(--space-md)" }}
+        >
+          <div className="flex flex-col" style={{ gap: "var(--space-sm)" }}>
+            <Label htmlFor="reset-code" style={labelStyle}>
+              8-Character Reset Code
+            </Label>
             <Input
               id="reset-code"
               name="code"
               type="text"
               required
               placeholder="e.g. A1B2C3D4"
-              className="h-11 font-mono tracking-widest uppercase"
+              className="font-mono tracking-widest uppercase"
+              style={inputStyle}
               autoComplete="off"
             />
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="new-password">New Password</Label>
+          <div className="flex flex-col" style={{ gap: "var(--space-sm)" }}>
+            <Label htmlFor="new-password" style={labelStyle}>
+              New Password
+            </Label>
             <Input
               id="new-password"
               name="newPassword"
               type="password"
               required
               placeholder="Enter your new password"
-              className="h-11"
+              style={inputStyle}
               autoComplete="new-password"
             />
           </div>
 
           <Button
             type="submit"
-            className="w-full h-11 text-sm font-semibold bg-brand-primary hover:bg-brand-primary-dark text-white cursor-pointer transition-colors"
+            className="w-full cursor-pointer transition-colors"
+            style={primaryButtonStyle}
             disabled={isLoading}
           >
             {isLoading ? (
               <span className="flex items-center gap-2">
-                <Spinner className="w-4 h-4" /> Resetting...
+                <Spinner className="w-4 h-4" /> RESETTING...
               </span>
             ) : (
-              "Reset Password & Login"
+              "RESET PASSWORD & LOGIN"
             )}
           </Button>
 
+          {/* Secondary/ghost button — per design guide pattern */}
           <Button
             type="button"
             variant="ghost"
-            className="w-full h-11"
+            className="w-full cursor-pointer transition-colors"
+            style={ghostButtonStyle}
             onClick={() => setStep("forgot")}
             disabled={isLoading}
           >
-            Back to email
+            BACK TO EMAIL
           </Button>
         </form>
       )}
 
       {/* Back to Sign In */}
-      <div className="mt-6 text-center">
+      <div className="text-center" style={{ marginTop: "var(--space-lg)" }}>
         <Link
           href="/sign-in"
-          className="inline-flex items-center gap-2 text-sm font-medium text-brand-primary hover:text-brand-primary-dark transition-colors"
+          className="inline-flex items-center transition-colors hover:underline"
+          style={{
+            gap: "var(--space-sm)",
+            fontSize: "var(--font-size-body)",
+            fontWeight: "var(--font-weight-medium)",
+            color: "var(--color-link)",
+            fontFamily: "var(--font-family-body)",
+          }}
         >
           <svg
             width="16"
             height="16"
             viewBox="0 0 24 24"
             fill="none"
-            className="text-current"
+            style={{ color: "currentcolor" }}
           >
             <path
               d="M19 12H5M12 19l-7-7 7-7"

@@ -102,10 +102,10 @@ export default function LMSPage() {
     <div className="flex flex-1 flex-col gap-6">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-brand-accent">
+          <h1 className="text-4xl font-serif font-bold text-foreground">
             Learning (LMS)
           </h1>
-          <p className="text-sm text-muted-foreground mt-1">
+          <p className="text-base text-muted-foreground mt-2">
             Browse courses, access lessons, and manage assignments.
           </p>
         </div>
@@ -133,7 +133,7 @@ export default function LMSPage() {
           {isAdmin && (
             <Button
               onClick={() => setIsOpen(true)}
-              className="bg-brand-primary hover:bg-brand-primary-deep text-white"
+              className="rounded-full h-10 px-5 text-sm font-medium"
             >
               <HugeiconsIcon icon={Add01Icon} className="size-4 mr-2" />
               New Course
@@ -144,44 +144,50 @@ export default function LMSPage() {
 
       {/* Stats */}
       <div className="grid gap-4 md:grid-cols-3">
-        <Card className="shadow-sm">
+        <Card className="border-border/50">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Total Courses</CardTitle>
+            <CardTitle className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+              Total Courses
+            </CardTitle>
             <HugeiconsIcon
               icon={Book01Icon}
-              className="text-brand-primary"
-              size={16}
+              className="text-foreground"
+              size={18}
             />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-brand-accent">
+            <div className="text-5xl font-serif font-medium tracking-tight text-foreground">
               {courses === undefined ? "…" : courses.length}
             </div>
           </CardContent>
         </Card>
-        <Card className="shadow-sm">
+        <Card className="border-border/50">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Active</CardTitle>
+            <CardTitle className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+              Active
+            </CardTitle>
             <HugeiconsIcon
               icon={Tick02Icon}
-              className="text-emerald-500"
-              size={16}
+              className="text-foreground"
+              size={18}
             />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-brand-accent">
+            <div className="text-5xl font-serif font-medium tracking-tight text-foreground">
               {courses === undefined
                 ? "…"
                 : courses.filter((c) => c.status === "active").length}
             </div>
           </CardContent>
         </Card>
-        <Card className="shadow-sm">
+        <Card className="border-border/50">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Total Lessons</CardTitle>
+            <CardTitle className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+              Total Lessons
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-brand-accent">
+            <div className="text-5xl font-serif font-medium tracking-tight text-foreground">
               {courses === undefined
                 ? "…"
                 : courses.reduce((s, c) => s + c.lessonCount, 0)}
@@ -211,28 +217,23 @@ export default function LMSPage() {
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {filtered?.map((course) => (
             <Link key={course._id} href={`/dashboard/lms/${course._id}`}>
-              <Card className="shadow-sm border-t-4 border-t-brand-primary hover:shadow-md transition-shadow cursor-pointer h-full">
+              <Card className="border border-border/50 hover:border-foreground transition-colors cursor-pointer h-full rounded-none">
                 <CardHeader className="pb-2">
                   <div className="flex items-center justify-between">
                     <Badge
                       variant="outline"
-                      className="text-[10px] bg-brand-primary/10 text-brand-primary"
+                      className="text-[10px] uppercase tracking-wider rounded-none font-semibold border-foreground"
                     >
                       {course.subjectName}
                     </Badge>
-                    <Badge
-                      variant={
-                        course.status === "active" ? "default" : "secondary"
-                      }
-                      className="text-[10px]"
-                    >
+                    <span className="text-[10px] font-medium tracking-widest text-muted-foreground uppercase">
                       {course.status}
-                    </Badge>
+                    </span>
                   </div>
-                  <CardTitle className="text-lg font-bold text-brand-accent mt-2">
+                  <CardTitle className="text-2xl font-serif font-bold text-foreground mt-4">
                     {course.title}
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-sm font-medium text-foreground mt-1">
                     {course.className} • {course.creatorName}
                   </CardDescription>
                 </CardHeader>

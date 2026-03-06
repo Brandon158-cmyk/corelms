@@ -16,11 +16,18 @@ import {
 import { useRouter } from "next/navigation";
 import { useDebounce } from "use-debounce";
 import { Spinner } from "@/components/ui/spinner";
-import { cn } from "@/lib/utils";
 
 type SearchResultType = "Student" | "Staff" | "Class" | "Subject";
 
-export function UniversalSearch() {
+/**
+ * variant="default"  — compact search for top bar / inline use
+ * variant="banner"   — large search with maroon button, like PwC Digital Lab
+ */
+type UniversalSearchProps = {
+  variant?: "default" | "banner";
+};
+
+export function UniversalSearch({ variant = "default" }: UniversalSearchProps) {
   const [searchTerm, setSearchTerm] = React.useState("");
   const [debouncedTerm] = useDebounce(searchTerm, 300);
   const [isOpen, setIsOpen] = React.useState(false);
@@ -83,55 +90,138 @@ export function UniversalSearch() {
     }
   };
 
+  const showDropdown = isOpen && debouncedTerm.length >= 2;
+  const isBanner = variant === "banner";
+
   return (
     <div ref={wrapperRef} className="relative w-full group">
-      <HugeiconsIcon
-        icon={SearchIcon}
-        strokeWidth={2}
-        className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-brand-primary"
-      />
-      <Input
-        type="search"
-        placeholder="Search students, classes, or subjects..."
-        value={searchTerm}
-        onChange={(e) => {
-          setSearchTerm(e.target.value);
-          setIsOpen(true);
+      {/* Search input row */}
+      <div
+        className="flex items-stretch w-full overflow-hidden"
+        style={{
+          borderRadius: showDropdown
+            ? "var(--radius-md-token) var(--radius-md-token) 0 0"
+            : "var(--radius-md-token)",
+          background: "var(--color-surface-primary)",
+          boxShadow: isBanner ? "0 2px 8px rgba(0,0,0,0.15)" : "none",
         }}
-        onFocus={() => {
-          if (searchTerm.trim().length >= 2) {
-            setIsOpen(true);
-          }
-        }}
-        className={cn(
-          "pl-10 h-10 w-full bg-transparent border-2 border-brand-primary/50 text-foreground placeholder:text-muted-foreground hover:border-brand-primary focus-visible:ring-0 focus-visible:border-brand-primary transition-all shadow-sm",
-          isOpen && debouncedTerm.length >= 2
-            ? "rounded-t-2xl rounded-b-none border-b-transparent"
-            : "rounded-full",
-        )}
-      />
+      >
+        {/* Input field */}
+        <div className="relative flex-1">
+          {!isBanner && (
+            <HugeiconsIcon
+              icon={SearchIcon}
+              strokeWidth={2}
+              className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 size-4"
+              style={{ color: "var(--color-accent-primary)" }}
+            />
+          )}
+          <Input
+            type="search"
+            placeholder="Search students, classes, or subjects..."
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setIsOpen(true);
+            }}
+            onFocus={() => {
+              if (searchTerm.trim().length >= 2) {
+                setIsOpen(true);
+              }
+            }}
+            className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none"
+            style={{
+              height: isBanner ? "52px" : "36px",
+              paddingLeft: isBanner ? "var(--space-lg)" : "40px",
+              paddingRight: "var(--space-md)",
+              borderRadius: "0",
+              fontFamily: "var(--font-family-body)",
+              fontSize: isBanner
+                ? "var(--font-size-body)"
+                : "var(--font-size-caption)",
+              color: "var(--color-text-body)",
+              background: "transparent",
+            }}
+          />
+        </div>
+        {/* Search button — solid maroon, like PwC's orange button */}
+        <button
+          type="button"
+          className="flex items-center justify-center shrink-0 transition-opacity hover:opacity-90 cursor-pointer"
+          style={{
+            width: isBanner ? "52px" : "40px",
+            background: "var(--color-accent-primary)",
+            color: "var(--color-text-inverse)",
+          }}
+          onClick={() => {
+            if (searchTerm.trim().length >= 2) {
+              setIsOpen(true);
+            }
+          }}
+          aria-label="Search"
+        >
+          <HugeiconsIcon
+            icon={SearchIcon}
+            strokeWidth={2.5}
+            className={isBanner ? "size-5" : "size-4"}
+          />
+        </button>
+      </div>
 
-      {isOpen && debouncedTerm.length >= 2 && (
-        <div className="absolute top-full left-0 right-0 w-full bg-white dark:bg-zinc-900 border-2 border-t-0 border-brand-primary rounded-b-2xl shadow-xl overflow-hidden z-50 max-h-[400px] overflow-y-auto flex flex-col">
+      {/* Dropdown results */}
+      {showDropdown && (
+        <div
+          className="absolute top-full left-0 right-0 w-full overflow-hidden z-50 overflow-y-auto flex flex-col"
+          style={{
+            background: "var(--color-surface-primary)",
+            borderTop: "1px solid var(--color-border-default)",
+            borderRadius: "0 0 var(--radius-md-token) var(--radius-md-token)",
+            boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
+            maxHeight: "400px",
+          }}
+        >
           {isLoading && (
-            <div className="flex items-center justify-center p-6 text-muted-foreground">
+            <div
+              className="flex items-center justify-center"
+              style={{
+                padding: "var(--space-lg)",
+                color: "var(--color-text-secondary)",
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-body)",
+              }}
+            >
               <Spinner className="mr-2" />
               Searching...
             </div>
           )}
 
           {!isLoading && !hasResults && (
-            <div className="flex flex-col items-center justify-center p-8 text-muted-foreground">
+            <div
+              className="flex flex-col items-center justify-center"
+              style={{
+                padding: "var(--space-xl)",
+                color: "var(--color-text-secondary)",
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-body)",
+              }}
+            >
               <HugeiconsIcon
                 icon={Cancel01Icon}
-                className="mb-2 size-8 text-brand-primary/30"
+                className="size-8"
+                style={{
+                  marginBottom: "var(--space-sm)",
+                  color: "var(--color-text-placeholder)",
+                }}
               />
-              <p>No results found for "{debouncedTerm}"</p>
+              <p>No results found for &quot;{debouncedTerm}&quot;</p>
             </div>
           )}
 
           {!isLoading && hasResults && (
-            <div className="flex flex-col p-2 space-y-4">
+            <div
+              className="flex flex-col"
+              style={{ padding: "var(--space-sm)", gap: "var(--space-md)" }}
+            >
               {(Object.keys(groupedResults) as SearchResultType[]).map(
                 (type) => {
                   const results = groupedResults[type];
@@ -141,24 +231,74 @@ export function UniversalSearch() {
 
                   return (
                     <div key={type} className="flex flex-col">
-                      <h4 className="px-3 py-1.5 text-xs font-semibold text-muted-foreground tracking-wider uppercase bg-muted/30 rounded-md">
+                      <h4
+                        style={{
+                          padding: "var(--space-xs) var(--space-sm)",
+                          fontSize: "var(--font-size-tag)",
+                          fontFamily: "var(--font-family-body)",
+                          fontWeight: "var(--font-weight-medium)",
+                          color: "var(--color-text-secondary)",
+                          letterSpacing: "var(--letter-spacing-uppercase)",
+                          textTransform: "uppercase",
+                          background: "var(--color-surface-secondary)",
+                          borderRadius: "var(--radius-sm-token)",
+                        }}
+                      >
                         {type}s
                       </h4>
-                      <div className="mt-1 flex flex-col gap-1">
+                      <div
+                        className="flex flex-col"
+                        style={{ marginTop: "var(--space-xs)", gap: "2px" }}
+                      >
                         {results?.map((result: any) => (
                           <button
                             key={result.id}
                             onClick={() => handleSelect(result.href)}
-                            className="flex items-center w-full gap-3 px-3 py-2 text-left hover:bg-brand-primary/10 rounded-md transition-colors group/item focus:bg-brand-primary/10 focus:outline-none"
+                            className="flex items-center w-full text-left transition-colors group/item focus:outline-none"
+                            style={{
+                              gap: "var(--space-sm)",
+                              padding: "var(--space-sm)",
+                              borderRadius: "var(--radius-sm-token)",
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.background =
+                                "var(--color-surface-secondary)";
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.background = "transparent";
+                            }}
                           >
-                            <div className="flex items-center justify-center size-8 rounded-full bg-brand-primary/10 text-brand-primary group-hover/item:bg-brand-primary group-hover/item:text-white transition-colors shrink-0">
+                            <div
+                              className="flex items-center justify-center shrink-0 rounded-full"
+                              style={{
+                                width: "32px",
+                                height: "32px",
+                                background: "rgba(139, 30, 30, 0.08)",
+                                color: "var(--color-accent-primary)",
+                              }}
+                            >
                               <HugeiconsIcon icon={Icon} className="size-4" />
                             </div>
                             <div className="flex flex-col min-w-0">
-                              <span className="text-sm font-medium text-foreground truncate block">
+                              <span
+                                className="truncate block"
+                                style={{
+                                  fontFamily: "var(--font-family-body)",
+                                  fontSize: "var(--font-size-body)",
+                                  fontWeight: "var(--font-weight-medium)",
+                                  color: "var(--color-text-body)",
+                                }}
+                              >
                                 {result.title}
                               </span>
-                              <span className="text-xs text-muted-foreground truncate block">
+                              <span
+                                className="truncate block"
+                                style={{
+                                  fontFamily: "var(--font-family-body)",
+                                  fontSize: "var(--font-size-tag)",
+                                  color: "var(--color-text-secondary)",
+                                }}
+                              >
                                 {result.subtitle}
                               </span>
                             </div>

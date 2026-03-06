@@ -21,13 +21,24 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 
+/* Shared card style */
+const cardStyle = {
+  background: "var(--color-surface-primary)",
+  border: "var(--card-border-width) solid var(--color-border-default)",
+  borderRadius: "var(--radius-md-token)",
+  boxShadow: "var(--shadow-card)",
+};
+
 export function TeacherDashboard() {
   const stats = useQuery(api.dashboard.getTeacherStats);
 
   if (stats === undefined) {
     return (
       <div className="flex h-[400px] items-center justify-center">
-        <Spinner className="size-8" />
+        <Spinner
+          className="size-8"
+          style={{ color: "var(--color-accent-primary)" }}
+        />
       </div>
     );
   }
@@ -37,47 +48,112 @@ export function TeacherDashboard() {
   }
 
   return (
-    <div className="flex flex-col gap-6">
+    <div
+      className="flex flex-col"
+      style={{ gap: "var(--space-lg)", paddingTop: "var(--space-lg)" }}
+    >
       <div className="grid gap-4 md:grid-cols-2">
-        <Card className="shadow-sm">
+        {/* Your Classes */}
+        <Card style={cardStyle}>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Your Classes</CardTitle>
-            <div className="rounded-full bg-brand-primary/10 p-2">
+            <CardTitle
+              style={{
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-tag)",
+                fontWeight: "var(--font-weight-medium)",
+                letterSpacing: "var(--letter-spacing-uppercase)",
+                textTransform: "uppercase",
+                color: "var(--color-text-secondary)",
+              }}
+            >
+              Your Classes
+            </CardTitle>
+            <div
+              className="rounded-full"
+              style={{
+                padding: "var(--space-sm)",
+                background: "rgba(139, 30, 30, 0.08)",
+              }}
+            >
               <HugeiconsIcon
                 icon={UserMultiple02Icon}
-                className="text-brand-primary"
-                size={16}
+                style={{ color: "var(--color-accent-primary)" }}
+                size={18}
               />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-brand-accent">
+            <div
+              style={{
+                fontFamily: "var(--font-family-heading)",
+                fontSize: "var(--font-size-hero)",
+                fontWeight: "var(--font-weight-bold)",
+                color: "var(--color-text-heading)",
+              }}
+            >
               {stats.classesCount}
             </div>
-            <p className="text-xs text-muted-foreground mt-1">
+            <p
+              style={{
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-tag)",
+                color: "var(--color-text-secondary)",
+                marginTop: "var(--space-xs)",
+              }}
+            >
               Classes attached to your profile
             </p>
           </CardContent>
         </Card>
 
-        <Card className="shadow-sm">
+        {/* Open Assignments */}
+        <Card style={cardStyle}>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">
+            <CardTitle
+              style={{
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-tag)",
+                fontWeight: "var(--font-weight-medium)",
+                letterSpacing: "var(--letter-spacing-uppercase)",
+                textTransform: "uppercase",
+                color: "var(--color-text-secondary)",
+              }}
+            >
               Open Assignments
             </CardTitle>
-            <div className="rounded-full bg-blue-500/10 p-2">
+            <div
+              className="rounded-full"
+              style={{
+                padding: "var(--space-sm)",
+                background: "rgba(22, 78, 99, 0.08)",
+              }}
+            >
               <HugeiconsIcon
                 icon={TaskDaily01Icon}
-                className="text-blue-500"
-                size={16}
+                style={{ color: "var(--color-category-teal)" }}
+                size={18}
               />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-brand-accent">
+            <div
+              style={{
+                fontFamily: "var(--font-family-heading)",
+                fontSize: "var(--font-size-hero)",
+                fontWeight: "var(--font-weight-bold)",
+                color: "var(--color-text-heading)",
+              }}
+            >
               {stats.assignmentCount}
             </div>
-            <p className="text-xs text-muted-foreground mt-1">
+            <p
+              style={{
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-tag)",
+                color: "var(--color-text-secondary)",
+                marginTop: "var(--space-xs)",
+              }}
+            >
               Assignments pending grading
             </p>
           </CardContent>
@@ -85,32 +161,69 @@ export function TeacherDashboard() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <Card className="shadow-sm">
+        {/* My Classes Overview */}
+        <Card style={cardStyle}>
           <CardHeader>
-            <CardTitle>My Classes Overview</CardTitle>
-            <CardDescription>
+            <CardTitle
+              style={{
+                fontFamily: "var(--font-family-heading)",
+                fontSize: "var(--font-size-section-heading)",
+                color: "var(--color-text-heading)",
+              }}
+            >
+              My Classes Overview
+            </CardTitle>
+            <CardDescription
+              style={{
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-caption)",
+                color: "var(--color-text-secondary)",
+              }}
+            >
               Quick access to classes you teach or manage.
             </CardDescription>
           </CardHeader>
           <CardContent>
             {stats.myClasses.length > 0 ? (
-              <div className="space-y-3">
+              <div className="flex flex-col" style={{ gap: "var(--space-sm)" }}>
                 {stats.myClasses.map((c: any) => (
                   <div
                     key={c._id}
-                    className="flex items-center justify-between p-3 border rounded-lg bg-muted/5"
+                    className="flex items-center justify-between transition-colors"
+                    style={{
+                      padding: "var(--space-md)",
+                      border: "1px solid var(--color-border-default)",
+                      borderRadius: "var(--radius-sm-token)",
+                    }}
                   >
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 rounded-md bg-brand-primary/10">
-                        <HugeiconsIcon
-                          icon={Book01Icon}
-                          className="size-4 text-brand-primary"
-                        />
-                      </div>
+                    <div
+                      className="flex items-center"
+                      style={{ gap: "var(--space-md)" }}
+                    >
+                      <HugeiconsIcon
+                        icon={Book01Icon}
+                        className="size-5"
+                        style={{ color: "var(--color-text-body)" }}
+                      />
                       <div>
-                        <p className="text-sm font-semibold">{c.name}</p>
-                        <p className="text-xs text-muted-foreground">
-                          Room: {c.room || "N/A"}
+                        <p
+                          style={{
+                            fontFamily: "var(--font-family-body)",
+                            fontSize: "var(--font-size-body)",
+                            fontWeight: "var(--font-weight-medium)",
+                            color: "var(--color-text-body)",
+                          }}
+                        >
+                          {c.name}
+                        </p>
+                        <p
+                          style={{
+                            fontFamily: "var(--font-family-body)",
+                            fontSize: "var(--font-size-caption)",
+                            color: "var(--color-text-secondary)",
+                          }}
+                        >
+                          {c.room || "N/A"}
                         </p>
                       </div>
                     </div>
@@ -118,42 +231,110 @@ export function TeacherDashboard() {
                 ))}
               </div>
             ) : (
-              <div className="flex h-[150px] items-center justify-center text-sm text-muted-foreground border border-dashed rounded-lg bg-muted/20">
+              <div
+                className="flex h-[150px] items-center justify-center"
+                style={{
+                  fontFamily: "var(--font-family-body)",
+                  fontSize: "var(--font-size-body)",
+                  color: "var(--color-text-secondary)",
+                  border: "1px dashed var(--color-border-default)",
+                  borderRadius: "var(--radius-sm-token)",
+                  background: "var(--color-surface-secondary)",
+                }}
+              >
                 You are not assigned to any classes yet.
               </div>
             )}
           </CardContent>
         </Card>
 
-        <Card className="shadow-sm">
+        {/* Recent Assignments */}
+        <Card style={cardStyle}>
           <CardHeader>
-            <CardTitle>Recent Assignments</CardTitle>
-            <CardDescription>Your recently created open tasks.</CardDescription>
+            <CardTitle
+              style={{
+                fontFamily: "var(--font-family-heading)",
+                fontSize: "var(--font-size-section-heading)",
+                color: "var(--color-text-heading)",
+              }}
+            >
+              Recent Assignments
+            </CardTitle>
+            <CardDescription
+              style={{
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-caption)",
+                color: "var(--color-text-secondary)",
+              }}
+            >
+              Your recently created open tasks.
+            </CardDescription>
           </CardHeader>
           <CardContent>
             {stats.recentAssignments.length > 0 ? (
-              <div className="space-y-3">
+              <div className="flex flex-col" style={{ gap: "var(--space-sm)" }}>
                 {stats.recentAssignments.map((a: any) => (
                   <div
                     key={a._id}
-                    className="flex flex-col gap-1 p-3 border rounded-lg bg-muted/5"
+                    className="flex flex-col transition-colors"
+                    style={{
+                      gap: "var(--space-sm)",
+                      padding: "var(--space-md)",
+                      border: "1px solid var(--color-border-default)",
+                      borderRadius: "var(--radius-sm-token)",
+                    }}
                   >
                     <div className="flex justify-between items-start">
-                      <p className="text-sm font-semibold line-clamp-1">
+                      <p
+                        className="line-clamp-1"
+                        style={{
+                          fontFamily: "var(--font-family-body)",
+                          fontSize: "var(--font-size-body)",
+                          fontWeight: "var(--font-weight-medium)",
+                          color: "var(--color-text-body)",
+                        }}
+                      >
                         {a.title}
                       </p>
-                      <span className="text-[10px] font-semibold tracking-wider text-green-600 bg-green-100 px-2 py-0.5 rounded-full uppercase">
+                      <span
+                        style={{
+                          fontFamily: "var(--font-family-body)",
+                          fontSize: "var(--font-size-tag)",
+                          fontWeight: "var(--font-weight-medium)",
+                          letterSpacing: "var(--letter-spacing-uppercase)",
+                          textTransform: "uppercase",
+                          color: "var(--color-text-secondary)",
+                          background: "var(--color-surface-secondary)",
+                          padding: "2px var(--space-sm)",
+                          border: "1px solid var(--color-border-default)",
+                          borderRadius: "var(--radius-sm-token)",
+                        }}
+                      >
                         open
                       </span>
                     </div>
-                    <div className="flex justify-between items-center text-xs text-muted-foreground mt-1">
-                      <span>
+                    <div
+                      className="flex justify-between items-center"
+                      style={{ marginTop: "var(--space-xs)" }}
+                    >
+                      <span
+                        style={{
+                          fontFamily: "var(--font-family-body)",
+                          fontSize: "var(--font-size-caption)",
+                          color: "var(--color-text-secondary)",
+                        }}
+                      >
                         Due: {format(new Date(a.dueDate), "MMM dd, yyyy")}
                       </span>
                       <Button
                         variant="link"
                         size="sm"
-                        className="h-auto p-0 text-brand-primary"
+                        className="h-auto p-0"
+                        style={{
+                          fontFamily: "var(--font-family-body)",
+                          fontWeight: "var(--font-weight-medium)",
+                          color: "var(--color-accent-primary)",
+                        }}
                         nativeButton={false}
                         render={
                           <Link
@@ -172,7 +353,17 @@ export function TeacherDashboard() {
                 ))}
               </div>
             ) : (
-              <div className="flex h-[150px] items-center justify-center text-sm text-muted-foreground border border-dashed rounded-lg bg-muted/20">
+              <div
+                className="flex h-[150px] items-center justify-center"
+                style={{
+                  fontFamily: "var(--font-family-body)",
+                  fontSize: "var(--font-size-body)",
+                  color: "var(--color-text-secondary)",
+                  border: "1px dashed var(--color-border-default)",
+                  borderRadius: "var(--radius-sm-token)",
+                  background: "var(--color-surface-secondary)",
+                }}
+              >
                 No recent assignments.
               </div>
             )}

@@ -35,33 +35,76 @@ export default function SignInPage() {
 
   return (
     <div>
-      <div className="mb-8 text-center sm:text-left">
-        <h2 className="text-2xl font-bold text-brand-accent tracking-tight">
-          Welcome back
+      {/* Page heading — serif, page-title size */}
+      <div style={{ marginBottom: "var(--space-xl)" }}>
+        <h2
+          style={{
+            fontFamily: "var(--font-family-heading)",
+            fontSize: "var(--font-size-page-title)",
+            fontWeight: "var(--font-weight-bold)",
+            color: "var(--color-text-heading)",
+            lineHeight: "var(--line-height-tight)",
+          }}
+        >
+          Welcome back.
         </h2>
-        <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
-          Log in to your account to continue to your dashboard.
+        <p
+          style={{
+            fontFamily: "var(--font-family-body)",
+            fontSize: "var(--font-size-body)",
+            color: "var(--color-text-secondary)",
+            marginTop: "var(--space-sm)",
+            lineHeight: "var(--line-height-relaxed)",
+          }}
+        >
+          Log in to your account to continue.
         </p>
       </div>
 
       {/* Error Alert */}
       {error && (
-        <div className="mb-4 rounded-lg border border-destructive/30 bg-destructive/5 px-4 py-3 text-sm text-destructive">
+        <div
+          style={{
+            marginBottom: "var(--space-md)",
+            borderRadius: "var(--radius-sm-token)",
+            border: "1px solid var(--color-accent-secondary)",
+            background: "rgba(163, 58, 42, 0.06)",
+            padding: "var(--space-sm) var(--space-md)",
+            fontSize: "var(--font-size-body)",
+            color: "var(--color-accent-secondary)",
+            fontFamily: "var(--font-family-body)",
+          }}
+        >
           {error}
         </div>
       )}
 
       {/* Form */}
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="space-y-2">
-          <Label htmlFor="signin-email">Email</Label>
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col"
+        style={{ gap: "var(--space-md)" }}
+      >
+        <div className="flex flex-col" style={{ gap: "var(--space-sm)" }}>
+          <Label
+            htmlFor="signin-email"
+            style={{
+              fontFamily: "var(--font-family-body)",
+              fontSize: "var(--font-size-body)",
+              fontWeight: "var(--font-weight-medium)",
+              color: "var(--color-text-body)",
+            }}
+          >
+            Email
+          </Label>
           <div className="relative">
             <svg
               width="18"
               height="18"
               viewBox="0 0 24 24"
               fill="none"
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+              className="absolute left-3 top-1/2 -translate-y-1/2"
+              style={{ color: "var(--color-text-placeholder)" }}
             >
               <rect
                 x="2"
@@ -86,21 +129,39 @@ export default function SignInPage() {
               type="email"
               required
               placeholder="Enter your email"
-              className="pl-10 h-11"
+              className="pl-10"
+              style={{
+                height: "var(--input-height)",
+                borderRadius: "var(--radius-sm-token)",
+                border: "1px solid var(--color-border-input)",
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-body)",
+              }}
               autoComplete="email"
             />
           </div>
         </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="signin-password">Password</Label>
+        <div className="flex flex-col" style={{ gap: "var(--space-sm)" }}>
+          <Label
+            htmlFor="signin-password"
+            style={{
+              fontFamily: "var(--font-family-body)",
+              fontSize: "var(--font-size-body)",
+              fontWeight: "var(--font-weight-medium)",
+              color: "var(--color-text-body)",
+            }}
+          >
+            Password
+          </Label>
           <div className="relative">
             <svg
               width="18"
               height="18"
               viewBox="0 0 24 24"
               fill="none"
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+              className="absolute left-3 top-1/2 -translate-y-1/2"
+              style={{ color: "var(--color-text-placeholder)" }}
             >
               <rect
                 x="3"
@@ -125,15 +186,34 @@ export default function SignInPage() {
               type="password"
               required
               placeholder="Enter your password"
-              className="pl-10 h-11"
+              className="pl-10"
+              style={{
+                height: "var(--input-height)",
+                borderRadius: "var(--radius-sm-token)",
+                border: "1px solid var(--color-border-input)",
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-body)",
+              }}
               autoComplete="current-password"
             />
           </div>
         </div>
 
+        {/* Primary Button — solid maroon, uppercase, sm radius */}
         <Button
           type="submit"
-          className="w-full h-11 text-sm font-semibold bg-brand-primary hover:bg-brand-primary-dark text-white cursor-pointer transition-colors"
+          className="w-full cursor-pointer transition-colors"
+          style={{
+            height: "var(--input-height)",
+            background: "var(--color-accent-primary)",
+            color: "var(--color-text-inverse)",
+            borderRadius: "var(--radius-sm-token)",
+            textTransform: "uppercase" as const,
+            fontFamily: "var(--font-family-body)",
+            fontWeight: "var(--font-weight-medium)",
+            fontSize: "var(--font-size-body)",
+            letterSpacing: "var(--letter-spacing-uppercase)",
+          }}
           disabled={isLoading}
         >
           {isLoading ? (
@@ -142,27 +222,44 @@ export default function SignInPage() {
               Signing in...
             </span>
           ) : (
-            "Log In"
+            "LOG IN"
           )}
         </Button>
       </form>
 
       {/* Links */}
-      <div className="mt-6 text-center space-y-2">
-        <p className="text-sm text-muted-foreground">
+      <div className="text-center" style={{ marginTop: "var(--space-xl)" }}>
+        <p
+          style={{
+            fontSize: "var(--font-size-body)",
+            color: "var(--color-text-secondary)",
+            fontFamily: "var(--font-family-body)",
+            marginBottom: "var(--space-sm)",
+          }}
+        >
           Don&apos;t have an account?{" "}
           <Link
             href="/sign-up"
-            className="font-medium text-brand-primary hover:text-brand-primary-dark transition-colors"
+            style={{
+              fontWeight: "var(--font-weight-semibold)",
+              color: "var(--color-link)",
+            }}
+            className="hover:underline transition-colors"
           >
             Register
           </Link>
         </p>
         <Link
           href="/forgot-password"
-          className="text-sm font-medium text-brand-primary hover:text-brand-primary-dark transition-colors inline-block"
+          style={{
+            fontSize: "var(--font-size-body)",
+            fontWeight: "var(--font-weight-semibold)",
+            color: "var(--color-link)",
+            fontFamily: "var(--font-family-body)",
+          }}
+          className="hover:underline transition-colors inline-block"
         >
-          Forgot your password?
+          Forgot password?
         </Link>
       </div>
     </div>

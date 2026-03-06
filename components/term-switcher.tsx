@@ -99,18 +99,41 @@ export function TermSwitcher() {
               />
             }
           >
-            <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
+            {/* School icon — maroon accent on sidebar */}
+            <div
+              className="flex aspect-square items-center justify-center rounded-lg"
+              style={{
+                width: "32px",
+                height: "32px",
+                background: "var(--color-accent-primary)",
+                color: "var(--color-text-inverse)",
+              }}
+            >
               <HugeiconsIcon
                 icon={SchoolIcon}
                 strokeWidth={2}
                 className="size-4"
               />
             </div>
-            <div className="flex flex-col gap-0.5 leading-none">
-              <span className="font-medium truncate max-w-[140px]">
+            <div className="flex flex-col leading-none" style={{ gap: "2px" }}>
+              <span
+                className="truncate max-w-[140px]"
+                style={{
+                  fontFamily: "var(--font-family-body)",
+                  fontWeight: "var(--font-weight-medium)",
+                  fontSize: "var(--font-size-body)",
+                }}
+              >
                 {schoolName}
               </span>
-              <span className="text-xs text-sidebar-foreground/60 truncate max-w-[140px]">
+              <span
+                className="truncate max-w-[140px]"
+                style={{
+                  fontFamily: "var(--font-family-body)",
+                  fontSize: "var(--font-size-tag)",
+                  opacity: 0.6,
+                }}
+              >
                 {displayLabel}
               </span>
             </div>
@@ -120,7 +143,14 @@ export function TermSwitcher() {
               className="ml-auto"
             />
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="start" className="w-[220px]">
+          <DropdownMenuContent
+            align="start"
+            style={{
+              width: "220px",
+              fontFamily: "var(--font-family-body)",
+              fontSize: "var(--font-size-body)",
+            }}
+          >
             {/* All Time option */}
             <DropdownMenuItem onClick={selectAllTime}>
               <HugeiconsIcon
@@ -134,6 +164,7 @@ export function TermSwitcher() {
                   icon={Tick02Icon}
                   strokeWidth={2}
                   className="ml-auto size-4"
+                  style={{ color: "var(--color-accent-primary)" }}
                 />
               )}
             </DropdownMenuItem>
@@ -148,7 +179,6 @@ export function TermSwitcher() {
                 mode === "years" && selectedYearIds.includes(year._id);
 
               if (yearTerms.length === 0) {
-                // No terms — just show as a clickable item
                 return (
                   <DropdownMenuItem
                     key={year._id}
@@ -165,13 +195,13 @@ export function TermSwitcher() {
                         icon={Tick02Icon}
                         strokeWidth={2}
                         className="ml-auto size-4"
+                        style={{ color: "var(--color-accent-primary)" }}
                       />
                     )}
                   </DropdownMenuItem>
                 );
               }
 
-              // Has terms — show as submenu
               return (
                 <DropdownMenuSub key={year._id}>
                   <DropdownMenuSubTrigger>
@@ -186,11 +216,11 @@ export function TermSwitcher() {
                         icon={Tick02Icon}
                         strokeWidth={2}
                         className="ml-auto size-4 mr-2"
+                        style={{ color: "var(--color-accent-primary)" }}
                       />
                     )}
                   </DropdownMenuSubTrigger>
                   <DropdownMenuSubContent>
-                    {/* Select entire year */}
                     <DropdownMenuItem onClick={() => selectYear(year._id)}>
                       All of {year.name}
                       {isYearSelected && (
@@ -198,11 +228,11 @@ export function TermSwitcher() {
                           icon={Tick02Icon}
                           strokeWidth={2}
                           className="ml-auto size-4"
+                          style={{ color: "var(--color-accent-primary)" }}
                         />
                       )}
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    {/* Individual terms */}
                     {yearTerms.map((term) => {
                       const isTermSelected =
                         mode === "terms" && selectedTermIds.includes(term._id);
@@ -217,6 +247,7 @@ export function TermSwitcher() {
                               icon={Tick02Icon}
                               strokeWidth={2}
                               className="ml-auto size-4"
+                              style={{ color: "var(--color-accent-primary)" }}
                             />
                           )}
                         </DropdownMenuItem>
@@ -229,7 +260,13 @@ export function TermSwitcher() {
 
             {(!years || years.length === 0) && (
               <DropdownMenuItem disabled>
-                <span className="text-muted-foreground text-xs">
+                <span
+                  style={{
+                    color: "var(--color-text-secondary)",
+                    fontSize: "var(--font-size-tag)",
+                    fontFamily: "var(--font-family-body)",
+                  }}
+                >
                   No academic years configured
                 </span>
               </DropdownMenuItem>

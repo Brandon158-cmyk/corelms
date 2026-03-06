@@ -279,62 +279,88 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarSeparator className="mx-0" />
       </SidebarHeader>
       <SidebarContent className="gap-0">
-        {visibleNav.map((item) =>
-          item.items ? (
-            <Collapsible
-              key={item.title}
-              title={item.title}
-              defaultOpen
-              className="group/collapsible"
-            >
+        {visibleNav.map((item, index) => (
+          <React.Fragment key={item.title}>
+            {item.items ? (
+              <Collapsible
+                title={item.title}
+                defaultOpen
+                className="group/collapsible"
+              >
+                <SidebarGroup>
+                  <SidebarGroupLabel
+                    className="group/label text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                    style={{
+                      fontFamily: "var(--font-family-body)",
+                      fontSize: "var(--font-size-tag)",
+                      fontWeight: "var(--font-weight-medium)",
+                      letterSpacing: "var(--letter-spacing-uppercase)",
+                      textTransform: "uppercase",
+                    }}
+                    render={<CollapsibleTrigger />}
+                  >
+                    {item.title}{" "}
+                    <HugeiconsIcon
+                      icon={ArrowRight01Icon}
+                      strokeWidth={2}
+                      className="ml-auto transition-transform group-data-open/collapsible:rotate-90"
+                    />
+                  </SidebarGroupLabel>
+                  <CollapsibleContent>
+                    <SidebarGroupContent>
+                      <SidebarMenu>
+                        {item.items.map((subItem) => {
+                          const isActive =
+                            pathname === subItem.url ||
+                            (subItem.url !== "/dashboard" &&
+                              pathname.startsWith(`${subItem.url}/`));
+
+                          return (
+                            <SidebarMenuItem key={subItem.title}>
+                              <SidebarMenuButton
+                                isActive={isActive}
+                                render={<Link href={subItem.url} />}
+                                style={{
+                                  fontFamily: "var(--font-family-body)",
+                                  fontSize: "var(--font-size-nav)",
+                                  fontWeight: isActive
+                                    ? "var(--font-weight-medium)"
+                                    : "var(--font-weight-regular)",
+                                }}
+                              >
+                                {subItem.title}
+                              </SidebarMenuButton>
+                            </SidebarMenuItem>
+                          );
+                        })}
+                      </SidebarMenu>
+                    </SidebarGroupContent>
+                  </CollapsibleContent>
+                </SidebarGroup>
+              </Collapsible>
+            ) : (
               <SidebarGroup>
                 <SidebarGroupLabel
-                  className="group/label text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sm"
-                  render={<CollapsibleTrigger />}
+                  className="group/label text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                  style={{
+                    fontFamily: "var(--font-family-body)",
+                    fontSize: "var(--font-size-tag)",
+                    fontWeight: "var(--font-weight-medium)",
+                    letterSpacing: "var(--letter-spacing-uppercase)",
+                    textTransform: "uppercase",
+                  }}
+                  render={<Link href={item.url} />}
                 >
-                  {item.title}{" "}
-                  <HugeiconsIcon
-                    icon={ArrowRight01Icon}
-                    strokeWidth={2}
-                    className="ml-auto transition-transform group-data-open/collapsible:rotate-90"
-                  />
+                  {item.title}
                 </SidebarGroupLabel>
-                <CollapsibleContent>
-                  <SidebarGroupContent>
-                    <SidebarMenu>
-                      {item.items.map((subItem) => {
-                        const isActive =
-                          pathname === subItem.url ||
-                          (subItem.url !== "/dashboard" &&
-                            pathname.startsWith(`${subItem.url}/`));
-
-                        return (
-                          <SidebarMenuItem key={subItem.title}>
-                            <SidebarMenuButton
-                              isActive={isActive}
-                              render={<Link href={subItem.url} />}
-                            >
-                              {subItem.title}
-                            </SidebarMenuButton>
-                          </SidebarMenuItem>
-                        );
-                      })}
-                    </SidebarMenu>
-                  </SidebarGroupContent>
-                </CollapsibleContent>
               </SidebarGroup>
-            </Collapsible>
-          ) : (
-            <SidebarGroup key={item.title}>
-              <SidebarGroupLabel
-                className="group/label text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sm"
-                render={<Link href={item.url} />}
-              >
-                {item.title}
-              </SidebarGroupLabel>
-            </SidebarGroup>
-          ),
-        )}
+            )}
+            {/* Separator between nav groups */}
+            {index < visibleNav.length - 1 && (
+              <SidebarSeparator className="mx-0" />
+            )}
+          </React.Fragment>
+        ))}
       </SidebarContent>
       <SidebarRail />
     </Sidebar>

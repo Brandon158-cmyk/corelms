@@ -11,6 +11,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Spinner } from "@/components/ui/spinner";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { PageBanner } from "@/components/layout/PageBanner";
 
 // Specific Dashboards
 import { AdminDashboard } from "@/components/dashboard/AdminDashboard";
@@ -24,15 +25,24 @@ export default function Page() {
 
   if (user === undefined) {
     return (
-      <div className="flex flex-1 items-center justify-center p-10">
-        <Spinner className="size-8" />
+      <div
+        className="flex flex-1 items-center justify-center"
+        style={{ padding: "var(--space-xxl)" }}
+      >
+        <Spinner
+          className="size-8"
+          style={{ color: "var(--color-accent-primary)" }}
+        />
       </div>
     );
   }
 
   if (user === null) {
     return (
-      <Alert className="max-w-2xl mx-auto mt-10">
+      <Alert
+        className="max-w-2xl mx-auto"
+        style={{ marginTop: "var(--space-xxl)" }}
+      >
         <HugeiconsIcon icon={InformationCircleIcon} className="size-4" />
         <AlertTitle>Not Logged In</AlertTitle>
         <AlertDescription>
@@ -63,16 +73,34 @@ export default function Page() {
       break;
     default:
       DashboardContent = (
-        <Alert className="max-w-2xl mt-10 border-orange-500/30 bg-orange-500/10 text-orange-800">
+        <Alert
+          className="max-w-2xl"
+          style={{
+            marginTop: "var(--space-lg)",
+            border: "1px solid var(--color-warning)",
+            background: "rgba(201, 162, 39, 0.08)",
+            color: "var(--color-text-body)",
+          }}
+        >
           <HugeiconsIcon
             icon={InformationCircleIcon}
             className="size-4"
-            color="#f97316"
+            style={{ color: "var(--color-warning)" }}
           />
-          <AlertTitle className="text-orange-900">
+          <AlertTitle
+            style={{
+              fontFamily: "var(--font-family-heading)",
+              color: "var(--color-text-heading)",
+            }}
+          >
             Role assignment pending
           </AlertTitle>
-          <AlertDescription className="text-orange-800">
+          <AlertDescription
+            style={{
+              fontFamily: "var(--font-family-body)",
+              color: "var(--color-text-secondary)",
+            }}
+          >
             Your account is currently waiting for an administrator to assign you
             a role and link you to a school.
           </AlertDescription>
@@ -81,33 +109,55 @@ export default function Page() {
   }
 
   return (
-    <div className="flex flex-1 flex-col gap-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold text-brand-accent tracking-tight">
-            Welcome back, {user.name?.split(" ")[0]}
-          </h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            Here's what's happening at {user.tenant?.name || "your school"}.
-          </p>
-        </div>
+    <div className="flex flex-1 flex-col" style={{ gap: "var(--space-lg)" }}>
+      {/* Hero Banner — main landing page */}
+      <PageBanner
+        variant="hero"
+        title={`Welcome back, ${user.name?.split(" ")[0]}`}
+        subtitle={`Here's what's happening at ${user.tenant?.name || "your school"}. Search for students, classes, or subjects below.`}
+      />
 
-        {/* Filter indicator */}
-        {mode !== "all-time" &&
-          user.role !== "student" &&
-          user.role !== "parent" && (
-            <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-lg border shadow-sm">
-              <HugeiconsIcon
-                icon={Calendar03Icon}
-                className="size-4 text-brand-primary"
-              />
-              <span className="text-sm text-muted-foreground">View:</span>
-              <Badge variant="outline" className="text-xs bg-muted/50">
-                {filterLabel}
-              </Badge>
-            </div>
-          )}
-      </div>
+      {/* Filter indicator */}
+      {mode !== "all-time" &&
+        user.role !== "student" &&
+        user.role !== "parent" && (
+          <div
+            className="flex items-center self-start"
+            style={{
+              gap: "var(--space-sm)",
+              background: "var(--color-surface-primary)",
+              padding: "var(--space-xs) var(--space-sm)",
+              borderRadius: "var(--radius-sm-token)",
+              border:
+                "var(--card-border-width) solid var(--color-border-default)",
+              boxShadow: "var(--shadow-card)",
+            }}
+          >
+            <HugeiconsIcon
+              icon={Calendar03Icon}
+              className="size-4"
+              style={{ color: "var(--color-accent-primary)" }}
+            />
+            <span
+              style={{
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-caption)",
+                color: "var(--color-text-secondary)",
+              }}
+            >
+              View:
+            </span>
+            <Badge
+              variant="outline"
+              style={{
+                fontSize: "var(--font-size-tag)",
+                fontFamily: "var(--font-family-body)",
+              }}
+            >
+              {filterLabel}
+            </Badge>
+          </div>
+        )}
 
       {DashboardContent}
     </div>

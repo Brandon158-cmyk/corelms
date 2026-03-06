@@ -46,89 +46,195 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
-
-  /* CoreLMS Brand Colors */
-  --color-brand-primary: var(--brand-primary);
-  --color-brand-primary-dark: var(--brand-primary-dark);
-  --color-brand-primary-deep: var(--brand-primary-deep);
-  --color-brand-accent: var(--brand-accent);
-  --color-brand-bg: var(--brand-bg);
 }
 
+/* ═══════════════════════════════════════════════════
+   CoreLMS Design Language System — Token Definitions
+   Every value below traces to the Design Language Guide.
+   Never hard-code hex/px outside this block.
+   ═══════════════════════════════════════════════════ */
 :root {
-  /* CoreLMS Orange Brand Palette */
-  --brand-primary: oklch(0.72 0.19 50);
-  --brand-primary-dark: oklch(0.55 0.2 45);
-  --brand-primary-deep: oklch(0.4 0.18 40);
-  --brand-accent: oklch(0.25 0.02 265);
-  --brand-bg: oklch(0.98 0.005 80);
+  /* ── Colours ──────────────────────────────────── */
 
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.58 0.22 27);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.72 0.19 50);
-  --chart-2: oklch(0.65 0.2 40);
-  --chart-3: oklch(0.55 0.2 45);
-  --chart-4: oklch(0.48 0.18 35);
-  --chart-5: oklch(0.4 0.18 40);
-  --radius: 0.1rem;
-  --sidebar: var(--brand-primary-deep);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: var(--brand-primary);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: var(--brand-primary-dark);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: var(--brand-primary-dark);
-  --sidebar-ring: var(--brand-primary);
+  /* Accent */
+  --color-accent-primary: #8b1e1e; /* Rich maroon */
+  --color-accent-primary-dark: #6b1616; /* Deep maroon — hover/pressed */
+  --color-accent-secondary: #a33a2a; /* Warm brick-red — secondary accent */
+
+  /* Navigation surface */
+  --color-nav-bg: #1e1428; /* Dark navy-plum */
+
+  /* Surfaces */
+  --color-surface-primary: #ffffff;
+  --color-surface-secondary: #faf8f5; /* Warm off-white */
+
+  /* Borders */
+  --color-border-default: #e5e0db; /* Warm light border */
+  --color-border-input: #d4cfc9; /* Warm input border */
+
+  /* Text */
+  --color-text-heading: #1e1428; /* Dark navy-plum */
+  --color-text-body: #2e2626; /* Very dark warm charcoal */
+  --color-text-secondary: #6b5f5f; /* Warm medium grey */
+  --color-text-placeholder: #a89898; /* Warm light grey */
+  --color-text-inverse: #ffffff; /* On dark/accent backgrounds */
+
+  /* Semantic */
+  --color-link: #1a5276; /* Deep academic navy-blue */
+  --color-star-filled: #c9a227; /* Antique gold */
+  --color-star-empty: #c8b8b8; /* Warm grey */
+  --color-badge-verified: #8b1e1e; /* Maroon verification badge */
+  --color-badge-label: #1a3a6b; /* Deep navy — FEATURED / UPDATED */
+  --color-warning: #c9a227; /* Antique gold warning icon */
+
+  /* Category icons */
+  --color-category-maroon: #8b1e1e; /* Primary content types */
+  --color-category-green: #1a5c3a; /* Practical tools / resources */
+  --color-category-purple: #4a2080; /* Pathways / curriculum maps */
+
+  /* Decorative */
+  --color-overlay-dark: rgba(30, 20, 40, 0.65); /* Hero image overlay */
+  --color-geo-stripe: #c9a227; /* Antique gold geometric stripe */
+
+  /* ── Typography ───────────────────────────────── */
+  --font-family-heading: Georgia, "Book Antiqua", Palatino, serif;
+  --font-family-body: "Helvetica Neue", Arial, sans-serif;
+
+  --font-size-hero: 34px;
+  --font-size-page-title: 28px;
+  --font-size-section-heading: 22px;
+  --font-size-asset-title: 24px;
+  --font-size-card-title: 16px;
+  --font-size-sub-heading: 17px;
+  --font-size-body: 14px;
+  --font-size-caption: 13px;
+  --font-size-tag: 11px;
+  --font-size-nav: 14px;
+  --font-size-tab: 13px;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.6;
+  --letter-spacing-uppercase: 0.5px;
+
+  /* ── Spacing ──────────────────────────────────── */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-xxl: 48px;
+
+  /* ── Border Radius ────────────────────────────── */
+  --radius-none: 0px;
+  --radius-sm-token: 4px;
+  --radius-md-token: 6px;
+  --radius-lg-token: 8px;
+  --radius-full: 50%;
+
+  /* ── Shadows ──────────────────────────────────── */
+  --shadow-none: none;
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-popover: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  /* ── Component tokens ─────────────────────────── */
+  --nav-height: 50px;
+  --input-height: 44px;
+  --button-border-width: 1.5px;
+  --tab-indicator-height: 3px;
+  --card-border-width: 1px;
+  --card-padding: 16px;
+  --badge-pill-radius: 3px;
+  --badge-pill-padding: 4px 10px;
+  --star-size: 15px;
+  --avatar-size-nav: 34px;
+  --icon-size-nav: 22px;
+  --icon-size-inline: 18px;
+  --icon-size-meta: 14px;
+  --hero-overlay-opacity: 0.65;
+
+  /* ── Shadcn Theme Mapping ─────────────────────── */
+  /* Maps shadcn's required CSS variables to our design tokens */
+  --background: #faf8f5; /* Warm off-white page background */
+  --foreground: #2e2626; /* Dark warm charcoal body text */
+  --card: #ffffff; /* White card surface */
+  --card-foreground: #2e2626;
+  --popover: #ffffff;
+  --popover-foreground: #2e2626;
+  --primary: #8b1e1e; /* Maroon accent as primary */
+  --primary-foreground: #ffffff;
+  --secondary: #faf8f5;
+  --secondary-foreground: #2e2626;
+  --muted: #f2ece6; /* Slightly darker warm off-white */
+  --muted-foreground: #6b5f5f; /* Warm medium grey */
+  --accent: #f2ece6;
+  --accent-foreground: #2e2626;
+  --destructive: #a33a2a; /* Warm brick-red for errors */
+  --border: #e5e0db; /* Warm light border */
+  --input: #d4cfc9; /* Warm input border */
+  --ring: #8b1e1e; /* Maroon focus ring */
+
+  /* Charts — maroon palette */
+  --chart-1: #8b1e1e;
+  --chart-2: #a33a2a;
+  --chart-3: #6b1616;
+  --chart-4: #1a5276;
+  --chart-5: #1a5c3a;
+
+  --radius: 8px;
+
+  /* Sidebar — dark navy-plum */
+  --sidebar: #1e1428;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #8b1e1e;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #2a1e36; /* Slightly lighter navy-plum for hover */
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #2a1e36;
+  --sidebar-ring: #8b1e1e;
+
+  /* Font variables used by Tailwind */
+  --font-sans: "Helvetica Neue", Arial, sans-serif;
+  --font-serif: Georgia, "Book Antiqua", Palatino, serif;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.87 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.371 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.72 0.19 50);
-  --chart-2: oklch(0.65 0.2 40);
-  --chart-3: oklch(0.55 0.2 45);
-  --chart-4: oklch(0.48 0.18 35);
-  --chart-5: oklch(0.4 0.18 40);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.72 0.19 50);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --background: #1a1418;
+  --foreground: #f5f0eb;
+  --card: #241e28;
+  --card-foreground: #f5f0eb;
+  --popover: #241e28;
+  --popover-foreground: #f5f0eb;
+  --primary: #8b1e1e;
+  --primary-foreground: #ffffff;
+  --secondary: #2a1e36;
+  --secondary-foreground: #f5f0eb;
+  --muted: #2a1e36;
+  --muted-foreground: #a89898;
+  --accent: #2a1e36;
+  --accent-foreground: #f5f0eb;
+  --destructive: #a33a2a;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.15);
+  --ring: #8b1e1e;
+  --chart-1: #8b1e1e;
+  --chart-2: #a33a2a;
+  --chart-3: #6b1616;
+  --chart-4: #1a5276;
+  --chart-5: #1a5c3a;
+  --sidebar: #1a1418;
+  --sidebar-foreground: #f5f0eb;
+  --sidebar-primary: #8b1e1e;
+  --sidebar-primary-foreground: #f5f0eb;
+  --sidebar-accent: #2a1e36;
+  --sidebar-accent-foreground: #f5f0eb;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: #8b1e1e;
 }
 
 @layer base {
@@ -137,6 +243,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-family-body);
   }
   h1,
   h2,
@@ -144,7 +251,7 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-serif);
+    font-family: var(--font-family-heading);
   }
 }
 

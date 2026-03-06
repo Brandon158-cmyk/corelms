@@ -4,29 +4,48 @@ import { ReactNode } from "react";
 import { AuthGuard } from "@/components/auth/AuthGuard";
 
 /**
- * Centered Auth Layout
- * Simpler design with a focused card in the middle of the screen.
+ * Auth Layout — Design Language Guide conformant.
+ * Dark navy-plum background, white card with maroon accent border.
  */
 export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
     <AuthGuard mode="guest">
-      <div className="min-h-screen flex flex-col items-center justify-center bg-brand-primary-deep relative overflow-hidden">
-        {/* Decorative Background Elements */}
+      <div
+        className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden"
+        style={{
+          background: "var(--color-nav-bg)",
+        }}
+      >
+        {/* Subtle dot grid background — decorative, low opacity */}
         <div
-          className="absolute inset-0 z-0 opacity-[0.05] pointer-events-none"
+          className="absolute inset-0 z-0 pointer-events-none"
           style={{
-            backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+            opacity: 0.04,
+            backgroundImage: `radial-gradient(circle at 2px 2px, var(--color-text-inverse) 1px, transparent 0)`,
             backgroundSize: "40px 40px",
           }}
         />
 
-        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-white/5 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-black/20 rounded-full blur-[120px] pointer-events-none" />
-
-        <div className="z-10 w-full max-w-md px-6 flex flex-col items-center">
+        <div
+          className="z-10 w-full max-w-md flex flex-col items-center"
+          style={{ padding: "var(--space-lg)" }}
+        >
           {/* Central Logo */}
-          <div className="mb-8 flex flex-col items-center gap-3">
-            <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-white/10 text-white shadow-2xl backdrop-blur-sm border border-white/20">
+          <div
+            className="flex flex-col items-center"
+            style={{ marginBottom: "var(--space-xl)", gap: "var(--space-sm)" }}
+          >
+            <div
+              className="flex items-center justify-center"
+              style={{
+                width: "56px",
+                height: "56px",
+                borderRadius: "var(--radius-lg-token)",
+                background: "rgba(255, 255, 255, 0.1)",
+                color: "var(--color-text-inverse)",
+                border: "1px solid rgba(255, 255, 255, 0.15)",
+              }}
+            >
               <svg
                 width="32"
                 height="32"
@@ -58,13 +77,31 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
                 />
               </svg>
             </div>
-            <span className="text-3xl font-bold text-white tracking-tight drop-shadow-sm">
+            <span
+              style={{
+                fontFamily: "var(--font-family-heading)",
+                fontSize: "var(--font-size-page-title)",
+                fontWeight: "var(--font-weight-bold)",
+                color: "var(--color-text-inverse)",
+                letterSpacing: "-0.5px",
+                lineHeight: "var(--line-height-tight)",
+              }}
+            >
               corelms
             </span>
           </div>
 
-          {/* Auth Card Content */}
-          <div className="w-full bg-white rounded-xl shadow-2xl shadow-black/20 border border-white/10 p-8 sm:p-10 transition-all duration-300">
+          {/* Auth Card — popover/modal pattern from design guide */}
+          <div
+            className="w-full"
+            style={{
+              background: "var(--color-surface-primary)",
+              borderRadius: "var(--radius-lg-token)",
+              border: "2px solid var(--color-accent-primary)",
+              boxShadow: "var(--shadow-popover)",
+              padding: "var(--space-xl)",
+            }}
+          >
             {children}
           </div>
         </div>

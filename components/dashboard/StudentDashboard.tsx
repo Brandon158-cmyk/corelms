@@ -21,13 +21,23 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 
+const cardStyle = {
+  background: "var(--color-surface-primary)",
+  border: "var(--card-border-width) solid var(--color-border-default)",
+  borderRadius: "var(--radius-md-token)",
+  boxShadow: "var(--shadow-card)",
+};
+
 export function StudentDashboard() {
   const stats = useQuery(api.dashboard.getStudentStats);
 
   if (stats === undefined) {
     return (
       <div className="flex h-[400px] items-center justify-center">
-        <Spinner className="size-8" />
+        <Spinner
+          className="size-8"
+          style={{ color: "var(--color-accent-primary)" }}
+        />
       </div>
     );
   }
@@ -37,76 +47,179 @@ export function StudentDashboard() {
   }
 
   return (
-    <div className="flex flex-col gap-6">
+    <div
+      className="flex flex-col"
+      style={{ gap: "var(--space-lg)", paddingTop: "var(--space-lg)" }}
+    >
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <Card className="shadow-sm">
+        {/* My Class */}
+        <Card style={cardStyle}>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">My Class</CardTitle>
-            <div className="rounded-full bg-brand-primary/10 p-2">
+            <CardTitle
+              style={{
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-tag)",
+                fontWeight: "var(--font-weight-medium)",
+                letterSpacing: "var(--letter-spacing-uppercase)",
+                textTransform: "uppercase",
+                color: "var(--color-text-secondary)",
+              }}
+            >
+              My Class
+            </CardTitle>
+            <div
+              className="rounded-full"
+              style={{
+                padding: "var(--space-sm)",
+                background: "rgba(139, 30, 30, 0.08)",
+              }}
+            >
               <HugeiconsIcon
                 icon={BookOpen01Icon}
-                className="text-brand-primary"
-                size={16}
+                style={{ color: "var(--color-accent-primary)" }}
+                size={18}
               />
             </div>
           </CardHeader>
           <CardContent>
             {stats.myClass ? (
               <>
-                <div className="text-xl font-bold text-brand-accent">
+                <div
+                  style={{
+                    fontFamily: "var(--font-family-heading)",
+                    fontSize: "var(--font-size-hero)",
+                    fontWeight: "var(--font-weight-bold)",
+                    color: "var(--color-text-heading)",
+                  }}
+                >
                   {(stats.myClass as any).name}
                 </div>
-                <p className="text-xs text-muted-foreground mt-1">
+                <p
+                  style={{
+                    fontFamily: "var(--font-family-body)",
+                    fontSize: "var(--font-size-tag)",
+                    color: "var(--color-text-secondary)",
+                    marginTop: "var(--space-xs)",
+                  }}
+                >
                   Room: {(stats.myClass as any).room || "Not assigned"}
                 </p>
               </>
             ) : (
-              <div className="text-sm text-muted-foreground">
+              <div
+                style={{
+                  fontFamily: "var(--font-family-body)",
+                  fontSize: "var(--font-size-body)",
+                  color: "var(--color-text-secondary)",
+                }}
+              >
                 Not enrolled yet
               </div>
             )}
           </CardContent>
         </Card>
 
-        <Card className="shadow-sm">
+        {/* Assignments Due */}
+        <Card style={cardStyle}>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">
+            <CardTitle
+              style={{
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-tag)",
+                fontWeight: "var(--font-weight-medium)",
+                letterSpacing: "var(--letter-spacing-uppercase)",
+                textTransform: "uppercase",
+                color: "var(--color-text-secondary)",
+              }}
+            >
               Assignments Due
             </CardTitle>
-            <div className="rounded-full bg-orange-500/10 p-2">
+            <div
+              className="rounded-full"
+              style={{
+                padding: "var(--space-sm)",
+                background: "rgba(22, 78, 99, 0.08)",
+              }}
+            >
               <HugeiconsIcon
                 icon={TaskDaily01Icon}
-                className="text-orange-500"
-                size={16}
+                style={{ color: "var(--color-category-teal)" }}
+                size={18}
               />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-brand-accent">
+            <div
+              style={{
+                fontFamily: "var(--font-family-heading)",
+                fontSize: "var(--font-size-hero)",
+                fontWeight: "var(--font-weight-bold)",
+                color: "var(--color-text-heading)",
+              }}
+            >
               {stats.upcomingAssignments.length}
             </div>
-            <p className="text-xs text-muted-foreground mt-1">
+            <p
+              style={{
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-tag)",
+                color: "var(--color-text-secondary)",
+                marginTop: "var(--space-xs)",
+              }}
+            >
               Active tasks pending your submission
             </p>
           </CardContent>
         </Card>
 
-        <Card className="shadow-sm">
+        {/* Next Event */}
+        <Card style={cardStyle}>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Next Event</CardTitle>
-            <div className="rounded-full bg-blue-500/10 p-2">
+            <CardTitle
+              style={{
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-tag)",
+                fontWeight: "var(--font-weight-medium)",
+                letterSpacing: "var(--letter-spacing-uppercase)",
+                textTransform: "uppercase",
+                color: "var(--color-text-secondary)",
+              }}
+            >
+              Next Event
+            </CardTitle>
+            <div
+              className="rounded-full"
+              style={{
+                padding: "var(--space-sm)",
+                background: "rgba(201, 162, 39, 0.08)",
+              }}
+            >
               <HugeiconsIcon
                 icon={Calendar03Icon}
-                className="text-blue-500"
-                size={16}
+                style={{ color: "var(--color-warning)" }}
+                size={18}
               />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-lg font-bold text-brand-accent">
+            <div
+              style={{
+                fontFamily: "var(--font-family-heading)",
+                fontSize: "var(--font-size-section-heading)",
+                fontWeight: "var(--font-weight-bold)",
+                color: "var(--color-text-heading)",
+              }}
+            >
               Math Mid-Term
             </div>
-            <p className="text-xs text-muted-foreground mt-1">
+            <p
+              style={{
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-tag)",
+                color: "var(--color-text-secondary)",
+                marginTop: "var(--space-xs)",
+              }}
+            >
               Coming up on Nov 14th
             </p>
           </CardContent>
@@ -114,32 +227,72 @@ export function StudentDashboard() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <Card className="shadow-sm">
+        {/* Upcoming Assignments */}
+        <Card style={cardStyle}>
           <CardHeader>
-            <CardTitle>Upcoming Assignments</CardTitle>
-            <CardDescription>Tasks you need to complete soon.</CardDescription>
+            <CardTitle
+              style={{
+                fontFamily: "var(--font-family-heading)",
+                fontSize: "var(--font-size-section-heading)",
+                color: "var(--color-text-heading)",
+              }}
+            >
+              Upcoming Assignments
+            </CardTitle>
+            <CardDescription
+              style={{
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-caption)",
+                color: "var(--color-text-secondary)",
+              }}
+            >
+              Tasks you need to complete soon.
+            </CardDescription>
           </CardHeader>
           <CardContent>
             {stats.upcomingAssignments.length > 0 ? (
-              <div className="space-y-3">
+              <div className="flex flex-col" style={{ gap: "var(--space-sm)" }}>
                 {stats.upcomingAssignments.map((a: any) => (
                   <div
                     key={a._id}
-                    className="flex flex-col gap-1 p-3 border rounded-lg bg-orange-50/50"
+                    className="flex flex-col transition-colors"
+                    style={{
+                      gap: "var(--space-sm)",
+                      padding: "var(--space-md)",
+                      border: "1px solid var(--color-border-default)",
+                      borderRadius: "var(--radius-sm-token)",
+                    }}
                   >
-                    <div className="flex justify-between items-start">
-                      <p className="text-sm font-semibold line-clamp-1 text-orange-950">
-                        {a.title}
-                      </p>
-                    </div>
-                    <div className="flex justify-between items-center text-xs text-orange-800 mt-1">
-                      <span>
+                    <p
+                      className="line-clamp-1"
+                      style={{
+                        fontFamily: "var(--font-family-body)",
+                        fontSize: "var(--font-size-body)",
+                        fontWeight: "var(--font-weight-medium)",
+                        color: "var(--color-text-body)",
+                      }}
+                    >
+                      {a.title}
+                    </p>
+                    <div className="flex justify-between items-center">
+                      <span
+                        style={{
+                          fontFamily: "var(--font-family-body)",
+                          fontSize: "var(--font-size-caption)",
+                          color: "var(--color-text-secondary)",
+                        }}
+                      >
                         Due: {format(new Date(a.dueDate), "MMM dd, yyyy")}
                       </span>
                       <Button
                         variant="link"
                         size="sm"
-                        className="h-auto p-0 text-orange-700"
+                        className="h-auto p-0"
+                        style={{
+                          fontFamily: "var(--font-family-body)",
+                          fontWeight: "var(--font-weight-medium)",
+                          color: "var(--color-accent-primary)",
+                        }}
                         nativeButton={false}
                         render={
                           <Link
@@ -158,46 +311,104 @@ export function StudentDashboard() {
                 ))}
               </div>
             ) : (
-              <div className="flex h-[150px] items-center justify-center text-sm text-muted-foreground border border-dashed rounded-lg bg-muted/20">
-                You're all caught up! No active assignments.
+              <div
+                className="flex h-[150px] items-center justify-center"
+                style={{
+                  fontFamily: "var(--font-family-body)",
+                  fontSize: "var(--font-size-body)",
+                  color: "var(--color-text-secondary)",
+                  border: "1px dashed var(--color-border-default)",
+                  borderRadius: "var(--radius-sm-token)",
+                  background: "var(--color-surface-secondary)",
+                }}
+              >
+                You&apos;re all caught up! No active assignments.
               </div>
             )}
           </CardContent>
         </Card>
 
-        <Card className="shadow-sm">
+        {/* Recent Grades */}
+        <Card style={cardStyle}>
           <CardHeader>
-            <CardTitle>Recent Grades</CardTitle>
-            <CardDescription>
+            <CardTitle
+              style={{
+                fontFamily: "var(--font-family-heading)",
+                fontSize: "var(--font-size-section-heading)",
+                color: "var(--color-text-heading)",
+              }}
+            >
+              Recent Grades
+            </CardTitle>
+            <CardDescription
+              style={{
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-caption)",
+                color: "var(--color-text-secondary)",
+              }}
+            >
               Your performance on recent assessments.
             </CardDescription>
           </CardHeader>
           <CardContent>
             {stats.recentGrades.length > 0 ? (
-              <div className="space-y-3">
+              <div className="flex flex-col" style={{ gap: "var(--space-sm)" }}>
                 {stats.recentGrades.map((g: any) => (
                   <div
                     key={g._id}
-                    className="flex items-center justify-between p-3 border rounded-lg bg-muted/5"
+                    className="flex items-center justify-between transition-colors"
+                    style={{
+                      padding: "var(--space-md)",
+                      border: "1px solid var(--color-border-default)",
+                      borderRadius: "var(--radius-sm-token)",
+                    }}
                   >
-                    <div className="flex items-center gap-3">
-                      <div>
-                        <p className="text-sm font-semibold">
-                          Assessment Score
-                        </p>
-                        <p className="text-xs text-muted-foreground">
-                          {g.comments || "No comments"}
-                        </p>
-                      </div>
+                    <div>
+                      <p
+                        style={{
+                          fontFamily: "var(--font-family-body)",
+                          fontSize: "var(--font-size-body)",
+                          fontWeight: "var(--font-weight-medium)",
+                          color: "var(--color-text-body)",
+                        }}
+                      >
+                        Assessment Score
+                      </p>
+                      <p
+                        style={{
+                          fontFamily: "var(--font-family-body)",
+                          fontSize: "var(--font-size-caption)",
+                          color: "var(--color-text-secondary)",
+                        }}
+                      >
+                        {g.comments || "No comments"}
+                      </p>
                     </div>
-                    <div className="text-lg font-bold text-brand-primary">
+                    <div
+                      style={{
+                        fontFamily: "var(--font-family-heading)",
+                        fontSize: "var(--font-size-hero)",
+                        fontWeight: "var(--font-weight-bold)",
+                        color: "var(--color-accent-primary)",
+                      }}
+                    >
                       {g.score}
                     </div>
                   </div>
                 ))}
               </div>
             ) : (
-              <div className="flex h-[150px] items-center justify-center text-sm text-muted-foreground border border-dashed rounded-lg bg-muted/20">
+              <div
+                className="flex h-[150px] items-center justify-center"
+                style={{
+                  fontFamily: "var(--font-family-body)",
+                  fontSize: "var(--font-size-body)",
+                  color: "var(--color-text-secondary)",
+                  border: "1px dashed var(--color-border-default)",
+                  borderRadius: "var(--radius-sm-token)",
+                  background: "var(--color-surface-secondary)",
+                }}
+              >
                 No recent grades published.
               </div>
             )}

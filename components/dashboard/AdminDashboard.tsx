@@ -33,7 +33,10 @@ export function AdminDashboard() {
   if (stats === undefined) {
     return (
       <div className="flex h-[400px] items-center justify-center">
-        <Spinner className="size-8" />
+        <Spinner
+          className="size-8"
+          style={{ color: "var(--color-accent-primary)" }}
+        />
       </div>
     );
   }
@@ -43,65 +46,162 @@ export function AdminDashboard() {
   }
 
   return (
-    <div className="flex flex-col gap-6">
+    <div
+      className="flex flex-col"
+      style={{ gap: "var(--space-lg)", paddingTop: "var(--space-lg)" }}
+    >
       <div className="grid gap-4 md:grid-cols-3">
-        <Card className="shadow-sm">
+        {/* Stat Card: Total Students */}
+        <Card
+          style={{
+            background: "var(--color-surface-primary)",
+            border:
+              "var(--card-border-width) solid var(--color-border-default)",
+            borderRadius: "var(--radius-md-token)",
+            boxShadow: "var(--shadow-card)",
+          }}
+        >
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">
+            <CardTitle
+              style={{
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-caption)",
+                fontWeight: "var(--font-weight-medium)",
+                color: "var(--color-text-secondary)",
+              }}
+            >
               Total Students
             </CardTitle>
-            <div className="rounded-full bg-brand-primary/10 p-2">
+            <div
+              className="rounded-full"
+              style={{
+                padding: "var(--space-sm)",
+                background: "rgba(139, 30, 30, 0.08)",
+              }}
+            >
               <HugeiconsIcon
                 icon={UserMultiple02Icon}
-                className="text-brand-primary"
+                style={{ color: "var(--color-accent-primary)" }}
                 size={16}
               />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-brand-accent">
+            <div
+              style={{
+                fontFamily: "var(--font-family-heading)",
+                fontSize: "var(--font-size-hero)",
+                fontWeight: "var(--font-weight-bold)",
+                color: "var(--color-text-heading)",
+              }}
+            >
               {stats.totalStudents}
             </div>
           </CardContent>
         </Card>
 
-        <Card className="shadow-sm">
+        {/* Stat Card: Total Teachers */}
+        <Card
+          style={{
+            background: "var(--color-surface-primary)",
+            border:
+              "var(--card-border-width) solid var(--color-border-default)",
+            borderRadius: "var(--radius-md-token)",
+            boxShadow: "var(--shadow-card)",
+          }}
+        >
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">
+            <CardTitle
+              style={{
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-caption)",
+                fontWeight: "var(--font-weight-medium)",
+                color: "var(--color-text-secondary)",
+              }}
+            >
               Total Teachers
             </CardTitle>
-            <div className="rounded-full bg-blue-500/10 p-2">
+            <div
+              className="rounded-full"
+              style={{
+                padding: "var(--space-sm)",
+                background: "rgba(22, 78, 99, 0.08)",
+              }}
+            >
               <HugeiconsIcon
                 icon={TeacherIcon}
-                className="text-blue-500"
+                style={{ color: "var(--color-category-teal)" }}
                 size={16}
               />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-brand-accent">
+            <div
+              style={{
+                fontFamily: "var(--font-family-heading)",
+                fontSize: "var(--font-size-hero)",
+                fontWeight: "var(--font-weight-bold)",
+                color: "var(--color-text-heading)",
+              }}
+            >
               {stats.totalTeachers}
             </div>
           </CardContent>
         </Card>
 
-        <Card className="shadow-sm">
+        {/* Stat Card: Active Classes */}
+        <Card
+          style={{
+            background: "var(--color-surface-primary)",
+            border:
+              "var(--card-border-width) solid var(--color-border-default)",
+            borderRadius: "var(--radius-md-token)",
+            boxShadow: "var(--shadow-card)",
+          }}
+        >
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">
+            <CardTitle
+              style={{
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-caption)",
+                fontWeight: "var(--font-weight-medium)",
+                color: "var(--color-text-secondary)",
+              }}
+            >
               Active Classes
             </CardTitle>
-            <div className="rounded-full bg-purple-500/10 p-2">
+            <div
+              className="rounded-full"
+              style={{
+                padding: "var(--space-sm)",
+                background: "rgba(88, 28, 135, 0.08)",
+              }}
+            >
               <HugeiconsIcon
                 icon={Book01Icon}
-                className="text-purple-500"
+                style={{ color: "var(--color-category-purple)" }}
                 size={16}
               />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-brand-accent">
+            <div
+              style={{
+                fontFamily: "var(--font-family-heading)",
+                fontSize: "var(--font-size-hero)",
+                fontWeight: "var(--font-weight-bold)",
+                color: "var(--color-text-heading)",
+              }}
+            >
               {stats.activeClasses}
-              <span className="text-sm text-muted-foreground ml-2 font-normal">
+              <span
+                className="ml-2 font-normal"
+                style={{
+                  fontFamily: "var(--font-family-body)",
+                  fontSize: "var(--font-size-caption)",
+                  color: "var(--color-text-secondary)",
+                }}
+              >
                 / {stats.totalClasses} total
               </span>
             </div>
@@ -110,46 +210,82 @@ export function AdminDashboard() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <Card className="shadow-sm md:col-span-2 lg:col-span-2">
+        {/* Chart Card */}
+        <Card
+          className="md:col-span-2 lg:col-span-2"
+          style={{
+            background: "var(--color-surface-primary)",
+            border:
+              "var(--card-border-width) solid var(--color-border-default)",
+            borderRadius: "var(--radius-md-token)",
+            boxShadow: "var(--shadow-card)",
+          }}
+        >
           <CardHeader>
-            <CardTitle>Classes per Grade Distribution</CardTitle>
-            <CardDescription>
+            <CardTitle
+              style={{
+                fontFamily: "var(--font-family-heading)",
+                fontSize: "var(--font-size-section-heading)",
+                color: "var(--color-text-heading)",
+              }}
+            >
+              Classes per Grade
+            </CardTitle>
+            <CardDescription
+              style={{
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-caption)",
+                color: "var(--color-text-secondary)",
+              }}
+            >
               Overview of active classes assigned to grades.
             </CardDescription>
           </CardHeader>
           <CardContent>
             {stats.chartData.length > 0 ? (
-              <div className="h-[300px] w-full mt-4">
+              <div
+                className="h-[300px] w-full"
+                style={{ marginTop: "var(--space-md)" }}
+              >
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={stats.chartData}>
                     <CartesianGrid
                       strokeDasharray="3 3"
                       vertical={false}
-                      stroke="#E5E7EB"
+                      stroke="var(--color-border-default)"
                     />
                     <XAxis
                       dataKey="name"
                       axisLine={false}
                       tickLine={false}
-                      tick={{ fill: "#6B7280", fontSize: 12 }}
+                      tick={{
+                        fill: "var(--color-text-secondary)",
+                        fontSize: 12,
+                      }}
                       dy={10}
                     />
                     <YAxis
                       axisLine={false}
                       tickLine={false}
-                      tick={{ fill: "#6B7280", fontSize: 12 }}
+                      tick={{
+                        fill: "var(--color-text-secondary)",
+                        fontSize: 12,
+                      }}
                     />
                     <Tooltip
-                      cursor={{ fill: "#F3F4F6" }}
+                      cursor={{ fill: "var(--color-surface-secondary)" }}
                       contentStyle={{
-                        borderRadius: "8px",
-                        border: "none",
-                        boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
+                        borderRadius: "var(--radius-sm-token)",
+                        border: "1px solid var(--color-border-default)",
+                        boxShadow: "var(--shadow-card)",
+                        background: "var(--color-surface-primary)",
+                        fontFamily: "var(--font-family-body)",
+                        fontSize: "var(--font-size-caption)",
                       }}
                     />
                     <Bar
                       dataKey="classes"
-                      fill="#99282C"
+                      fill="var(--color-accent-primary)"
                       radius={[4, 4, 0, 0]}
                       barSize={40}
                     />
@@ -157,45 +293,99 @@ export function AdminDashboard() {
                 </ResponsiveContainer>
               </div>
             ) : (
-              <div className="flex h-[300px] items-center justify-center text-sm text-muted-foreground bg-muted/20 rounded-lg border border-dashed">
+              <div
+                className="flex h-[300px] items-center justify-center"
+                style={{
+                  fontFamily: "var(--font-family-body)",
+                  fontSize: "var(--font-size-body)",
+                  color: "var(--color-text-secondary)",
+                  background: "var(--color-surface-secondary)",
+                  borderRadius: "var(--radius-sm-token)",
+                  border: "1px dashed var(--color-border-default)",
+                }}
+              >
                 Not enough data for chart. Please create grades and classes.
               </div>
             )}
           </CardContent>
         </Card>
 
-        <Card className="shadow-sm flex flex-col">
+        {/* System Health Card */}
+        <Card
+          className="flex flex-col"
+          style={{
+            background: "var(--color-surface-primary)",
+            border:
+              "var(--card-border-width) solid var(--color-border-default)",
+            borderRadius: "var(--radius-md-token)",
+            boxShadow: "var(--shadow-card)",
+          }}
+        >
           <CardHeader>
-            <CardTitle>System Health</CardTitle>
-            <CardDescription>
-              Quick overview of your school's setup.
+            <CardTitle
+              style={{
+                fontFamily: "var(--font-family-heading)",
+                fontSize: "var(--font-size-section-heading)",
+                color: "var(--color-text-heading)",
+              }}
+            >
+              System Health
+            </CardTitle>
+            <CardDescription
+              style={{
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-caption)",
+                color: "var(--color-text-secondary)",
+              }}
+            >
+              Quick overview of your school&apos;s setup.
             </CardDescription>
           </CardHeader>
-          <CardContent className="flex-1 flex flex-col gap-4">
-            <div className="flex items-center justify-between p-3 border rounded-lg">
-              <span className="text-sm font-medium">Students Registered</span>
-              <Badge
-                variant={stats.totalStudents > 0 ? "default" : "secondary"}
+          <CardContent
+            className="flex-1 flex flex-col"
+            style={{ gap: "var(--space-sm)" }}
+          >
+            {[
+              { label: "Students Registered", ok: stats.totalStudents > 0 },
+              { label: "Classes Active", ok: stats.activeClasses > 0 },
+              { label: "Teachers Assigned", ok: stats.totalTeachers > 0 },
+            ].map((item) => (
+              <div
+                key={item.label}
+                className="flex items-center justify-between"
+                style={{
+                  padding: "var(--space-sm) var(--space-md)",
+                  border: "1px solid var(--color-border-default)",
+                  borderRadius: "var(--radius-sm-token)",
+                }}
               >
-                {stats.totalStudents > 0 ? "Good" : "Action Required"}
-              </Badge>
-            </div>
-            <div className="flex items-center justify-between p-3 border rounded-lg">
-              <span className="text-sm font-medium">Classes Active</span>
-              <Badge
-                variant={stats.activeClasses > 0 ? "default" : "secondary"}
-              >
-                {stats.activeClasses > 0 ? "Good" : "Action Required"}
-              </Badge>
-            </div>
-            <div className="flex items-center justify-between p-3 border rounded-lg">
-              <span className="text-sm font-medium">Teachers Assigned</span>
-              <Badge
-                variant={stats.totalTeachers > 0 ? "default" : "secondary"}
-              >
-                {stats.totalTeachers > 0 ? "Good" : "Action Required"}
-              </Badge>
-            </div>
+                <span
+                  style={{
+                    fontFamily: "var(--font-family-body)",
+                    fontSize: "var(--font-size-body)",
+                    fontWeight: "var(--font-weight-medium)",
+                    color: "var(--color-text-body)",
+                  }}
+                >
+                  {item.label}
+                </span>
+                <Badge
+                  variant={item.ok ? "default" : "secondary"}
+                  style={{
+                    fontFamily: "var(--font-family-body)",
+                    fontSize: "var(--font-size-tag)",
+                    background: item.ok
+                      ? "var(--color-category-green)"
+                      : "var(--color-surface-secondary)",
+                    color: item.ok
+                      ? "var(--color-text-inverse)"
+                      : "var(--color-text-secondary)",
+                  }}
+                >
+                  {item.ok ? "Good" : "Action Required"}
+                </Badge>
+              </div>
+            ))}
           </CardContent>
         </Card>
       </div>

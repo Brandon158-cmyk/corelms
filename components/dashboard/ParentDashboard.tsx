@@ -12,61 +12,159 @@ import {
 import { HugeiconsIcon } from "@hugeicons/react";
 import { UserMultiple02Icon, BookOpen01Icon } from "@hugeicons/core-free-icons";
 
+const cardStyle = {
+  background: "var(--color-surface-primary)",
+  border: "var(--card-border-width) solid var(--color-border-default)",
+  borderRadius: "var(--radius-md-token)",
+  boxShadow: "var(--shadow-card)",
+};
+
 export function ParentDashboard({ user }: { user: any }) {
   return (
-    <div className="flex flex-col gap-6">
+    <div
+      className="flex flex-col"
+      style={{ gap: "var(--space-lg)", paddingTop: "var(--space-lg)" }}
+    >
       <div className="grid gap-4 md:grid-cols-2">
-        <Card className="shadow-sm">
+        {/* Linked Students */}
+        <Card style={cardStyle}>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">
+            <CardTitle
+              style={{
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-tag)",
+                fontWeight: "var(--font-weight-medium)",
+                letterSpacing: "var(--letter-spacing-uppercase)",
+                textTransform: "uppercase",
+                color: "var(--color-text-secondary)",
+              }}
+            >
               Linked Students
             </CardTitle>
-            <div className="rounded-full bg-brand-primary/10 p-2">
+            <div
+              className="rounded-full"
+              style={{
+                padding: "var(--space-sm)",
+                background: "rgba(22, 78, 99, 0.08)",
+              }}
+            >
               <HugeiconsIcon
                 icon={UserMultiple02Icon}
-                className="text-brand-primary"
-                size={16}
+                style={{ color: "var(--color-category-teal)" }}
+                size={18}
               />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-brand-accent">0</div>
-            <p className="text-xs text-muted-foreground mt-1">
+            <div
+              style={{
+                fontFamily: "var(--font-family-heading)",
+                fontSize: "var(--font-size-hero)",
+                fontWeight: "var(--font-weight-bold)",
+                color: "var(--color-text-heading)",
+              }}
+            >
+              0
+            </div>
+            <p
+              style={{
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-tag)",
+                color: "var(--color-text-secondary)",
+                marginTop: "var(--space-xs)",
+              }}
+            >
               Contact school admin to link your children.
             </p>
           </CardContent>
         </Card>
 
-        <Card className="shadow-sm">
+        {/* Pending Invoices */}
+        <Card style={cardStyle}>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">
+            <CardTitle
+              style={{
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-tag)",
+                fontWeight: "var(--font-weight-medium)",
+                letterSpacing: "var(--letter-spacing-uppercase)",
+                textTransform: "uppercase",
+                color: "var(--color-text-secondary)",
+              }}
+            >
               Pending Invoices
             </CardTitle>
-            <div className="rounded-full bg-blue-500/10 p-2">
+            <div
+              className="rounded-full"
+              style={{
+                padding: "var(--space-sm)",
+                background: "rgba(201, 162, 39, 0.08)",
+              }}
+            >
               <HugeiconsIcon
                 icon={BookOpen01Icon}
-                className="text-blue-500"
-                size={16}
+                style={{ color: "var(--color-warning)" }}
+                size={18}
               />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-brand-accent">ZMW 0.00</div>
-            <p className="text-xs text-muted-foreground mt-1">
+            <div
+              style={{
+                fontFamily: "var(--font-family-heading)",
+                fontSize: "var(--font-size-hero)",
+                fontWeight: "var(--font-weight-bold)",
+                color: "var(--color-text-heading)",
+              }}
+            >
+              ZMW 0.00
+            </div>
+            <p
+              style={{
+                fontFamily: "var(--font-family-body)",
+                fontSize: "var(--font-size-tag)",
+                color: "var(--color-text-secondary)",
+                marginTop: "var(--space-xs)",
+              }}
+            >
               All fees are up to date.
             </p>
           </CardContent>
         </Card>
       </div>
 
-      <Card className="shadow-sm min-h-[300px]">
+      {/* Recent Activity */}
+      <Card className="min-h-[300px]" style={cardStyle}>
         <CardHeader>
-          <CardTitle>Recent Activity</CardTitle>
-          <CardDescription>Updates regarding your children.</CardDescription>
+          <CardTitle
+            style={{
+              fontFamily: "var(--font-family-heading)",
+              fontSize: "var(--font-size-section-heading)",
+              color: "var(--color-text-heading)",
+            }}
+          >
+            Recent Activity
+          </CardTitle>
+          <CardDescription
+            style={{
+              fontFamily: "var(--font-family-body)",
+              fontSize: "var(--font-size-caption)",
+              color: "var(--color-text-secondary)",
+            }}
+          >
+            Updates regarding your children.
+          </CardDescription>
         </CardHeader>
-        <CardContent className="flex items-center justify-center min-h-[200px] text-muted-foreground text-sm">
+        <CardContent
+          className="flex items-center justify-center min-h-[200px]"
+          style={{
+            fontFamily: "var(--font-family-body)",
+            fontSize: "var(--font-size-body)",
+            color: "var(--color-text-secondary)",
+          }}
+        >
           No recent activity to display. Please ensure your account is linked to
-          your child's profile.
+          your child&apos;s profile.
         </CardContent>
       </Card>
     </div>

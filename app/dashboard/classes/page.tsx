@@ -54,15 +54,15 @@ export default function ClassesPage() {
     <div className="flex flex-1 flex-col gap-6">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-brand-accent">
+          <h1 className="text-4xl font-serif font-bold tracking-tight text-foreground">
             Classes
           </h1>
-          <p className="text-sm text-muted-foreground mt-1">
+          <p className="text-base text-muted-foreground mt-2">
             Manage your school's classes and schedules.
             {mode !== "all-time" && (
               <Badge
                 variant="outline"
-                className="ml-2 text-xs font-normal align-middle bg-brand-primary/5 text-brand-primary border-brand-primary/20"
+                className="ml-2 text-xs font-semibold uppercase tracking-wider align-middle border-foreground text-foreground rounded-none"
               >
                 Filtered: {filterLabel}
               </Badge>
@@ -72,17 +72,17 @@ export default function ClassesPage() {
         <CreateClassDialog />
       </div>
 
-      <Card className="col-span-1 shadow-sm border-t-4 border-t-brand-primary">
+      <Card className="col-span-1 border-border/50 rounded-none border-t-2 border-t-foreground">
         <CardHeader className="pb-4 border-b flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <CardTitle className="text-lg font-semibold flex items-center gap-2">
+            <CardTitle className="text-2xl font-serif font-semibold flex items-center gap-2 text-foreground">
               <HugeiconsIcon
                 icon={BookOpen}
-                className="size-5 text-brand-primary"
+                className="size-5 text-foreground"
               />
               Class Directory
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="mt-1">
               Overview of all active classrooms and cohorts.
             </CardDescription>
           </div>
@@ -200,13 +200,11 @@ export default function ClassesPage() {
                     </TableCell>
                     <TableCell>
                       <Badge
-                        variant={
-                          cls.status === "active" ? "default" : "secondary"
-                        }
+                        variant="outline"
                         className={
                           cls.status === "active"
-                            ? "bg-green-100 text-green-800 hover:bg-green-100/80"
-                            : ""
+                            ? "bg-foreground text-background uppercase tracking-widest text-[10px] rounded-none font-semibold border-foreground"
+                            : "uppercase tracking-widest text-[10px] rounded-none font-semibold border-muted-foreground text-muted-foreground"
                         }
                       >
                         {cls.status}
@@ -216,7 +214,7 @@ export default function ClassesPage() {
                       <Link href={`/dashboard/classes/${cls._id}`}>
                         <Button
                           variant="ghost"
-                          className="text-brand-primary hover:text-brand-primary-dark hover:bg-brand-primary/10 h-10 px-3 font-medium text-sm"
+                          className="text-foreground hover:text-background hover:bg-foreground h-10 px-3 font-semibold text-sm rounded-none border border-transparent hover:border-foreground"
                         >
                           <HugeiconsIcon
                             icon={BookOpen}
